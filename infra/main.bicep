@@ -9,8 +9,7 @@ param purviewSubscriptionId string = ''
 param aiFoundryProjectName string = ''
 param aiFoundryResourceGroup string = ''
 param aiSubscriptionId string = ''
-param azureOpenAIResourceName string = ''
-param azureOpenAIResourceGroup string = ''
+
 
 output governanceParameters object = {
 	purviewAccountName: purviewAccountName
@@ -19,6 +18,4 @@ output governanceParameters object = {
 	aiFoundryProjectName: aiFoundryProjectName
 	aiFoundryResourceGroup: aiFoundryResourceGroup
 	aiSubscriptionId: aiSubscriptionId
-	azureOpenAIResourceName: azureOpenAIResourceName
-	azureOpenAIResourceGroup: azureOpenAIResourceGroup
 }
