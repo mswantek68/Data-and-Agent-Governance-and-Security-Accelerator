@@ -1,7 +1,13 @@
 # Filename: 00-New-DspmSpec.ps1
 param(
-  [Parameter()][string]$OutFile = "./spec.dspm.template.json"
+  [Parameter()][string]$OutFile = "./spec.dspm.template.json",
+  [switch]$Force
 )
+
+if((Test-Path -Path $OutFile -PathType Leaf) -and -not $Force){
+  Write-Host "Spec '$OutFile' already exists. Skipping scaffold (pass -Force to overwrite)." -ForegroundColor Yellow
+  return
+}
 
 $tmpl = @'
 {

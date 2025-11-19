@@ -31,6 +31,22 @@
       "harmSeverityThreshold": null
     }
   },
+  "fabric": {
+    "oneLakeRoots": [
+      {
+        "name": "<onelake-root-name>",
+        "resourceId": "/subscriptions/<subscription-guid>/resourceGroups/<resource-group>/providers/Microsoft.Fabric/oneLakeWorkspaces/<onelake-root-name>",
+        "scanName": "<onelake-scan-name>"
+      }
+    ],
+    "workspaces": [
+      {
+        "name": "<fabric-workspace-name>",
+        "resourceId": "/subscriptions/<subscription-guid>/resourceGroups/<resource-group>/providers/Microsoft.Fabric/workspaces/<fabric-workspace-name>",
+        "scanName": "<fabric-workspace-scan-name>"
+      }
+    ]
+  },
   "contentSafety": {
     "endpoint": "",
     "keyVault": {
@@ -59,6 +75,11 @@
             "name": "Credit Card Number",
             "count": 1,
             "confidence": 85
+          },
+          {
+            "name": "U.S. Social Security Number (SSN)",
+            "count": 1,
+            "confidence": 85
           }
         ],
         "blockAccess": true,
@@ -69,8 +90,6 @@
   "labels": [
     {
       "name": "Confidential",
-      "displayName": "Confidential",
-      "tooltip": "Confidential data",
       "publishPolicyName": "Publish: Confidential",
       "encryptionEnabled": true,
       "publishScopes": {

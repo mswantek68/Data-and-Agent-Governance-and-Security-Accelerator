@@ -11,7 +11,7 @@ This guide covers the spec-driven modules under `scripts/governance` that automa
 - **Tools**: PowerShell 7, Azure CLI authenticated to the target tenant. Install the Exchange Online Management module on a workstation that can satisfy MFA prompts.
 - **Spec**: Copy `spec.dspm.template.json` to a local file (for example `spec.local.json`) and populate tenant, subscription, resource group, Purview account, data source names, AI Foundry project, Key Vault, and Log Analytics workspace. Derived IDs are computed automatically by the spec template.
 
-> Tip: Regenerate a skeleton spec any time with `pwsh ./scripts/governance/00-New-DspmSpec.ps1 -OutFile ./spec.dspm.template.json`, then copy it to your local filename when ready.
+> Tip: Regenerate a skeleton spec any time with `pwsh ./scripts/governance/00-New-DspmSpec.ps1 -OutFile ./spec.dspm.template.json` (add `-Force` if you really want to overwrite an existing file), then copy it to your local filename when ready.
 
 ---
 
@@ -50,7 +50,7 @@ Follow the numbered flow to wire up Microsoft 365 governance, Azure resource pos
 7. **AI Foundry integration**
    - `dspmPurview/30-Foundry-RegisterResources.ps1` validates and tags Azure AI Foundry resources.
    - `dspmPurview/31-Foundry-ConfigureContentSafety.ps1` pushes Content Safety blocklists from the spec into Key Vault and updates the Foundry project.
-   - `dspmPurview/32-Foundry-GenerateBindings-Stub.ps1` and `34-Validate-Posture.ps1` are extension points for app bindings and end-to-end validation.
+   - `dspmPurview/32-Foundry-GenerateBindings-Stub.ps1` is an extension point for app bindings.
 
 8. **Optional stubs**
    - `15-Create-SensitiveInfoType-Stub.ps1`, `16-Create-TrainableClassifier-Stub.ps1`, and `24-Create-BudgetAlert-Stub.ps1` outline where to plug in custom detection or FinOps policies.
@@ -81,7 +81,6 @@ Follow the numbered flow to wire up Microsoft 365 governance, Azure resource pos
 | `dspmPurview/29-Trigger-FabricWorkspaceScan.ps1` | Trigger Fabric workspace scan | Yes | `scans`, `dspm`, `foundry` |
 | `dspmPurview/30-Foundry-RegisterResources.ps1` | Validate and tag Foundry assets | Yes | `foundry`, `ops` |
 | `dspmPurview/31-Foundry-ConfigureContentSafety.ps1` | Configure Content Safety blocklists | Yes | `foundry`, `defender` |
-| `dspmPurview/34-Validate-Posture.ps1` | Summarize DSPM posture | Yes | `ops`, `dspm`, `defender` |
 
 ---
 
@@ -107,7 +106,6 @@ pwsh ./run.ps1 -Tags foundation,dspm,audit -SpecPath ./spec.local.json
 
 - `dspmPurview/17-Export-ComplianceInventory.ps1` for quarterly evidence packets.
 - `dspmPurview/21-Export-Audit.ps1` and `22-Ship-AuditToStorage.ps1` for incident response handoffs.
-- `dspmPurview/34-Validate-Posture.ps1` to confirm audit ingestion, policy status, and Defender telemetry.
 
 ---
 

@@ -41,7 +41,7 @@ Both scripts support `-SpecPath` and optional `-Tags` parameters so they can run
 
 ## Integration checkpoints
 
-- If the script warns that certain preview toggles (for example "Enable data security for AI interactions") must be enabled manually, follow the steps in the portal and rerun the validation script (`scripts/governance/dspmPurview/34-Validate-Posture.ps1`).
+- If the script warns that certain preview toggles (for example "Enable data security for AI interactions") must be enabled manually, follow the steps in the portal and rerun the automation to confirm the state.
 - Make sure Purview has access to the Log Analytics workspace if you intend to ship diagnostics into compliance dashboards.
 
 ---

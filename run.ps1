@@ -134,7 +134,6 @@ $plan = @(
   & $planEntry -Order 200 -File "scripts/governance/dspmPurview/30-Foundry-RegisterResources.ps1" -Tags @("foundry","ops") -NeedsSpec:$true -Parameters $null
   & $planEntry -Order 210 -File "scripts/governance/dspmPurview/31-Foundry-ConfigureContentSafety.ps1" -Tags @("foundry","contentsafety","defender") -NeedsSpec:$true -Parameters $null
   & $planEntry -Order 220 -File "scripts/governance/dspmPurview/17-Export-ComplianceInventory.ps1" -Tags @("ops") -NeedsSpec:$false -Parameters $null
-  & $planEntry -Order 230 -File "scripts/governance/dspmPurview/34-Validate-Posture.ps1" -Tags @("ops","dspm","defender","m365") -NeedsSpec:$true -Parameters $null
   & $planEntry -Order 280 -File "scripts/governance/dspmPurview/24-Create-BudgetAlert-Stub.ps1" -Tags @("ops") -NeedsSpec:$false -Parameters $null
 )
 
