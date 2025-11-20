@@ -1,6 +1,6 @@
 # AI Governance and Security Accelerator
 
-This accelerator knits together Microsoft 365, Microsoft Purview, Microsoft Defender for Cloud, Azure AI Foundry, and ChatGPT Enterprise so AI solutions inherit the same governance and security posture as the rest of the enterprise. All automation is spec driven: copy the shared template (`spec.dspm.template.json`) to an environment-specific file (for example `spec.local.json`) that feeds the atomic PowerShell modules provisioning resources, enabling compliance controls, and lighting up monitoring across tenants.
+This accelerator knits together Microsoft 365, Microsoft Purview, Microsoft Defender for Cloud, Azure AI Foundry, and ChatGPT Enterprise so AI solutions inherit the same governance and security posture as the rest of the enterprise. All automation is spec driven: copy the shared template (`spec.dspm.template.json`) to an environment-specific file (for example `spec.local.json`) that feeds the PowerShell modules configuring resources, enabling compliance controls, and collecting monitoring across tenants. This solution will create automation of applying policies needed for foundry control plane, the creation of RBAC rules for agents in Agent 365 and many other manual setups necessary to govern your AI data and agents. 
 
 - **PowerShell 7 required** – run every script (including `run.ps1`) from pwsh 7.x to avoid Windows PowerShell module loader conflicts.
 - **Az module installed** – install or update the Az rollup before running anything:
@@ -18,6 +18,9 @@ This accelerator knits together Microsoft 365, Microsoft Purview, Microsoft Defe
 ---
 
 ## Prerequisites
+
+Before DSPM can provide insights and risk analytics, you must opt in to analytics processing for Insider Risk Management (IRM) and Data Loss Prevention (DLP). This is a prerequisite for DSPM to start scanning and correlating data security signals. Once enabled, DSPM automatically begins scanning your data estate for sensitive data and risky activities.
+
 
 - **PowerShell 7** and **Azure CLI **authenticated to the target subscriptions.
 - **Microsoft 365 E5** (or **E5 compliance**) license assigned to an operator with **Compliance Administrator** and **Purview Data Source Administrator rights** ([Microsoft Learn](https://learn.microsoft.com/en-us/purview/ai-microsoft-purview-considerations#prerequisites-for-data-security-posture-management-for-ai)).
