@@ -1,6 +1,6 @@
 # AI Governance Value Narrative
 
-Use this story when a customer asks, "What business value do we unlock by running the accelerator?" The narrative ties every automation step to measurable outcomes anchored in current Microsoft Learn guidance (Nov 2025).
+Use this story when a customer asks, "What business value do we unlock by running the accelerator?" The narrative ties every automation step to measurable outcomes anchored in current Microsoft Learn guidance (as of late 2025).
 
 ## Headline value
 1. **Capture every Foundry prompt inside the compliance boundary you already trust.** Purview DSPM for AI plus Unified Audit (per [Use Microsoft Purview to manage data security & compliance for Microsoft Foundry](https://learn.microsoft.com/en-us/purview/ai-azure-foundry)) stores chats/responses in the user mailbox so retention, eDiscovery, Insider Risk, Communication Compliance, and Data Lifecycle Management all see the same evidence trail.
