@@ -15,6 +15,7 @@ Use this supplement when briefing sellers, technical specialists, or customer ch
 
 ---
 
+## 2. Enable Unified Audit and M365 Prerequisites
 - **What happens**: We run `pwsh ./run.ps1 -Tags m365 -SpecPath ./spec.local.json` (or the individual Exchange Online scripts) from the same local PowerShell 7 shell to confirm Unified Audit is on, flip the DSPM for AI switches, and log exactly which prerequisites passed.
 - **Why it matters**: Audit is the compliance safety net. Running these steps locally—with MFA-capable PowerShell 7—guarantees the Exchange Online modules load, the operator can finish interactive sign-in, and the DSPM for AI toggles are verified before touching AI resources.
 
