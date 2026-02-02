@@ -92,7 +92,7 @@ Deploy this solution to your Azure subscription using the Azure Developer CLI.
 | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/Data-Agent-Governance-and-Security-Accelerator) | [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/Data-Agent-Governance-and-Security-Accelerator) |
 | --- | --- |
 
-> **Important:** Check Azure resource availability. To ensure the required services are available in your subscription and region, review the [Prerequisites and costs](#prerequisites-and-costs) section before deploying.
+> **Important:** Check Azure resource availability. To ensure the required services and permissions are available in your subscription and region, review the [Prerequisites and costs](#prerequisites-and-costs) section before deploying.
 
 ### How to install or deploy
 
@@ -141,10 +141,19 @@ After automation completes, you **MUST** manually enable several settings that c
 
 To deploy this solution accelerator, ensure you have access to an [Azure subscription](https://azure.microsoft.com/free/) with the necessary permissions to create resource groups, resources, and assign roles.
 
-**Required permissions:**
+**Microsoft Purview Pre-requisite permissions checklist:**
+- Ensure your existing Purview account is assigned with below two roles as a Managed Identity on Subscription level:
+    - Storage Blob Data Reader role
+    - Reader role
+- Purview Data Security and Posture Management (DSPM) for AI access
+- Purview - Data Security AI Content Viewer role
+
+**Required permissions on M365 level:**
 - Contributor role at the subscription level
 - Role Based Access Control Administrator on the subscription and/or resource group level
 - Microsoft 365 E5 (or E5 Compliance) license for the operator enabling Secure Interactions
+- Compliance Administrator role
+- Exchange online Administrator role
 
 **Required tooling:**
 - Azure CLI 2.58.0+
