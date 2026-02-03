@@ -1,0 +1,1795 @@
+﻿[
+    {
+        "Mode":  "Enable",
+        "DisplayName":  "DSPM for AI - Block sensitive info from AI sites",
+        "Type":  "Dlp",
+        "ExchangeLocation":  [
+
+                             ],
+        "SharePointLocation":  [
+
+                               ],
+        "SharePointLocationException":  [
+
+                                        ],
+        "OneDriveLocation":  [
+
+                             ],
+        "OneDriveLocationException":  [
+
+                                      ],
+        "ExchangeOnPremisesLocation":  [
+
+                                       ],
+        "SharePointOnPremisesLocation":  [
+
+                                         ],
+        "SharePointOnPremisesLocationException":  [
+
+                                                  ],
+        "TeamsLocation":  [
+
+                          ],
+        "TeamsLocationException":  [
+
+                                   ],
+        "EndpointDlpLocation":  [
+                                    {
+                                        "DisplayName":  "All",
+                                        "Name":  "All",
+                                        "ImmutableIdentity":  "All",
+                                        "Type":  {
+                                                     "value":  1,
+                                                     "Value":  "Tenant"
+                                                 },
+                                        "Status":  {
+                                                       "value":  2,
+                                                       "Value":  "Success"
+                                                   },
+                                        "Workload":  {
+                                                         "value":  8192,
+                                                         "Value":  "EndpointDevices"
+                                                     },
+                                        "SourceType":  null,
+                                        "SourceTypeDisplayName":  null,
+                                        "SourceProvider":  {
+                                                               "value":  0,
+                                                               "Value":  "Unknown"
+                                                           },
+                                        "SourceEntryType":  {
+                                                                "value":  0,
+                                                                "Value":  "Unknown"
+                                                            },
+                                        "SchemaVersion":  2,
+                                        "Resources":  null
+                                    }
+                                ],
+        "EndpointDlpLocationException":  [
+
+                                         ],
+        "ThirdPartyAppDlpLocation":  [
+
+                                     ],
+        "ThirdPartyAppDlpLocationException":  [
+
+                                              ],
+        "OnPremisesScannerDlpLocation":  [
+
+                                         ],
+        "OnPremisesScannerDlpLocationException":  [
+
+                                                  ],
+        "PowerBIDlpLocation":  [
+
+                               ],
+        "PowerBIDlpLocationException":  [
+
+                                        ],
+        "Locations":  "[]",
+        "LocationInclusions":  [
+
+                               ],
+        "LocationExclusions":  [
+
+                               ],
+        "EndpointDlpExtendedLocations":  "",
+        "ExchangeSender":  [
+
+                           ],
+        "ExchangeSenderException":  [
+
+                                    ],
+        "PolicyTemplateInfo":  {
+                                   "Id":  "DlpPolicyTemplatesCustom",
+                                   "CategoryId":  "DlpPolicyCategoryCustom"
+                               },
+        "PolicyCategory":  "ApplicableToAI",
+        "MatchedItemsCount":  null,
+        "TotalItemsCount":  null,
+        "TopNLocationStatistics":  null,
+        "WorkloadStatistics":  null,
+        "IsSimulationPolicy":  false,
+        "SimulationStatus":  null,
+        "AutoEnableAfter":  null,
+        "IsFromSmartInsights":  null,
+        "IsColdDataSimulationPolicy":  false,
+        "ExtendedProperties":  null,
+        "Summary":  false,
+        "EnforcementPlanes":  null,
+        "LogicalWorkload":  null,
+        "OneDriveSharedBy":  [
+
+                             ],
+        "ExceptIfOneDriveSharedBy":  [
+
+                                     ],
+        "OneDriveSharedByMemberOf":  [
+
+                                     ],
+        "ExceptIfOneDriveSharedByMemberOf":  [
+
+                                             ],
+        "ExchangeSenderMemberOf":  [
+
+                                   ],
+        "ExchangeSenderMemberOfException":  [
+
+                                            ],
+        "ExchangeAdaptiveScopes":  [
+
+                                   ],
+        "ExchangeAdaptiveScopesException":  [
+
+                                            ],
+        "SharePointAdaptiveScopes":  [
+
+                                     ],
+        "SharePointAdaptiveScopesException":  [
+
+                                              ],
+        "OneDriveAdaptiveScopes":  [
+
+                                   ],
+        "OneDriveAdaptiveScopesException":  [
+
+                                            ],
+        "TeamsAdaptiveScopes":  [
+
+                                ],
+        "TeamsAdaptiveScopesException":  [
+
+                                         ],
+        "EndpointDlpAdaptiveScopes":  [
+
+                                      ],
+        "EndpointDlpAdaptiveScopesException":  [
+
+                                               ],
+        "ExpectedLocations":  0,
+        "CompletedLocations":  0,
+        "FailedLocations":  0,
+        "ItemStatistics":  null,
+        "RuleMatchBlob":  null,
+        "ErrorMetadata":  null,
+        "UserAdministrativeUnitMembershipMap":  null,
+        "ForceValidate":  false,
+        "PolicyRulesMetaData":  "{\"WhenRulesChangedUtc\":\"2026-01-27T13:18:30.1711181Z\"}",
+        "GlobalListType":  "None",
+        "PolicyConstraints":  "{\"AdministrativeUnit\":[],\"DynamicRiskPrevention\":[\"Block with override for elevated risk users\"]}",
+        "Workload":  "Exchange, SharePoint, OneDriveForBusiness, EndpointDevices",
+        "Priority":  0,
+        "ObjectVersion":  "f8bd8685-cdf1-485e-f5fe-08de5da74bec",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "Comment":  "Blocks elevated risk users from pasting/uploading sensitive info to AI sites (Browser enforcement). Enforcement planes are captured; automation will warn until browser scopes are supported.",
+        "Enabled":  true,
+        "DistributionStatus":  "Pending",
+        "DistributionSyncStatus":  "Success",
+        "DistributionResults":  null,
+        "LastStatusUpdateTime":  null,
+        "ModificationTimeUtc":  "\/Date(1769538224793)\/",
+        "CreationTimeUtc":  "\/Date(1762970212930)\/",
+        "PolicyRBACScopes":  [
+
+                             ],
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/DSPM for AI - Block sensitive info from AI sites",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/DSPM for AI - Block sensitive info from AI sites",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "DSPM for AI - Block sensitive info from AI sites",
+        "DistinguishedName":  "CN=DSPM for AI - Block sensitive info from AI sites,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedPolicy"
+                        ],
+        "WhenChanged":  "\/Date(1769520224000)\/",
+        "WhenCreated":  "\/Date(1762952212000)\/",
+        "WhenChangedUTC":  "\/Date(1769520224000)\/",
+        "WhenCreatedUTC":  "\/Date(1762952212000)\/",
+        "ExchangeObjectId":  "431ddebe-bd63-4580-8b48-60f0ce88a9e3",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "Guid":  "431ddebe-bd63-4580-8b48-60f0ce88a9e3",
+        "OriginatingServer":  "",
+        "ObjectState":  "Changed"
+    },
+    {
+        "Mode":  "Enable",
+        "DisplayName":  "DSPM for AI - Block sensitive info from AI apps in Edge",
+        "Type":  "Dlp",
+        "ExchangeLocation":  [
+
+                             ],
+        "SharePointLocation":  [
+
+                               ],
+        "SharePointLocationException":  [
+
+                                        ],
+        "OneDriveLocation":  [
+
+                             ],
+        "OneDriveLocationException":  [
+
+                                      ],
+        "ExchangeOnPremisesLocation":  [
+
+                                       ],
+        "SharePointOnPremisesLocation":  [
+
+                                         ],
+        "SharePointOnPremisesLocationException":  [
+
+                                                  ],
+        "TeamsLocation":  [
+
+                          ],
+        "TeamsLocationException":  [
+
+                                   ],
+        "EndpointDlpLocation":  [
+
+                                ],
+        "EndpointDlpLocationException":  [
+
+                                         ],
+        "ThirdPartyAppDlpLocation":  [
+
+                                     ],
+        "ThirdPartyAppDlpLocationException":  [
+
+                                              ],
+        "OnPremisesScannerDlpLocation":  [
+
+                                         ],
+        "OnPremisesScannerDlpLocationException":  [
+
+                                                  ],
+        "PowerBIDlpLocation":  [
+
+                               ],
+        "PowerBIDlpLocationException":  [
+
+                                        ],
+        "Locations":  "[{\"Workload\":\"Applications\",\"Location\":\"55785\",\"LocationDisplayName\":null,\"LocationSource\":\"SaaS\",\"LocationType\":\"Individual\",\"Inclusions\":[{\"Type\":\"Tenant\",\"Identity\":\"All\",\"DisplayName\":\"All\",\"Name\":\"All\"}]},{\"Workload\":\"Applications\",\"Location\":\"51399\",\"LocationDisplayName\":null,\"LocationSource\":\"SaaS\",\"LocationType\":\"Individual\",\"Inclusions\":[{\"Type\":\"Tenant\",\"Identity\":\"All\",\"DisplayName\":\"All\",\"Name\":\"All\"}]},{\"Workload\":\"Applications\",\"Location\":\"51279\",\"LocationDisplayName\":null,\"LocationSource\":\"SaaS\",\"LocationType\":\"Individual\",\"Inclusions\":[{\"Type\":\"Tenant\",\"Identity\":\"All\",\"DisplayName\":\"All\",\"Name\":\"All\"}]},{\"Workload\":\"Applications\",\"Location\":\"52655\",\"LocationDisplayName\":null,\"LocationSource\":\"SaaS\",\"LocationType\":\"Individual\",\"Inclusions\":[{\"Type\":\"Tenant\",\"Identity\":\"All\",\"DisplayName\":\"All\",\"Name\":\"All\"}]}]",
+        "LocationInclusions":  [
+                                   {
+                                       "DisplayName":  "All",
+                                       "Name":  "All",
+                                       "ImmutableIdentity":  "All",
+                                       "Type":  {
+                                                    "value":  1,
+                                                    "Value":  "Tenant"
+                                                },
+                                       "Status":  {
+                                                      "value":  2,
+                                                      "Value":  "Success"
+                                                  },
+                                       "Workload":  {
+                                                        "value":  1048576,
+                                                        "Value":  "Applications"
+                                                    },
+                                       "SourceType":  "55785",
+                                       "SourceTypeDisplayName":  null,
+                                       "SourceProvider":  {
+                                                              "value":  2,
+                                                              "Value":  "SaaS"
+                                                          },
+                                       "SourceEntryType":  {
+                                                               "value":  1,
+                                                               "Value":  "Individual"
+                                                           },
+                                       "SchemaVersion":  0,
+                                       "Resources":  null
+                                   },
+                                   {
+                                       "DisplayName":  "All",
+                                       "Name":  "All",
+                                       "ImmutableIdentity":  "All",
+                                       "Type":  {
+                                                    "value":  1,
+                                                    "Value":  "Tenant"
+                                                },
+                                       "Status":  {
+                                                      "value":  2,
+                                                      "Value":  "Success"
+                                                  },
+                                       "Workload":  {
+                                                        "value":  1048576,
+                                                        "Value":  "Applications"
+                                                    },
+                                       "SourceType":  "51399",
+                                       "SourceTypeDisplayName":  null,
+                                       "SourceProvider":  {
+                                                              "value":  2,
+                                                              "Value":  "SaaS"
+                                                          },
+                                       "SourceEntryType":  {
+                                                               "value":  1,
+                                                               "Value":  "Individual"
+                                                           },
+                                       "SchemaVersion":  0,
+                                       "Resources":  null
+                                   },
+                                   {
+                                       "DisplayName":  "All",
+                                       "Name":  "All",
+                                       "ImmutableIdentity":  "All",
+                                       "Type":  {
+                                                    "value":  1,
+                                                    "Value":  "Tenant"
+                                                },
+                                       "Status":  {
+                                                      "value":  2,
+                                                      "Value":  "Success"
+                                                  },
+                                       "Workload":  {
+                                                        "value":  1048576,
+                                                        "Value":  "Applications"
+                                                    },
+                                       "SourceType":  "51279",
+                                       "SourceTypeDisplayName":  null,
+                                       "SourceProvider":  {
+                                                              "value":  2,
+                                                              "Value":  "SaaS"
+                                                          },
+                                       "SourceEntryType":  {
+                                                               "value":  1,
+                                                               "Value":  "Individual"
+                                                           },
+                                       "SchemaVersion":  0,
+                                       "Resources":  null
+                                   },
+                                   {
+                                       "DisplayName":  "All",
+                                       "Name":  "All",
+                                       "ImmutableIdentity":  "All",
+                                       "Type":  {
+                                                    "value":  1,
+                                                    "Value":  "Tenant"
+                                                },
+                                       "Status":  {
+                                                      "value":  2,
+                                                      "Value":  "Success"
+                                                  },
+                                       "Workload":  {
+                                                        "value":  1048576,
+                                                        "Value":  "Applications"
+                                                    },
+                                       "SourceType":  "52655",
+                                       "SourceTypeDisplayName":  null,
+                                       "SourceProvider":  {
+                                                              "value":  2,
+                                                              "Value":  "SaaS"
+                                                          },
+                                       "SourceEntryType":  {
+                                                               "value":  1,
+                                                               "Value":  "Individual"
+                                                           },
+                                       "SchemaVersion":  0,
+                                       "Resources":  null
+                                   }
+                               ],
+        "LocationExclusions":  [
+
+                               ],
+        "EndpointDlpExtendedLocations":  "",
+        "ExchangeSender":  [
+
+                           ],
+        "ExchangeSenderException":  [
+
+                                    ],
+        "PolicyTemplateInfo":  null,
+        "PolicyCategory":  "ApplicableToAI",
+        "MatchedItemsCount":  null,
+        "TotalItemsCount":  null,
+        "TopNLocationStatistics":  null,
+        "WorkloadStatistics":  null,
+        "IsSimulationPolicy":  false,
+        "SimulationStatus":  null,
+        "AutoEnableAfter":  null,
+        "IsFromSmartInsights":  null,
+        "IsColdDataSimulationPolicy":  false,
+        "ExtendedProperties":  null,
+        "Summary":  false,
+        "EnforcementPlanes":  [
+                                  "Browser"
+                              ],
+        "LogicalWorkload":  null,
+        "OneDriveSharedBy":  [
+
+                             ],
+        "ExceptIfOneDriveSharedBy":  [
+
+                                     ],
+        "OneDriveSharedByMemberOf":  [
+
+                                     ],
+        "ExceptIfOneDriveSharedByMemberOf":  [
+
+                                             ],
+        "ExchangeSenderMemberOf":  [
+
+                                   ],
+        "ExchangeSenderMemberOfException":  [
+
+                                            ],
+        "ExchangeAdaptiveScopes":  [
+
+                                   ],
+        "ExchangeAdaptiveScopesException":  [
+
+                                            ],
+        "SharePointAdaptiveScopes":  [
+
+                                     ],
+        "SharePointAdaptiveScopesException":  [
+
+                                              ],
+        "OneDriveAdaptiveScopes":  [
+
+                                   ],
+        "OneDriveAdaptiveScopesException":  [
+
+                                            ],
+        "TeamsAdaptiveScopes":  [
+
+                                ],
+        "TeamsAdaptiveScopesException":  [
+
+                                         ],
+        "EndpointDlpAdaptiveScopes":  [
+
+                                      ],
+        "EndpointDlpAdaptiveScopesException":  [
+
+                                               ],
+        "ExpectedLocations":  0,
+        "CompletedLocations":  0,
+        "FailedLocations":  0,
+        "ItemStatistics":  null,
+        "RuleMatchBlob":  null,
+        "ErrorMetadata":  null,
+        "UserAdministrativeUnitMembershipMap":  null,
+        "ForceValidate":  false,
+        "PolicyRulesMetaData":  "{\"WhenRulesChangedUtc\":\"2025-11-12T12:56:59.8610213Z\"}",
+        "GlobalListType":  "None",
+        "PolicyConstraints":  "{\"AdministrativeUnit\":[],\"DynamicRiskPrevention\":[]}",
+        "Workload":  "Exchange, SharePoint, OneDriveForBusiness, Applications",
+        "Priority":  1,
+        "ObjectVersion":  "7883d747-054c-42dc-c125-08de21eaf7ea",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "Comment":  "This policy detects inline for a selection of common sensitive information types and blocks prompts from being sent to AI apps while using Microsoft Edge. ",
+        "Enabled":  true,
+        "DistributionStatus":  "Pending",
+        "DistributionSyncStatus":  "Success",
+        "DistributionResults":  null,
+        "LastStatusUpdateTime":  null,
+        "ModificationTimeUtc":  "\/Date(1762970219860)\/",
+        "CreationTimeUtc":  "\/Date(1762970213043)\/",
+        "PolicyRBACScopes":  [
+
+                             ],
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/DSPM for AI - Block sensitive info from AI apps in Edge",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/DSPM for AI - Block sensitive info from AI apps in Edge",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "DSPM for AI - Block sensitive info from AI apps in Edge",
+        "DistinguishedName":  "CN=DSPM for AI - Block sensitive info from AI apps in Edge,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedPolicy"
+                        ],
+        "WhenChanged":  "\/Date(1762952219000)\/",
+        "WhenCreated":  "\/Date(1762952213000)\/",
+        "WhenChangedUTC":  "\/Date(1762952219000)\/",
+        "WhenCreatedUTC":  "\/Date(1762952213000)\/",
+        "ExchangeObjectId":  "a17b93e4-a7dd-4c8f-bffb-1cdf7aba59ea",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "Guid":  "a17b93e4-a7dd-4c8f-bffb-1cdf7aba59ea",
+        "OriginatingServer":  "",
+        "ObjectState":  "Changed"
+    },
+    {
+        "Mode":  "Enable",
+        "DisplayName":  "DSPM for AI - Block prompts sent to AI apps in Edge",
+        "Type":  "Dlp",
+        "ExchangeLocation":  [
+
+                             ],
+        "SharePointLocation":  [
+
+                               ],
+        "SharePointLocationException":  [
+
+                                        ],
+        "OneDriveLocation":  [
+
+                             ],
+        "OneDriveLocationException":  [
+
+                                      ],
+        "ExchangeOnPremisesLocation":  [
+
+                                       ],
+        "SharePointOnPremisesLocation":  [
+
+                                         ],
+        "SharePointOnPremisesLocationException":  [
+
+                                                  ],
+        "TeamsLocation":  [
+
+                          ],
+        "TeamsLocationException":  [
+
+                                   ],
+        "EndpointDlpLocation":  [
+
+                                ],
+        "EndpointDlpLocationException":  [
+
+                                         ],
+        "ThirdPartyAppDlpLocation":  [
+
+                                     ],
+        "ThirdPartyAppDlpLocationException":  [
+
+                                              ],
+        "OnPremisesScannerDlpLocation":  [
+
+                                         ],
+        "OnPremisesScannerDlpLocationException":  [
+
+                                                  ],
+        "PowerBIDlpLocation":  [
+
+                               ],
+        "PowerBIDlpLocationException":  [
+
+                                        ],
+        "Locations":  "[{\"Workload\":\"Applications\",\"Location\":\"51279\",\"LocationDisplayName\":null,\"LocationSource\":\"SaaS\",\"LocationType\":\"Individual\",\"Inclusions\":[{\"Type\":\"Tenant\",\"Identity\":\"All\",\"DisplayName\":\"All\",\"Name\":\"All\"}]},{\"Workload\":\"Applications\",\"Location\":\"55785\",\"LocationDisplayName\":null,\"LocationSource\":\"SaaS\",\"LocationType\":\"Individual\",\"Inclusions\":[{\"Type\":\"Tenant\",\"Identity\":\"All\",\"DisplayName\":\"All\",\"Name\":\"All\"}]},{\"Workload\":\"Applications\",\"Location\":\"51399\",\"LocationDisplayName\":null,\"LocationSource\":\"SaaS\",\"LocationType\":\"Individual\",\"Inclusions\":[{\"Type\":\"Tenant\",\"Identity\":\"All\",\"DisplayName\":\"All\",\"Name\":\"All\"}]},{\"Workload\":\"Applications\",\"Location\":\"52655\",\"LocationDisplayName\":null,\"LocationSource\":\"SaaS\",\"LocationType\":\"Individual\",\"Inclusions\":[{\"Type\":\"Tenant\",\"Identity\":\"All\",\"DisplayName\":\"All\",\"Name\":\"All\"}]}]",
+        "LocationInclusions":  [
+                                   {
+                                       "DisplayName":  "All",
+                                       "Name":  "All",
+                                       "ImmutableIdentity":  "All",
+                                       "Type":  {
+                                                    "value":  1,
+                                                    "Value":  "Tenant"
+                                                },
+                                       "Status":  {
+                                                      "value":  2,
+                                                      "Value":  "Success"
+                                                  },
+                                       "Workload":  {
+                                                        "value":  1048576,
+                                                        "Value":  "Applications"
+                                                    },
+                                       "SourceType":  "51279",
+                                       "SourceTypeDisplayName":  null,
+                                       "SourceProvider":  {
+                                                              "value":  2,
+                                                              "Value":  "SaaS"
+                                                          },
+                                       "SourceEntryType":  {
+                                                               "value":  1,
+                                                               "Value":  "Individual"
+                                                           },
+                                       "SchemaVersion":  0,
+                                       "Resources":  null
+                                   },
+                                   {
+                                       "DisplayName":  "All",
+                                       "Name":  "All",
+                                       "ImmutableIdentity":  "All",
+                                       "Type":  {
+                                                    "value":  1,
+                                                    "Value":  "Tenant"
+                                                },
+                                       "Status":  {
+                                                      "value":  2,
+                                                      "Value":  "Success"
+                                                  },
+                                       "Workload":  {
+                                                        "value":  1048576,
+                                                        "Value":  "Applications"
+                                                    },
+                                       "SourceType":  "55785",
+                                       "SourceTypeDisplayName":  null,
+                                       "SourceProvider":  {
+                                                              "value":  2,
+                                                              "Value":  "SaaS"
+                                                          },
+                                       "SourceEntryType":  {
+                                                               "value":  1,
+                                                               "Value":  "Individual"
+                                                           },
+                                       "SchemaVersion":  0,
+                                       "Resources":  null
+                                   },
+                                   {
+                                       "DisplayName":  "All",
+                                       "Name":  "All",
+                                       "ImmutableIdentity":  "All",
+                                       "Type":  {
+                                                    "value":  1,
+                                                    "Value":  "Tenant"
+                                                },
+                                       "Status":  {
+                                                      "value":  2,
+                                                      "Value":  "Success"
+                                                  },
+                                       "Workload":  {
+                                                        "value":  1048576,
+                                                        "Value":  "Applications"
+                                                    },
+                                       "SourceType":  "51399",
+                                       "SourceTypeDisplayName":  null,
+                                       "SourceProvider":  {
+                                                              "value":  2,
+                                                              "Value":  "SaaS"
+                                                          },
+                                       "SourceEntryType":  {
+                                                               "value":  1,
+                                                               "Value":  "Individual"
+                                                           },
+                                       "SchemaVersion":  0,
+                                       "Resources":  null
+                                   },
+                                   {
+                                       "DisplayName":  "All",
+                                       "Name":  "All",
+                                       "ImmutableIdentity":  "All",
+                                       "Type":  {
+                                                    "value":  1,
+                                                    "Value":  "Tenant"
+                                                },
+                                       "Status":  {
+                                                      "value":  2,
+                                                      "Value":  "Success"
+                                                  },
+                                       "Workload":  {
+                                                        "value":  1048576,
+                                                        "Value":  "Applications"
+                                                    },
+                                       "SourceType":  "52655",
+                                       "SourceTypeDisplayName":  null,
+                                       "SourceProvider":  {
+                                                              "value":  2,
+                                                              "Value":  "SaaS"
+                                                          },
+                                       "SourceEntryType":  {
+                                                               "value":  1,
+                                                               "Value":  "Individual"
+                                                           },
+                                       "SchemaVersion":  0,
+                                       "Resources":  null
+                                   }
+                               ],
+        "LocationExclusions":  [
+
+                               ],
+        "EndpointDlpExtendedLocations":  "",
+        "ExchangeSender":  [
+
+                           ],
+        "ExchangeSenderException":  [
+
+                                    ],
+        "PolicyTemplateInfo":  null,
+        "PolicyCategory":  "ApplicableToAI",
+        "MatchedItemsCount":  null,
+        "TotalItemsCount":  null,
+        "TopNLocationStatistics":  null,
+        "WorkloadStatistics":  null,
+        "IsSimulationPolicy":  false,
+        "SimulationStatus":  null,
+        "AutoEnableAfter":  null,
+        "IsFromSmartInsights":  null,
+        "IsColdDataSimulationPolicy":  false,
+        "ExtendedProperties":  null,
+        "Summary":  false,
+        "EnforcementPlanes":  [
+                                  "Browser"
+                              ],
+        "LogicalWorkload":  null,
+        "OneDriveSharedBy":  [
+
+                             ],
+        "ExceptIfOneDriveSharedBy":  [
+
+                                     ],
+        "OneDriveSharedByMemberOf":  [
+
+                                     ],
+        "ExceptIfOneDriveSharedByMemberOf":  [
+
+                                             ],
+        "ExchangeSenderMemberOf":  [
+
+                                   ],
+        "ExchangeSenderMemberOfException":  [
+
+                                            ],
+        "ExchangeAdaptiveScopes":  [
+
+                                   ],
+        "ExchangeAdaptiveScopesException":  [
+
+                                            ],
+        "SharePointAdaptiveScopes":  [
+
+                                     ],
+        "SharePointAdaptiveScopesException":  [
+
+                                              ],
+        "OneDriveAdaptiveScopes":  [
+
+                                   ],
+        "OneDriveAdaptiveScopesException":  [
+
+                                            ],
+        "TeamsAdaptiveScopes":  [
+
+                                ],
+        "TeamsAdaptiveScopesException":  [
+
+                                         ],
+        "EndpointDlpAdaptiveScopes":  [
+
+                                      ],
+        "EndpointDlpAdaptiveScopesException":  [
+
+                                               ],
+        "ExpectedLocations":  0,
+        "CompletedLocations":  0,
+        "FailedLocations":  0,
+        "ItemStatistics":  null,
+        "RuleMatchBlob":  null,
+        "ErrorMetadata":  null,
+        "UserAdministrativeUnitMembershipMap":  null,
+        "ForceValidate":  false,
+        "PolicyRulesMetaData":  "{\"WhenRulesChangedUtc\":\"2026-01-27T13:18:42.842941Z\"}",
+        "GlobalListType":  "None",
+        "PolicyConstraints":  "{\"AdministrativeUnit\":[],\"DynamicRiskPrevention\":[\"Adaptive Protection to block prompts sent to AI Rule\"]}",
+        "Workload":  "Exchange, SharePoint, OneDriveForBusiness, Applications",
+        "Priority":  2,
+        "ObjectVersion":  "7e732226-d9c6-4467-8578-08de5da7540f",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "Comment":  "Blocks elevated risk users from submitting prompts to AI apps in Edge (Browser enforcement). Automation will warn until browser scopes are supported.",
+        "Enabled":  true,
+        "DistributionStatus":  "Pending",
+        "DistributionSyncStatus":  "Success",
+        "DistributionResults":  null,
+        "LastStatusUpdateTime":  null,
+        "ModificationTimeUtc":  "\/Date(1769538238440)\/",
+        "CreationTimeUtc":  "\/Date(1762970213193)\/",
+        "PolicyRBACScopes":  [
+
+                             ],
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/DSPM for AI - Block prompts sent to AI apps in Edge",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/DSPM for AI - Block prompts sent to AI apps in Edge",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "DSPM for AI - Block prompts sent to AI apps in Edge",
+        "DistinguishedName":  "CN=DSPM for AI - Block prompts sent to AI apps in Edge,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedPolicy"
+                        ],
+        "WhenChanged":  "\/Date(1769520238000)\/",
+        "WhenCreated":  "\/Date(1762952213000)\/",
+        "WhenChangedUTC":  "\/Date(1769520238000)\/",
+        "WhenCreatedUTC":  "\/Date(1762952213000)\/",
+        "ExchangeObjectId":  "bd54f8bd-6b17-40b9-8933-d98cead5c63c",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "Guid":  "bd54f8bd-6b17-40b9-8933-d98cead5c63c",
+        "OriginatingServer":  "",
+        "ObjectState":  "Changed"
+    },
+    {
+        "Mode":  "Enable",
+        "DisplayName":  "DSPM for AI: Detect sensitive info added to AI sites",
+        "Type":  "Dlp",
+        "ExchangeLocation":  [
+
+                             ],
+        "SharePointLocation":  [
+
+                               ],
+        "SharePointLocationException":  [
+
+                                        ],
+        "OneDriveLocation":  [
+
+                             ],
+        "OneDriveLocationException":  [
+
+                                      ],
+        "ExchangeOnPremisesLocation":  [
+
+                                       ],
+        "SharePointOnPremisesLocation":  [
+
+                                         ],
+        "SharePointOnPremisesLocationException":  [
+
+                                                  ],
+        "TeamsLocation":  [
+
+                          ],
+        "TeamsLocationException":  [
+
+                                   ],
+        "EndpointDlpLocation":  [
+                                    {
+                                        "DisplayName":  "All",
+                                        "Name":  "All",
+                                        "ImmutableIdentity":  "All",
+                                        "Type":  {
+                                                     "value":  1,
+                                                     "Value":  "Tenant"
+                                                 },
+                                        "Status":  {
+                                                       "value":  2,
+                                                       "Value":  "Success"
+                                                   },
+                                        "Workload":  {
+                                                         "value":  8192,
+                                                         "Value":  "EndpointDevices"
+                                                     },
+                                        "SourceType":  null,
+                                        "SourceTypeDisplayName":  null,
+                                        "SourceProvider":  {
+                                                               "value":  0,
+                                                               "Value":  "Unknown"
+                                                           },
+                                        "SourceEntryType":  {
+                                                                "value":  0,
+                                                                "Value":  "Unknown"
+                                                            },
+                                        "SchemaVersion":  2,
+                                        "Resources":  null
+                                    }
+                                ],
+        "EndpointDlpLocationException":  [
+
+                                         ],
+        "ThirdPartyAppDlpLocation":  [
+
+                                     ],
+        "ThirdPartyAppDlpLocationException":  [
+
+                                              ],
+        "OnPremisesScannerDlpLocation":  [
+
+                                         ],
+        "OnPremisesScannerDlpLocationException":  [
+
+                                                  ],
+        "PowerBIDlpLocation":  [
+
+                               ],
+        "PowerBIDlpLocationException":  [
+
+                                        ],
+        "Locations":  "[]",
+        "LocationInclusions":  [
+
+                               ],
+        "LocationExclusions":  [
+
+                               ],
+        "EndpointDlpExtendedLocations":  "",
+        "ExchangeSender":  [
+
+                           ],
+        "ExchangeSenderException":  [
+
+                                    ],
+        "PolicyTemplateInfo":  {
+                                   "Id":  "DlpPolicyTemplatesCustom",
+                                   "CategoryId":  "DlpPolicyCategoryCustom"
+                               },
+        "PolicyCategory":  "ApplicableToAI",
+        "MatchedItemsCount":  null,
+        "TotalItemsCount":  null,
+        "TopNLocationStatistics":  null,
+        "WorkloadStatistics":  null,
+        "IsSimulationPolicy":  false,
+        "SimulationStatus":  null,
+        "AutoEnableAfter":  null,
+        "IsFromSmartInsights":  null,
+        "IsColdDataSimulationPolicy":  false,
+        "ExtendedProperties":  null,
+        "Summary":  false,
+        "EnforcementPlanes":  null,
+        "LogicalWorkload":  null,
+        "OneDriveSharedBy":  [
+
+                             ],
+        "ExceptIfOneDriveSharedBy":  [
+
+                                     ],
+        "OneDriveSharedByMemberOf":  [
+
+                                     ],
+        "ExceptIfOneDriveSharedByMemberOf":  [
+
+                                             ],
+        "ExchangeSenderMemberOf":  [
+
+                                   ],
+        "ExchangeSenderMemberOfException":  [
+
+                                            ],
+        "ExchangeAdaptiveScopes":  [
+
+                                   ],
+        "ExchangeAdaptiveScopesException":  [
+
+                                            ],
+        "SharePointAdaptiveScopes":  [
+
+                                     ],
+        "SharePointAdaptiveScopesException":  [
+
+                                              ],
+        "OneDriveAdaptiveScopes":  [
+
+                                   ],
+        "OneDriveAdaptiveScopesException":  [
+
+                                            ],
+        "TeamsAdaptiveScopes":  [
+
+                                ],
+        "TeamsAdaptiveScopesException":  [
+
+                                         ],
+        "EndpointDlpAdaptiveScopes":  [
+
+                                      ],
+        "EndpointDlpAdaptiveScopesException":  [
+
+                                               ],
+        "ExpectedLocations":  0,
+        "CompletedLocations":  0,
+        "FailedLocations":  0,
+        "ItemStatistics":  null,
+        "RuleMatchBlob":  null,
+        "ErrorMetadata":  null,
+        "UserAdministrativeUnitMembershipMap":  null,
+        "ForceValidate":  false,
+        "PolicyRulesMetaData":  "{\"WhenRulesChangedUtc\":\"2025-11-12T16:48:13.2258734Z\"}",
+        "GlobalListType":  "None",
+        "PolicyConstraints":  "{\"AdministrativeUnit\":[],\"DynamicRiskPrevention\":[]}",
+        "Workload":  "Exchange, SharePoint, OneDriveForBusiness, EndpointDevices",
+        "Priority":  3,
+        "ObjectVersion":  "99d4d308-5812-4f25-2227-08de220b4522",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "Comment":  "Discovers sensitive content pasted or uploaded in Microsoft Edge, Chrome, and Firefox to AI sites. This policy covers all users and groups in your org in audit mode only.",
+        "Enabled":  true,
+        "DistributionStatus":  "Pending",
+        "DistributionSyncStatus":  "Success",
+        "DistributionResults":  null,
+        "LastStatusUpdateTime":  null,
+        "ModificationTimeUtc":  "\/Date(1762984093303)\/",
+        "CreationTimeUtc":  "\/Date(1762984086757)\/",
+        "PolicyRBACScopes":  [
+
+                             ],
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/DSPM for AI: Detect sensitive info added to AI sites",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/DSPM for AI: Detect sensitive info added to AI sites",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "DSPM for AI: Detect sensitive info added to AI sites",
+        "DistinguishedName":  "CN=DSPM for AI: Detect sensitive info added to AI sites,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedPolicy"
+                        ],
+        "WhenChanged":  "\/Date(1762966093000)\/",
+        "WhenCreated":  "\/Date(1762966086000)\/",
+        "WhenChangedUTC":  "\/Date(1762966093000)\/",
+        "WhenCreatedUTC":  "\/Date(1762966086000)\/",
+        "ExchangeObjectId":  "08b7515a-ff09-48e1-b8ee-d933835bff09",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "Guid":  "08b7515a-ff09-48e1-b8ee-d933835bff09",
+        "OriginatingServer":  "",
+        "ObjectState":  "Changed"
+    },
+    {
+        "Mode":  "Enable",
+        "DisplayName":  "AI Egress Control",
+        "Type":  "Dlp",
+        "ExchangeLocation":  [
+                                 {
+                                     "DisplayName":  "All",
+                                     "Name":  "All",
+                                     "ImmutableIdentity":  "All",
+                                     "Type":  {
+                                                  "value":  1,
+                                                  "Value":  "Tenant"
+                                              },
+                                     "Status":  {
+                                                    "value":  2,
+                                                    "Value":  "Success"
+                                                },
+                                     "Workload":  {
+                                                      "value":  1,
+                                                      "Value":  "Exchange"
+                                                  },
+                                     "SourceType":  null,
+                                     "SourceTypeDisplayName":  null,
+                                     "SourceProvider":  {
+                                                            "value":  0,
+                                                            "Value":  "Unknown"
+                                                        },
+                                     "SourceEntryType":  {
+                                                             "value":  0,
+                                                             "Value":  "Unknown"
+                                                         },
+                                     "SchemaVersion":  2,
+                                     "Resources":  null
+                                 }
+                             ],
+        "SharePointLocation":  [
+                                   {
+                                       "DisplayName":  "All",
+                                       "Name":  "All",
+                                       "ImmutableIdentity":  "All",
+                                       "Type":  {
+                                                    "value":  1,
+                                                    "Value":  "Tenant"
+                                                },
+                                       "Status":  {
+                                                      "value":  2,
+                                                      "Value":  "Success"
+                                                  },
+                                       "Workload":  {
+                                                        "value":  2,
+                                                        "Value":  "SharePoint"
+                                                    },
+                                       "SourceType":  null,
+                                       "SourceTypeDisplayName":  null,
+                                       "SourceProvider":  {
+                                                              "value":  0,
+                                                              "Value":  "Unknown"
+                                                          },
+                                       "SourceEntryType":  {
+                                                               "value":  0,
+                                                               "Value":  "Unknown"
+                                                           },
+                                       "SchemaVersion":  2,
+                                       "Resources":  null
+                                   }
+                               ],
+        "SharePointLocationException":  [
+
+                                        ],
+        "OneDriveLocation":  [
+                                 {
+                                     "DisplayName":  "All",
+                                     "Name":  "All",
+                                     "ImmutableIdentity":  "All",
+                                     "Type":  {
+                                                  "value":  1,
+                                                  "Value":  "Tenant"
+                                              },
+                                     "Status":  {
+                                                    "value":  2,
+                                                    "Value":  "Success"
+                                                },
+                                     "Workload":  {
+                                                      "value":  8,
+                                                      "Value":  "OneDriveForBusiness"
+                                                  },
+                                     "SourceType":  null,
+                                     "SourceTypeDisplayName":  null,
+                                     "SourceProvider":  {
+                                                            "value":  0,
+                                                            "Value":  "Unknown"
+                                                        },
+                                     "SourceEntryType":  {
+                                                             "value":  0,
+                                                             "Value":  "Unknown"
+                                                         },
+                                     "SchemaVersion":  2,
+                                     "Resources":  null
+                                 }
+                             ],
+        "OneDriveLocationException":  [
+
+                                      ],
+        "ExchangeOnPremisesLocation":  [
+
+                                       ],
+        "SharePointOnPremisesLocation":  [
+
+                                         ],
+        "SharePointOnPremisesLocationException":  [
+
+                                                  ],
+        "TeamsLocation":  [
+                              {
+                                  "DisplayName":  "All",
+                                  "Name":  "All",
+                                  "ImmutableIdentity":  "All",
+                                  "Type":  {
+                                               "value":  1,
+                                               "Value":  "Tenant"
+                                           },
+                                  "Status":  {
+                                                 "value":  2,
+                                                 "Value":  "Success"
+                                             },
+                                  "Workload":  {
+                                                   "value":  2048,
+                                                   "Value":  "Teams"
+                                               },
+                                  "SourceType":  null,
+                                  "SourceTypeDisplayName":  null,
+                                  "SourceProvider":  {
+                                                         "value":  0,
+                                                         "Value":  "Unknown"
+                                                     },
+                                  "SourceEntryType":  {
+                                                          "value":  0,
+                                                          "Value":  "Unknown"
+                                                      },
+                                  "SchemaVersion":  2,
+                                  "Resources":  null
+                              }
+                          ],
+        "TeamsLocationException":  [
+
+                                   ],
+        "EndpointDlpLocation":  [
+
+                                ],
+        "EndpointDlpLocationException":  [
+
+                                         ],
+        "ThirdPartyAppDlpLocation":  [
+
+                                     ],
+        "ThirdPartyAppDlpLocationException":  [
+
+                                              ],
+        "OnPremisesScannerDlpLocation":  [
+
+                                         ],
+        "OnPremisesScannerDlpLocationException":  [
+
+                                                  ],
+        "PowerBIDlpLocation":  [
+
+                               ],
+        "PowerBIDlpLocationException":  [
+
+                                        ],
+        "Locations":  "[]",
+        "LocationInclusions":  [
+
+                               ],
+        "LocationExclusions":  [
+
+                               ],
+        "EndpointDlpExtendedLocations":  "",
+        "ExchangeSender":  [
+
+                           ],
+        "ExchangeSenderException":  [
+
+                                    ],
+        "PolicyTemplateInfo":  null,
+        "PolicyCategory":  "Unknown",
+        "MatchedItemsCount":  null,
+        "TotalItemsCount":  null,
+        "TopNLocationStatistics":  null,
+        "WorkloadStatistics":  null,
+        "IsSimulationPolicy":  false,
+        "SimulationStatus":  null,
+        "AutoEnableAfter":  null,
+        "IsFromSmartInsights":  null,
+        "IsColdDataSimulationPolicy":  false,
+        "ExtendedProperties":  null,
+        "Summary":  false,
+        "EnforcementPlanes":  null,
+        "LogicalWorkload":  null,
+        "OneDriveSharedBy":  [
+
+                             ],
+        "ExceptIfOneDriveSharedBy":  [
+
+                                     ],
+        "OneDriveSharedByMemberOf":  [
+
+                                     ],
+        "ExceptIfOneDriveSharedByMemberOf":  [
+
+                                             ],
+        "ExchangeSenderMemberOf":  [
+
+                                   ],
+        "ExchangeSenderMemberOfException":  [
+
+                                            ],
+        "ExchangeAdaptiveScopes":  [
+
+                                   ],
+        "ExchangeAdaptiveScopesException":  [
+
+                                            ],
+        "SharePointAdaptiveScopes":  [
+
+                                     ],
+        "SharePointAdaptiveScopesException":  [
+
+                                              ],
+        "OneDriveAdaptiveScopes":  [
+
+                                   ],
+        "OneDriveAdaptiveScopesException":  [
+
+                                            ],
+        "TeamsAdaptiveScopes":  [
+
+                                ],
+        "TeamsAdaptiveScopesException":  [
+
+                                         ],
+        "EndpointDlpAdaptiveScopes":  [
+
+                                      ],
+        "EndpointDlpAdaptiveScopesException":  [
+
+                                               ],
+        "ExpectedLocations":  0,
+        "CompletedLocations":  0,
+        "FailedLocations":  0,
+        "ItemStatistics":  null,
+        "RuleMatchBlob":  null,
+        "ErrorMetadata":  null,
+        "UserAdministrativeUnitMembershipMap":  null,
+        "ForceValidate":  false,
+        "PolicyRulesMetaData":  "{\"WhenRulesChangedUtc\":\"2025-11-17T18:36:18.2854039Z\"}",
+        "GlobalListType":  "None",
+        "PolicyConstraints":  "{\"AdministrativeUnit\":[]}",
+        "Workload":  "Exchange, SharePoint, OneDriveForBusiness, Teams",
+        "Priority":  4,
+        "ObjectVersion":  "9fa7a045-95f6-4691-4379-08de5da74156",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "Comment":  "Blocks sensitive data exfiltration to AI assistants across core workloads.",
+        "Enabled":  true,
+        "DistributionStatus":  "Pending",
+        "DistributionSyncStatus":  "Success",
+        "DistributionResults":  null,
+        "LastStatusUpdateTime":  null,
+        "ModificationTimeUtc":  "\/Date(1769538207027)\/",
+        "CreationTimeUtc":  "\/Date(1763407964187)\/",
+        "PolicyRBACScopes":  [
+
+                             ],
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/AI Egress Control",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/AI Egress Control",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "AI Egress Control",
+        "DistinguishedName":  "CN=AI Egress Control,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedPolicy"
+                        ],
+        "WhenChanged":  "\/Date(1769520207000)\/",
+        "WhenCreated":  "\/Date(1763389964000)\/",
+        "WhenChangedUTC":  "\/Date(1769520207000)\/",
+        "WhenCreatedUTC":  "\/Date(1763389964000)\/",
+        "ExchangeObjectId":  "d3b35751-fb78-4c7c-915a-585c69c484af",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "Guid":  "d3b35751-fb78-4c7c-915a-585c69c484af",
+        "OriginatingServer":  "",
+        "ObjectState":  "Changed"
+    },
+    {
+        "Mode":  "Enable",
+        "DisplayName":  "Adaptive Protection policy for Endpoint DLP",
+        "Type":  "Dlp",
+        "ExchangeLocation":  [
+
+                             ],
+        "SharePointLocation":  [
+
+                               ],
+        "SharePointLocationException":  [
+
+                                        ],
+        "OneDriveLocation":  [
+
+                             ],
+        "OneDriveLocationException":  [
+
+                                      ],
+        "ExchangeOnPremisesLocation":  [
+
+                                       ],
+        "SharePointOnPremisesLocation":  [
+
+                                         ],
+        "SharePointOnPremisesLocationException":  [
+
+                                                  ],
+        "TeamsLocation":  [
+
+                          ],
+        "TeamsLocationException":  [
+
+                                   ],
+        "EndpointDlpLocation":  [
+                                    {
+                                        "DisplayName":  "All",
+                                        "Name":  "All",
+                                        "ImmutableIdentity":  "All",
+                                        "Type":  {
+                                                     "value":  1,
+                                                     "Value":  "Tenant"
+                                                 },
+                                        "Status":  {
+                                                       "value":  2,
+                                                       "Value":  "Success"
+                                                   },
+                                        "Workload":  {
+                                                         "value":  8192,
+                                                         "Value":  "EndpointDevices"
+                                                     },
+                                        "SourceType":  null,
+                                        "SourceTypeDisplayName":  null,
+                                        "SourceProvider":  {
+                                                               "value":  0,
+                                                               "Value":  "Unknown"
+                                                           },
+                                        "SourceEntryType":  {
+                                                                "value":  0,
+                                                                "Value":  "Unknown"
+                                                            },
+                                        "SchemaVersion":  2,
+                                        "Resources":  null
+                                    }
+                                ],
+        "EndpointDlpLocationException":  [
+
+                                         ],
+        "ThirdPartyAppDlpLocation":  [
+
+                                     ],
+        "ThirdPartyAppDlpLocationException":  [
+
+                                              ],
+        "OnPremisesScannerDlpLocation":  [
+
+                                         ],
+        "OnPremisesScannerDlpLocationException":  [
+
+                                                  ],
+        "PowerBIDlpLocation":  [
+
+                               ],
+        "PowerBIDlpLocationException":  [
+
+                                        ],
+        "Locations":  "[]",
+        "LocationInclusions":  [
+
+                               ],
+        "LocationExclusions":  [
+
+                               ],
+        "EndpointDlpExtendedLocations":  "",
+        "ExchangeSender":  [
+
+                           ],
+        "ExchangeSenderException":  [
+
+                                    ],
+        "PolicyTemplateInfo":  {
+                                   "Id":  "DlpPolicyTemplatesCustom",
+                                   "CategoryId":  "DlpPolicyCategoryCustom"
+                               },
+        "PolicyCategory":  "Unknown",
+        "MatchedItemsCount":  null,
+        "TotalItemsCount":  null,
+        "TopNLocationStatistics":  null,
+        "WorkloadStatistics":  null,
+        "IsSimulationPolicy":  false,
+        "SimulationStatus":  null,
+        "AutoEnableAfter":  null,
+        "IsFromSmartInsights":  null,
+        "IsColdDataSimulationPolicy":  false,
+        "ExtendedProperties":  null,
+        "Summary":  false,
+        "EnforcementPlanes":  null,
+        "LogicalWorkload":  null,
+        "OneDriveSharedBy":  [
+
+                             ],
+        "ExceptIfOneDriveSharedBy":  [
+
+                                     ],
+        "OneDriveSharedByMemberOf":  [
+
+                                     ],
+        "ExceptIfOneDriveSharedByMemberOf":  [
+
+                                             ],
+        "ExchangeSenderMemberOf":  [
+
+                                   ],
+        "ExchangeSenderMemberOfException":  [
+
+                                            ],
+        "ExchangeAdaptiveScopes":  [
+
+                                   ],
+        "ExchangeAdaptiveScopesException":  [
+
+                                            ],
+        "SharePointAdaptiveScopes":  [
+
+                                     ],
+        "SharePointAdaptiveScopesException":  [
+
+                                              ],
+        "OneDriveAdaptiveScopes":  [
+
+                                   ],
+        "OneDriveAdaptiveScopesException":  [
+
+                                            ],
+        "TeamsAdaptiveScopes":  [
+
+                                ],
+        "TeamsAdaptiveScopesException":  [
+
+                                         ],
+        "EndpointDlpAdaptiveScopes":  [
+
+                                      ],
+        "EndpointDlpAdaptiveScopesException":  [
+
+                                               ],
+        "ExpectedLocations":  0,
+        "CompletedLocations":  0,
+        "FailedLocations":  0,
+        "ItemStatistics":  null,
+        "RuleMatchBlob":  null,
+        "ErrorMetadata":  null,
+        "UserAdministrativeUnitMembershipMap":  null,
+        "ForceValidate":  false,
+        "PolicyRulesMetaData":  "{\"WhenRulesChangedUtc\":\"2025-11-22T03:51:01.5257823Z\"}",
+        "GlobalListType":  "None",
+        "PolicyConstraints":  "{\"AdministrativeUnit\":[],\"DynamicRiskPrevention\":[\"Adaptive Protection block rule for Endpoint DLP\",\"Adaptive Protection audit rule for Endpoint DLP\"]}",
+        "Workload":  "Exchange, SharePoint, OneDriveForBusiness, EndpointDevices",
+        "Priority":  5,
+        "ObjectVersion":  "cd9dfc9b-2c4f-4680-fadf-08de297a5a8e",
+        "CreatedBy":  "",
+        "LastModifiedBy":  "",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "Comment":  "This is the default Adaptive Protection policy for Endpoint location.",
+        "Enabled":  true,
+        "DistributionStatus":  "Pending",
+        "DistributionSyncStatus":  "Success",
+        "DistributionResults":  null,
+        "LastStatusUpdateTime":  null,
+        "ModificationTimeUtc":  "\/Date(1763801461527)\/",
+        "CreationTimeUtc":  "\/Date(1763801452367)\/",
+        "PolicyRBACScopes":  [
+
+                             ],
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/Adaptive Protection policy for Endpoint DLP",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/Adaptive Protection policy for Endpoint DLP",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "Adaptive Protection policy for Endpoint DLP",
+        "DistinguishedName":  "CN=Adaptive Protection policy for Endpoint DLP,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedPolicy"
+                        ],
+        "WhenChanged":  "\/Date(1763783461000)\/",
+        "WhenCreated":  "\/Date(1763783452000)\/",
+        "WhenChangedUTC":  "\/Date(1763783461000)\/",
+        "WhenCreatedUTC":  "\/Date(1763783452000)\/",
+        "ExchangeObjectId":  "ccfc5213-ab67-4e1d-b25c-189d74b06125",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "Guid":  "ccfc5213-ab67-4e1d-b25c-189d74b06125",
+        "OriginatingServer":  "",
+        "ObjectState":  "Changed"
+    },
+    {
+        "Mode":  "Enable",
+        "DisplayName":  "Adaptive Protection policy for Teams and Exchange DLP",
+        "Type":  "Dlp",
+        "ExchangeLocation":  [
+                                 {
+                                     "DisplayName":  "All",
+                                     "Name":  "All",
+                                     "ImmutableIdentity":  "All",
+                                     "Type":  {
+                                                  "value":  1,
+                                                  "Value":  "Tenant"
+                                              },
+                                     "Status":  {
+                                                    "value":  2,
+                                                    "Value":  "Success"
+                                                },
+                                     "Workload":  {
+                                                      "value":  1,
+                                                      "Value":  "Exchange"
+                                                  },
+                                     "SourceType":  null,
+                                     "SourceTypeDisplayName":  null,
+                                     "SourceProvider":  {
+                                                            "value":  0,
+                                                            "Value":  "Unknown"
+                                                        },
+                                     "SourceEntryType":  {
+                                                             "value":  0,
+                                                             "Value":  "Unknown"
+                                                         },
+                                     "SchemaVersion":  2,
+                                     "Resources":  null
+                                 }
+                             ],
+        "SharePointLocation":  [
+
+                               ],
+        "SharePointLocationException":  [
+
+                                        ],
+        "OneDriveLocation":  [
+
+                             ],
+        "OneDriveLocationException":  [
+
+                                      ],
+        "ExchangeOnPremisesLocation":  [
+
+                                       ],
+        "SharePointOnPremisesLocation":  [
+
+                                         ],
+        "SharePointOnPremisesLocationException":  [
+
+                                                  ],
+        "TeamsLocation":  [
+                              {
+                                  "DisplayName":  "All",
+                                  "Name":  "All",
+                                  "ImmutableIdentity":  "All",
+                                  "Type":  {
+                                               "value":  1,
+                                               "Value":  "Tenant"
+                                           },
+                                  "Status":  {
+                                                 "value":  2,
+                                                 "Value":  "Success"
+                                             },
+                                  "Workload":  {
+                                                   "value":  2048,
+                                                   "Value":  "Teams"
+                                               },
+                                  "SourceType":  null,
+                                  "SourceTypeDisplayName":  null,
+                                  "SourceProvider":  {
+                                                         "value":  0,
+                                                         "Value":  "Unknown"
+                                                     },
+                                  "SourceEntryType":  {
+                                                          "value":  0,
+                                                          "Value":  "Unknown"
+                                                      },
+                                  "SchemaVersion":  2,
+                                  "Resources":  null
+                              }
+                          ],
+        "TeamsLocationException":  [
+
+                                   ],
+        "EndpointDlpLocation":  [
+
+                                ],
+        "EndpointDlpLocationException":  [
+
+                                         ],
+        "ThirdPartyAppDlpLocation":  [
+
+                                     ],
+        "ThirdPartyAppDlpLocationException":  [
+
+                                              ],
+        "OnPremisesScannerDlpLocation":  [
+
+                                         ],
+        "OnPremisesScannerDlpLocationException":  [
+
+                                                  ],
+        "PowerBIDlpLocation":  [
+
+                               ],
+        "PowerBIDlpLocationException":  [
+
+                                        ],
+        "Locations":  "[]",
+        "LocationInclusions":  [
+
+                               ],
+        "LocationExclusions":  [
+
+                               ],
+        "EndpointDlpExtendedLocations":  "",
+        "ExchangeSender":  [
+
+                           ],
+        "ExchangeSenderException":  [
+
+                                    ],
+        "PolicyTemplateInfo":  {
+                                   "Id":  "DlpPolicyTemplatesCustom",
+                                   "CategoryId":  "DlpPolicyCategoryCustom"
+                               },
+        "PolicyCategory":  "Unknown",
+        "MatchedItemsCount":  null,
+        "TotalItemsCount":  null,
+        "TopNLocationStatistics":  null,
+        "WorkloadStatistics":  null,
+        "IsSimulationPolicy":  false,
+        "SimulationStatus":  null,
+        "AutoEnableAfter":  null,
+        "IsFromSmartInsights":  null,
+        "IsColdDataSimulationPolicy":  false,
+        "ExtendedProperties":  null,
+        "Summary":  false,
+        "EnforcementPlanes":  null,
+        "LogicalWorkload":  null,
+        "OneDriveSharedBy":  [
+
+                             ],
+        "ExceptIfOneDriveSharedBy":  [
+
+                                     ],
+        "OneDriveSharedByMemberOf":  [
+
+                                     ],
+        "ExceptIfOneDriveSharedByMemberOf":  [
+
+                                             ],
+        "ExchangeSenderMemberOf":  [
+
+                                   ],
+        "ExchangeSenderMemberOfException":  [
+
+                                            ],
+        "ExchangeAdaptiveScopes":  [
+
+                                   ],
+        "ExchangeAdaptiveScopesException":  [
+
+                                            ],
+        "SharePointAdaptiveScopes":  [
+
+                                     ],
+        "SharePointAdaptiveScopesException":  [
+
+                                              ],
+        "OneDriveAdaptiveScopes":  [
+
+                                   ],
+        "OneDriveAdaptiveScopesException":  [
+
+                                            ],
+        "TeamsAdaptiveScopes":  [
+
+                                ],
+        "TeamsAdaptiveScopesException":  [
+
+                                         ],
+        "EndpointDlpAdaptiveScopes":  [
+
+                                      ],
+        "EndpointDlpAdaptiveScopesException":  [
+
+                                               ],
+        "ExpectedLocations":  0,
+        "CompletedLocations":  0,
+        "FailedLocations":  0,
+        "ItemStatistics":  null,
+        "RuleMatchBlob":  null,
+        "ErrorMetadata":  null,
+        "UserAdministrativeUnitMembershipMap":  null,
+        "ForceValidate":  false,
+        "PolicyRulesMetaData":  "{\"WhenRulesChangedUtc\":\"2025-11-22T03:51:01.9187688Z\"}",
+        "GlobalListType":  "None",
+        "PolicyConstraints":  "{\"AdministrativeUnit\":[],\"DynamicRiskPrevention\":[\"Adaptive Protection block rule for Teams and Exchange DLP\",\"Adaptive Protection audit rule for Teams and Exchange DLP\"]}",
+        "Workload":  "Exchange, SharePoint, OneDriveForBusiness, Teams",
+        "Priority":  6,
+        "ObjectVersion":  "e76fda25-27c8-4080-f1e8-08de297a5aca",
+        "CreatedBy":  "",
+        "LastModifiedBy":  "",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "Comment":  "This is the default Adaptive Protection policy for Teams and Exchange locations.",
+        "Enabled":  true,
+        "DistributionStatus":  "Pending",
+        "DistributionSyncStatus":  "Success",
+        "DistributionResults":  null,
+        "LastStatusUpdateTime":  null,
+        "ModificationTimeUtc":  "\/Date(1763801461920)\/",
+        "CreationTimeUtc":  "\/Date(1763801453443)\/",
+        "PolicyRBACScopes":  [
+
+                             ],
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/Adaptive Protection policy for Teams and Exchange DLP",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/Adaptive Protection policy for Teams and Exchange DLP",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "Adaptive Protection policy for Teams and Exchange DLP",
+        "DistinguishedName":  "CN=Adaptive Protection policy for Teams and Exchange DLP,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedPolicy"
+                        ],
+        "WhenChanged":  "\/Date(1763783461000)\/",
+        "WhenCreated":  "\/Date(1763783453000)\/",
+        "WhenChangedUTC":  "\/Date(1763783461000)\/",
+        "WhenCreatedUTC":  "\/Date(1763783453000)\/",
+        "ExchangeObjectId":  "bf8d61e1-f39c-460f-9a74-3de0e0e4fb4f",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "Guid":  "bf8d61e1-f39c-460f-9a74-3de0e0e4fb4f",
+        "OriginatingServer":  "",
+        "ObjectState":  "Changed"
+    }
+]

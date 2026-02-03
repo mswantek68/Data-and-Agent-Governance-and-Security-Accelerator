@@ -58,35 +58,182 @@
   "logAnalyticsWorkspaceId": "",
   "dataSources": [],
   "scans": [],
-  "dlpPolicy": {
-    "name": "AI Egress Control",
-    "mode": "Enforce",
-    "locations": {
-      "Exchange": "All",
-      "SharePoint": "All",
-      "OneDrive": "All",
-      "Teams": "All"
+  "dlpPolicies": [
+    {
+      "name": "AI Egress Control",
+      "mode": "Enforce",
+      "comment": "Blocks sensitive data exfiltration to AI assistants across core workloads.",
+      "locations": {
+        "Exchange": "All",
+        "SharePoint": "All",
+        "OneDrive": "All",
+        "Teams": "All",
+        "Endpoint": "All"
+      },
+      "rules": [
+        {
+          "name": "Block Sensitive Data to AI Destinations",
+          "sensitiveInfoTypes": [
+            { "name": "Credit Card Number", "count": 1, "confidence": 85 },
+            { "name": "U.S. Social Security Number (SSN)", "count": 1, "confidence": 85 }
+          ],
+          "blockAccess": true,
+          "notifyUser": true
+        }
+      ]
     },
-    "rules": [
-      {
-        "name": "Block Sensitive Data to AI Destinations",
-        "sensitiveInfoTypes": [
-          {
-            "name": "Credit Card Number",
-            "count": 1,
-            "confidence": 85
-          },
-          {
-            "name": "U.S. Social Security Number (SSN)",
-            "count": 1,
-            "confidence": 85
-          }
-        ],
-        "blockAccess": true,
-        "notifyUser": true
-      }
-    ]
-  },
+    {
+      "name": "AI Prompt Guard (Edge/Browsers)",
+      "mode": "TestWithNotifications",
+      "comment": "Browser scopes are retained for visibility; the script will warn because Browser/Application enforcement is not automated yet.",
+      "enforcementPlanes": ["Browser"],
+      "locations": {
+        "Exchange": "All",
+        "SharePoint": "All",
+        "OneDrive": "All",
+        "Teams": "All"
+      },
+      "rules": [
+        {
+          "name": "Detect Sensitive Data in AI Prompts",
+          "sensitiveInfoTypes": [
+            { "name": "Credit Card Number", "count": 1, "confidence": 65 }
+          ],
+          "blockAccess": false,
+          "notifyUser": true
+        }
+      ]
+    },
+    {
+      "name": "Default DLP policy - Protect sensitive M365 Copilot interactions",
+      "mode": "Enforce",
+      "comment": "Baseline Copilot guardrail; approximated with core workloads. Update to your label set or add manual portal enforcement for Copilot services.",
+      "locations": {
+        "Exchange": "All",
+        "SharePoint": "All",
+        "OneDrive": "All",
+        "Teams": "All"
+      },
+      "rules": [
+        {
+          "name": "Block Sensitive Data to Copilot",
+          "sensitiveInfoTypes": [
+            { "name": "Credit Card Number", "count": 1, "confidence": 85 },
+            { "name": "U.S. Social Security Number (SSN)", "count": 1, "confidence": 85 }
+          ],
+          "blockAccess": true,
+          "notifyUser": true
+        }
+      ]
+    },
+    {
+      "name": "DSPM for AI - Protect sensitive data from Copilot processing",
+      "mode": "Enforce",
+      "comment": "Blocks Copilot/agents from processing items labeled per your sensitivity policy. sensitivityLabels is documented but not yet automated; rule will warn and skip labels until implementation lands.",
+      "locations": {
+        "Exchange": "All",
+        "SharePoint": "All",
+        "OneDrive": "All",
+        "Teams": "All"
+      },
+      "rules": [
+        {
+          "name": "Block Labeled Data from Copilot",
+          "sensitivityLabels": [
+            "Highly Confidential",
+            "Confidential"
+          ],
+          "blockAccess": true,
+          "notifyUser": true
+        }
+      ]
+    },
+    {
+      "name": "DSPM for AI - Block sensitive info from AI sites",
+      "mode": "Enable",
+      "comment": "Blocks elevated risk users from pasting/uploading sensitive info to AI sites (Browser enforcement). Enforcement planes are captured; automation will warn until browser scopes are supported.",
+      "enforcementPlanes": ["Browser"],
+      "locations": {
+        "Exchange": "All",
+        "SharePoint": "All",
+        "OneDrive": "All",
+        "Teams": "All"
+      },
+      "rules": [
+        {
+          "name": "Block Sensitive Info on AI Sites",
+          "sensitiveInfoTypes": [
+            { "name": "Credit Card Number", "count": 1, "confidence": 85 },
+            { "name": "U.S. Social Security Number (SSN)", "count": 1, "confidence": 85 }
+          ],
+          "blockAccess": true,
+          "notifyUser": true
+        }
+      ]
+    },
+    {
+      "name": "DSPM for AI - Block prompts sent to AI apps in Edge",
+      "mode": "Enable",
+      "comment": "Blocks elevated risk users from submitting prompts to AI apps in Edge (Browser enforcement). Automation will warn until browser scopes are supported.",
+      "enforcementPlanes": ["Browser"],
+      "locations": {
+        "Exchange": "All",
+        "SharePoint": "All",
+        "OneDrive": "All",
+        "Teams": "All"
+      },
+      "rules": [
+        {
+          "name": "Block Prompts to AI Apps",
+          "sensitiveInfoTypes": [
+            { "name": "Credit Card Number", "count": 1, "confidence": 75 },
+            { "name": "U.S. Social Security Number (SSN)", "count": 1, "confidence": 75 }
+          ],
+          "blockAccess": true,
+          "notifyUser": true
+        }
+      ]
+    },
+    {
+      "name": "DSPM for AI - Capture interactions for enterprise AI apps",
+      "mode": "TestWithNotifications",
+      "comment": "Capture interactions for enterprise AI apps; adjust to Enforce when ready.",
+      "locations": {
+        "Exchange": "All",
+        "SharePoint": "All",
+        "OneDrive": "All",
+        "Teams": "All",
+        "Endpoint": "All"
+      },
+      "rules": [
+        {
+          "name": "Capture AI Interactions",
+          "sensitiveInfoTypes": [
+            { "name": "Credit Card Number", "count": 1, "confidence": 65 }
+          ],
+          "blockAccess": false,
+          "notifyUser": true
+        }
+      ]
+    }
+  ],
+  "communicationCompliancePolicies": [
+    {
+      "name": "DSPM for AI - Unethical behavior in AI apps",
+      "comment": "Flag unethical behavior related to AI assistants; requires reviewers.",
+      "enabled": true,
+      "reviewers": [
+        "compliance.admin@contoso.com"
+      ]
+    }
+  ],
+  "insiderRiskPolicies": [
+    {
+      "name": "DSPM for AI - Detect risky AI usage",
+      "comment": "Detect risky interactions in AI apps; placeholder for manual creation until automation is available.",
+      "enabled": true
+    }
+  ],
   "labels": [
     {
       "name": "Confidential",

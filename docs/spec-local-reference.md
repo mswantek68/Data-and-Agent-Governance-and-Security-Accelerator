@@ -94,7 +94,10 @@ Then edit `spec.local.json` with your actual Azure resource IDs and configuratio
 
 | Path | Type | Description | Consumed by |
 | ---- | ---- | ----------- | ----------- |
-| `dlpPolicy.*` | object | Defines the single DLP policy created by `12-Create-DlpPolicy.ps1`. Includes rule definitions, workloads, and sensitive info selections. | `12-Create-DlpPolicy.ps1` |
+| `dlpPolicies[]` | array | Declarative list of DLP policies (name, mode, locations, rules). Legacy `dlpPolicy` is still honored if present but will be removed in a future release. | `12-Create-DlpPolicy.ps1` |
+| `dlpPolicies[].rules[].sensitivityLabels[]` | array | List of sensitivity label display names for label-based enforcement. Currently logged and skipped—portal or future automation required. | `12-Create-DlpPolicy.ps1` |
+| `communicationCompliancePolicies[]` | array | Communication Compliance policies (name, comment, enabled flag, reviewers). Reviewers are required. | `33-Create-CommunicationCompliancePolicy.ps1` |
+| `insiderRiskPolicies[]` | array | Insider Risk Management policies (name, comment, enabled flag). Today surfaced for manual action; creation is not automated. | `34-Create-InsiderRiskPolicy.ps1` |
 | `labels[]` | array | Sensitivity label definitions to create/publish (name, publish policy, encryption, scopes). | `13-Create-SensitivityLabel.ps1` |
 | `retentionPolicies[]` | array | Retention policies (name, rules, locations) that the automation publishes to keep AI interactions for the desired duration. | `14-Create-RetentionPolicy.ps1` |
 | `retentionPolicies[].rules[]` | array | Rule objects controlling duration and action (Keep/Delete). | `14-Create-RetentionPolicy.ps1` |

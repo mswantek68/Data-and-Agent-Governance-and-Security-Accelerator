@@ -83,12 +83,20 @@ function Get-BicepParameterConfig {
     return $bag
   }
   try {
-    $json = & $bicepCmd.Source build-params $ParamFile --stdout 2>$null
+    # Capture stdout only, ignore stderr (warnings)
+    $output = & $bicepCmd.Source build-params $ParamFile --stdout 2>&1
+    $json = ($output | Where-Object { $_ -is [string] -and $_.Trim().StartsWith('{') }) -join ''
     if (-not $json) { return $bag }
     $doc = $json | ConvertFrom-Json
-    $parametersProp = $doc.PSObject.Properties['parameters']
-    if ($parametersProp -and $parametersProp.Value) {
-      foreach ($prop in $parametersProp.Value.PSObject.Properties) {
+    # The bicep output has parametersJson as a nested JSON string
+    $paramsJson = $null
+    if ($doc.PSObject.Properties['parametersJson'] -and $doc.parametersJson) {
+      $paramsJson = $doc.parametersJson | ConvertFrom-Json
+    } elseif ($doc.PSObject.Properties['parameters']) {
+      $paramsJson = $doc
+    }
+    if ($paramsJson -and $paramsJson.PSObject.Properties['parameters']) {
+      foreach ($prop in $paramsJson.parameters.PSObject.Properties) {
         $bag[$prop.Name] = $prop.Value
       }
     }
@@ -168,7 +176,10 @@ $repoRoot = (Get-Item $PSScriptRoot).Parent.FullName
 $paramFilePath = Join-Path $repoRoot "infra/main.bicepparam"
 $script:parameterBag = Get-BicepParameterConfig -ParamFile $paramFilePath
 
-$specPath = Get-Default -value $SpecPath -fallback (Get-Default -value $env:DAGA_SPEC_PATH -fallback (Get-Default -value (Get-ParamString 'dagaSpecPath') -fallback "./spec.local.json"))
+$repoSpecLocal = Join-Path $repoRoot "spec.local.json"
+$repoSpecTemplate = Join-Path $repoRoot "spec.dspm.template.json"
+$defaultSpec = if (Test-Path -Path $repoSpecLocal) { $repoSpecLocal } elseif (Test-Path -Path $repoSpecTemplate) { $repoSpecTemplate } else { Join-Path $repoRoot "spec.local.json" }
+$specPath = Get-Default -value $SpecPath -fallback (Get-Default -value $env:DAGA_SPEC_PATH -fallback (Get-Default -value (Get-ParamString 'dagaSpecPath') -fallback $defaultSpec))
 if (-not (Test-Path -Path $specPath)) {
   throw "Spec file '$specPath' not found. Set DAGA_SPEC_PATH or pass -SpecPath to the hook."
 }

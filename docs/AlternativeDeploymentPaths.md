@@ -67,8 +67,8 @@ Get-AzContext  # Verify tenant/subscription match your spec
 | I want to... | Run these tags | Prerequisites | Key spec sections |
 |-------------|----------------|---------------|-------------------|
 | **Secure Azure AI Foundry only** | `defender,foundry` | Azure Contributor on subscription with Foundry projects | `aiFoundry.*`, `foundry.resources[]`, `defenderForAI.enableDefenderForCloudPlans` |
-| **Full Purview DSPM for AI (no M365)** | `foundation,dspm,defender,foundry` | Azure Contributor + Purview Data Source Admin | All Azure sections (skip `dlpPolicy`, `labels`, `retentionPolicies`) |
-| **Enable M365 Copilot governance** | `m365` (run separately from desktop) | Desktop + MFA + Exchange Online admin + E5 license | `dlpPolicy`, `labels`, `retentionPolicies` |
+| **Full Purview DSPM for AI (no M365)** | `foundation,dspm,defender,foundry` | Azure Contributor + Purview Data Source Admin | All Azure sections (skip `dlpPolicies`, `labels`, `retentionPolicies`) |
+| **Enable M365 Copilot governance** | `m365` (run separately from desktop) | Desktop + MFA + Exchange Online admin + E5 license | `dlpPolicies`, `labels`, `retentionPolicies` |
 | **Everything** | `all` | All of the above (may require multiple operators) | All spec sections |
 
 ---
@@ -266,20 +266,20 @@ Run individual scripts or use tags:
 
 **Foundation (Purview landing zone):**
 ```powershell
-pwsh ./scripts/governance/01-Ensure-ResourceGroup.ps1 -SpecPath ./spec.local.json
-pwsh ./scripts/governance/dspmPurview/02-Ensure-PurviewAccount.ps1 -SpecPath ./spec.local.json
+pwsh ./scripts/governance/Ensure-ResourceGroup.ps1 -SpecPath ./spec.local.json
+pwsh ./scripts/governance/dspmPurview/Ensure-PurviewAccount.ps1 -SpecPath ./spec.local.json
 ```
 
 **Defender for AI posture:**
 ```powershell
-pwsh ./scripts/defender/defenderForAI/06-Enable-DefenderPlans.ps1 -SpecPath ./spec.local.json
-pwsh ./scripts/defender/defenderForAI/07-Enable-Diagnostics.ps1 -SpecPath ./spec.local.json
+pwsh ./scripts/defender/defenderForAI/Enable-DefenderPlans.ps1 -SpecPath ./spec.local.json
+pwsh ./scripts/defender/defenderForAI/Enable-Diagnostics.ps1 -SpecPath ./spec.local.json
 ```
 
 **Foundry registration + Content Safety:**
 ```powershell
-pwsh ./scripts/governance/dspmPurview/30-Foundry-RegisterResources.ps1 -SpecPath ./spec.local.json
-pwsh ./scripts/governance/dspmPurview/31-Foundry-ConfigureContentSafety.ps1 -SpecPath ./spec.local.json
+pwsh ./scripts/governance/dspmPurview/Foundry-RegisterResources.ps1 -SpecPath ./spec.local.json
+pwsh ./scripts/governance/dspmPurview/Foundry-ConfigureContentSafety.ps1 -SpecPath ./spec.local.json
 ```
 
 **Or use the orchestrator:**
@@ -290,8 +290,8 @@ pwsh ./scripts/governance/dspmPurview/31-Foundry-ConfigureContentSafety.ps1 -Spe
 ### Step 5: Review and export evidence
 
 ```powershell
-pwsh ./scripts/governance/dspmPurview/17-Export-ComplianceInventory.ps1 -SpecPath ./spec.local.json
-pwsh ./scripts/governance/dspmPurview/21-Export-Audit.ps1 -SpecPath ./spec.local.json
+pwsh ./scripts/governance/dspmPurview/Export-ComplianceInventory.ps1 -SpecPath ./spec.local.json
+pwsh ./scripts/governance/dspmPurview/Export-Audit.ps1 -SpecPath ./spec.local.json
 ```
 
 ---
@@ -326,7 +326,7 @@ Point `run.ps1 -SpecPath` to the one you need.
 | `aiFoundry.*` | Foundry subscription and resource group | `foundry`, `defender` |
 | `foundry.resources[]` | List of Foundry projects to govern | `foundry` |
 | `defenderForAI.*` | Defender plans to enable | `defender` |
-| `dlpPolicy`, `labels`, `retentionPolicies` | M365 compliance settings | `m365` |
+| `dlpPolicies`, `communicationCompliancePolicies`, `insiderRiskPolicies`, `labels`, `retentionPolicies` | M365 compliance settings | `m365` |
 | `activityExport.*` | Audit export configuration | `audit` |
 
 See [spec-local-reference.md](./spec-local-reference.md) for field-by-field documentation.
@@ -361,26 +361,27 @@ Environment variables override `main.bicepparam` values:
 
 | Order | Script | What happens |
 | ----- | ------ | ------------ |
-| 5 | `00-New-DspmSpec.ps1` | Generates/refreshes the spec contract |
-| 10 | `01-Ensure-ResourceGroup.ps1` | Creates landing-zone resource group |
-| 20 | `02-Ensure-PurviewAccount.ps1` | Ensures Purview account exists |
-| 30 | `10-Connect-Compliance.ps1` | Establishes Exchange Online sessions |
-| 40 | `11-Enable-UnifiedAudit.ps1` | Turns on Unified Audit |
-| 50 | `12-Create-DlpPolicy.ps1` | Creates DLP/KYD policies |
-| 60 | `13-Create-SensitivityLabel.ps1` | Publishes sensitivity labels |
-| 70 | `14-Create-RetentionPolicy.ps1` | Creates retention policies |
-| 80 | `03-Register-DataSource.ps1` | Registers data sources in Purview |
-| 90 | `04-Run-Scan.ps1` | Triggers Purview scans |
-| 100 | `20-Subscribe-ManagementActivity.ps1` | Sets up audit exports |
-| 110 | `21-Export-Audit.ps1` | Executes audit export |
-| 120 | `05-Assign-AzurePolicies.ps1` | Applies Azure Policy assignments |
-| 130 | `06-Enable-DefenderPlans.ps1` | Enables Defender for Cloud plans |
-| 140 | `07-Enable-Diagnostics.ps1` | Configures diagnostic settings |
-| 150 | `25-Tag-ResourcesFromSpec.ps1` | Applies governance tags |
-| 200 | `30-Foundry-RegisterResources.ps1` | Registers Foundry projects in Purview |
-| 210 | `31-Foundry-ConfigureContentSafety.ps1` | Deploys Content Safety settings |
-| 220 | `17-Export-ComplianceInventory.ps1` | Captures compliance inventory |
-| 280 | `24-Create-BudgetAlert-Stub.ps1` | Budget alerts (placeholder) |
+| 5 | `New-DspmSpec.ps1` | Generates/refreshes the spec contract |
+| 10 | `Ensure-ResourceGroup.ps1` | Creates landing-zone resource group |
+| 20 | `Ensure-PurviewAccount.ps1` | Ensures Purview account exists |
+| 30 | `Connect-Compliance.ps1` | Establishes Exchange Online sessions |
+| 40 | `Enable-UnifiedAudit.ps1` | Turns on Unified Audit |
+| 50 | `Create-DlpPolicy.ps1` | Creates DLP/KYD policies |
+| 55 | `Create-CommunicationCompliancePolicy.ps1` | Creates Communication Compliance policies |
+| 56 | `Create-InsiderRiskPolicy.ps1` | Surfaces Insider Risk policies (manual action) |
+| 60 | `Create-SensitivityLabel.ps1` | Publishes sensitivity labels |
+| 70 | `Create-RetentionPolicy.ps1` | Creates retention policies |
+| 80 | `Register-DataSource.ps1` | Registers data sources in Purview |
+| 90 | `Run-Scan.ps1` | Triggers Purview scans |
+| 100 | `Subscribe-ManagementActivity.ps1` | Sets up audit exports |
+| 110 | `Export-Audit.ps1` | Executes audit export |
+| 120 | `Assign-AzurePolicies.ps1` | Applies Azure Policy assignments |
+| 130 | `Enable-DefenderPlans.ps1` | Enables Defender for Cloud plans |
+| 140 | `Enable-Diagnostics.ps1` | Configures diagnostic settings |
+| 150 | `Tag-ResourcesFromSpec.ps1` | Applies governance tags |
+| 200 | `Foundry-RegisterResources.ps1` | Registers Foundry projects in Purview |
+| 210 | `Foundry-ConfigureContentSafety.ps1` | Deploys Content Safety settings |
+| 220 | `Export-ComplianceInventory.ps1` | Captures compliance inventory |
 
 ---
 

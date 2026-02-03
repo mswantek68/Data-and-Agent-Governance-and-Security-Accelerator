@@ -1,0 +1,806 @@
+﻿[
+    {
+        "Settings":  [
+                         "[isparent, False]",
+                         "[contenttype, File, Email, Teamwork]",
+                         "[tooltip, Non-business data, for personal use only.]",
+                         "[displayname, Personal]"
+                     ],
+        "LabelActions":  [
+
+                         ],
+        "Conditions":  [
+
+                       ],
+        "ColumnAssetCondition":  null,
+        "SchematizedDataCondition":  null,
+        "LocaleSettings":  [
+                               "{\"LocaleKey\":\"displayName\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Personal\"}]}",
+                               "{\"LocaleKey\":\"tooltip\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Non-business data, for personal use only.\"}]}"
+                           ],
+        "ContentTypeRemovalViolations":  null,
+        "DisplayName":  "Personal",
+        "ParentId":  null,
+        "AbacEnabled":  null,
+        "CustomSecurityAttributeRequired":  null,
+        "IsParent":  false,
+        "IsLabelGroup":  false,
+        "Tooltip":  "Non-business data, for personal use only.",
+        "DefaultContentLabel":  null,
+        "ContentType":  "File, Email, Teamwork",
+        "Capabilities":  [
+
+                         ],
+        "ParentLabelDisplayName":  null,
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "ImmutableId":  "eb19b593-109e-42de-9fcd-b4167e5d092c",
+        "Priority":  0,
+        "Workload":  "Exchange, SharePoint",
+        "Policy":  "63530f6f-ac52-40ca-97bf-92ea929544ea",
+        "Comment":  "",
+        "Disabled":  false,
+        "Mode":  "Enforce",
+        "ObjectVersion":  "d88d716e-97b6-4234-bc08-08de22c1ba6c",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "Guid":  "eb19b593-109e-42de-9fcd-b4167e5d092c",
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0000-bc88714345d2",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0000-bc88714345d2",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "defa4170-0d19-0005-0000-bc88714345d2",
+        "DistinguishedName":  "CN=defa4170-0d19-0005-0000-bc88714345d2,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedRule"
+                        ],
+        "WhenChanged":  "\/Date(1763044458000)\/",
+        "WhenCreated":  "\/Date(1763044458000)\/",
+        "WhenChangedUTC":  "\/Date(1763044458000)\/",
+        "WhenCreatedUTC":  "\/Date(1763044458000)\/",
+        "ExchangeObjectId":  "eb19b593-109e-42de-9fcd-b4167e5d092c",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "OriginatingServer":  "",
+        "ObjectState":  "New"
+    },
+    {
+        "Settings":  [
+                         "[isparent, False]",
+                         "[contenttype, File, Email, Teamwork]",
+                         "[tooltip, Organization data that\u0027s specifically prepared and approved for public consumption.]",
+                         "[displayname, Public]"
+                     ],
+        "LabelActions":  [
+
+                         ],
+        "Conditions":  [
+
+                       ],
+        "ColumnAssetCondition":  null,
+        "SchematizedDataCondition":  null,
+        "LocaleSettings":  [
+                               "{\"LocaleKey\":\"displayName\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Public\"}]}",
+                               "{\"LocaleKey\":\"tooltip\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Organization data that\u0027s specifically prepared and approved for public consumption.\"}]}"
+                           ],
+        "ContentTypeRemovalViolations":  null,
+        "DisplayName":  "Public",
+        "ParentId":  null,
+        "AbacEnabled":  null,
+        "CustomSecurityAttributeRequired":  null,
+        "IsParent":  false,
+        "IsLabelGroup":  false,
+        "Tooltip":  "Organization data that\u0027s specifically prepared and approved for public consumption.",
+        "DefaultContentLabel":  null,
+        "ContentType":  "File, Email, Teamwork",
+        "Capabilities":  [
+
+                         ],
+        "ParentLabelDisplayName":  null,
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "ImmutableId":  "1901d768-2b44-46e7-ae4f-74f93b8539bc",
+        "Priority":  1,
+        "Workload":  "Exchange, SharePoint",
+        "Policy":  "63530f6f-ac52-40ca-97bf-92ea929544ea",
+        "Comment":  "",
+        "Disabled":  false,
+        "Mode":  "Enforce",
+        "ObjectVersion":  "cc9fa786-c694-4da1-a1dd-08de22c1bd87",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "Guid":  "1901d768-2b44-46e7-ae4f-74f93b8539bc",
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0001-bc88714345d2",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0001-bc88714345d2",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "defa4170-0d19-0005-0001-bc88714345d2",
+        "DistinguishedName":  "CN=defa4170-0d19-0005-0001-bc88714345d2,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedRule"
+                        ],
+        "WhenChanged":  "\/Date(1763044463000)\/",
+        "WhenCreated":  "\/Date(1763044463000)\/",
+        "WhenChangedUTC":  "\/Date(1763044463000)\/",
+        "WhenCreatedUTC":  "\/Date(1763044463000)\/",
+        "ExchangeObjectId":  "1901d768-2b44-46e7-ae4f-74f93b8539bc",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "OriginatingServer":  "",
+        "ObjectState":  "New"
+    },
+    {
+        "Settings":  [
+                         "[isparent, True]",
+                         "[contenttype, File, Email]",
+                         "[tooltip, Organization data that is not intended for public consumption. However, this can be shared with external partners, as required. Examples include a company internal telephone directory, organizational charts, internal standards, and most internal communication.]",
+                         "[displayname, General]"
+                     ],
+        "LabelActions":  [
+
+                         ],
+        "Conditions":  [
+
+                       ],
+        "ColumnAssetCondition":  null,
+        "SchematizedDataCondition":  null,
+        "LocaleSettings":  [
+                               "{\"LocaleKey\":\"displayName\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"General\"}]}",
+                               "{\"LocaleKey\":\"tooltip\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Organization data that is not intended for public consumption. However, this can be shared with external partners, as required. Examples include a company internal telephone directory, organizational charts, internal standards, and most internal communication.\"}]}"
+                           ],
+        "ContentTypeRemovalViolations":  null,
+        "DisplayName":  "General",
+        "ParentId":  null,
+        "AbacEnabled":  null,
+        "CustomSecurityAttributeRequired":  null,
+        "IsParent":  true,
+        "IsLabelGroup":  false,
+        "Tooltip":  "Organization data that is not intended for public consumption. However, this can be shared with external partners, as required. Examples include a company internal telephone directory, organizational charts, internal standards, and most internal communication.",
+        "DefaultContentLabel":  null,
+        "ContentType":  "File, Email",
+        "Capabilities":  [
+
+                         ],
+        "ParentLabelDisplayName":  null,
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "ImmutableId":  "1732e32b-ad10-4b0b-a788-966a91c2552e",
+        "Priority":  2,
+        "Workload":  "Exchange, SharePoint",
+        "Policy":  "63530f6f-ac52-40ca-97bf-92ea929544ea",
+        "Comment":  "",
+        "Disabled":  false,
+        "Mode":  "Enforce",
+        "ObjectVersion":  "7778271e-900a-4f59-3447-08de22c1c1ca",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "Guid":  "1732e32b-ad10-4b0b-a788-966a91c2552e",
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0002-bc88714345d2",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0002-bc88714345d2",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "defa4170-0d19-0005-0002-bc88714345d2",
+        "DistinguishedName":  "CN=defa4170-0d19-0005-0002-bc88714345d2,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedRule"
+                        ],
+        "WhenChanged":  "\/Date(1763044470000)\/",
+        "WhenCreated":  "\/Date(1763044467000)\/",
+        "WhenChangedUTC":  "\/Date(1763044470000)\/",
+        "WhenCreatedUTC":  "\/Date(1763044467000)\/",
+        "ExchangeObjectId":  "1732e32b-ad10-4b0b-a788-966a91c2552e",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "OriginatingServer":  "",
+        "ObjectState":  "Unchanged"
+    },
+    {
+        "Settings":  [
+                         "[parentid, 1732e32b-ad10-4b0b-a788-966a91c2552e]",
+                         "[contenttype, File, Email, Teamwork]",
+                         "[tooltip, Organization data that isn\u0027t intended for public consumption but can be shared with external partners if appropriate. Examples include customer conversations that don\u0027t include sensitive info or released marketing materials.]",
+                         "[isparent, False]",
+                         "[displayname, Anyone (unrestricted)]"
+                     ],
+        "LabelActions":  [
+
+                         ],
+        "Conditions":  [
+
+                       ],
+        "ColumnAssetCondition":  null,
+        "SchematizedDataCondition":  null,
+        "LocaleSettings":  [
+                               "{\"LocaleKey\":\"displayName\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Anyone (unrestricted)\"}]}",
+                               "{\"LocaleKey\":\"tooltip\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Organization data that isn\u0027t intended for public consumption but can be shared with external partners if appropriate. Examples include customer conversations that don\u0027t include sensitive info or released marketing materials.\"}]}"
+                           ],
+        "ContentTypeRemovalViolations":  null,
+        "DisplayName":  "Anyone (unrestricted)",
+        "ParentId":  "1732e32b-ad10-4b0b-a788-966a91c2552e",
+        "AbacEnabled":  null,
+        "CustomSecurityAttributeRequired":  null,
+        "IsParent":  false,
+        "IsLabelGroup":  false,
+        "Tooltip":  "Organization data that isn\u0027t intended for public consumption but can be shared with external partners if appropriate. Examples include customer conversations that don\u0027t include sensitive info or released marketing materials.",
+        "DefaultContentLabel":  null,
+        "ContentType":  "File, Email, Teamwork",
+        "Capabilities":  [
+
+                         ],
+        "ParentLabelDisplayName":  "General",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "ImmutableId":  "7ae40e76-c3ec-48a2-83ba-04b0317686ce",
+        "Priority":  3,
+        "Workload":  "Exchange, SharePoint",
+        "Policy":  "63530f6f-ac52-40ca-97bf-92ea929544ea",
+        "Comment":  "",
+        "Disabled":  false,
+        "Mode":  "Enforce",
+        "ObjectVersion":  "5068ddae-09bd-4dad-fc8b-08de22c1c1a5",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "Guid":  "7ae40e76-c3ec-48a2-83ba-04b0317686ce",
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0003-bc88714345d2",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0003-bc88714345d2",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "defa4170-0d19-0005-0003-bc88714345d2",
+        "DistinguishedName":  "CN=defa4170-0d19-0005-0003-bc88714345d2,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedRule"
+                        ],
+        "WhenChanged":  "\/Date(1763044470000)\/",
+        "WhenCreated":  "\/Date(1763044470000)\/",
+        "WhenChangedUTC":  "\/Date(1763044470000)\/",
+        "WhenCreatedUTC":  "\/Date(1763044470000)\/",
+        "ExchangeObjectId":  "7ae40e76-c3ec-48a2-83ba-04b0317686ce",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "OriginatingServer":  "",
+        "ObjectState":  "New"
+    },
+    {
+        "Settings":  [
+                         "[parentid, 1732e32b-ad10-4b0b-a788-966a91c2552e]",
+                         "[contenttype, File, Email, Teamwork]",
+                         "[tooltip, Organization data that isn\u0027t intended for public consumption. If you need to share this content with external partners, make sure it\u0027s appropriate with data owners and relabel content as General \\\\ Anyone (unrestricted). Examples include a company internal telephone directory, organizational charts, internal standards, and most internal communication.]",
+                         "[isparent, False]",
+                         "[displayname, All Employees (unrestricted)]"
+                     ],
+        "LabelActions":  [
+
+                         ],
+        "Conditions":  [
+
+                       ],
+        "ColumnAssetCondition":  null,
+        "SchematizedDataCondition":  null,
+        "LocaleSettings":  [
+                               "{\"LocaleKey\":\"displayName\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"All Employees (unrestricted)\"}]}",
+                               "{\"LocaleKey\":\"tooltip\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Organization data that isn\u0027t intended for public consumption. If you need to share this content with external partners, make sure it\u0027s appropriate with data owners and relabel content as General \\\\\\\\ Anyone (unrestricted). Examples include a company internal telephone directory, organizational charts, internal standards, and most internal communication.\"}]}"
+                           ],
+        "ContentTypeRemovalViolations":  null,
+        "DisplayName":  "All Employees (unrestricted)",
+        "ParentId":  "1732e32b-ad10-4b0b-a788-966a91c2552e",
+        "AbacEnabled":  null,
+        "CustomSecurityAttributeRequired":  null,
+        "IsParent":  false,
+        "IsLabelGroup":  false,
+        "Tooltip":  "Organization data that isn\u0027t intended for public consumption. If you need to share this content with external partners, make sure it\u0027s appropriate with data owners and relabel content as General \\\\ Anyone (unrestricted). Examples include a company internal telephone directory, organizational charts, internal standards, and most internal communication.",
+        "DefaultContentLabel":  null,
+        "ContentType":  "File, Email, Teamwork",
+        "Capabilities":  [
+
+                         ],
+        "ParentLabelDisplayName":  "General",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "ImmutableId":  "2fd2d678-c5d2-4416-9eb3-9ce074872007",
+        "Priority":  4,
+        "Workload":  "Exchange, SharePoint",
+        "Policy":  "63530f6f-ac52-40ca-97bf-92ea929544ea",
+        "Comment":  "",
+        "Disabled":  false,
+        "Mode":  "Enforce",
+        "ObjectVersion":  "268b4c92-72ff-4f3c-8e79-08de22c1c591",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "Guid":  "2fd2d678-c5d2-4416-9eb3-9ce074872007",
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0004-bc88714345d2",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0004-bc88714345d2",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "defa4170-0d19-0005-0004-bc88714345d2",
+        "DistinguishedName":  "CN=defa4170-0d19-0005-0004-bc88714345d2,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedRule"
+                        ],
+        "WhenChanged":  "\/Date(1763044477000)\/",
+        "WhenCreated":  "\/Date(1763044477000)\/",
+        "WhenChangedUTC":  "\/Date(1763044477000)\/",
+        "WhenCreatedUTC":  "\/Date(1763044477000)\/",
+        "ExchangeObjectId":  "2fd2d678-c5d2-4416-9eb3-9ce074872007",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "OriginatingServer":  "",
+        "ObjectState":  "New"
+    },
+    {
+        "Settings":  [
+                         "[isparent, True]",
+                         "[contenttype, File, Email]",
+                         "[tooltip, Sensitive business data that could cause damage to the business if shared with unauthorized people. Examples include contracts, security reports, forecast summaries, and sales account data.]",
+                         "[displayname, Confidential]"
+                     ],
+        "LabelActions":  [
+
+                         ],
+        "Conditions":  [
+
+                       ],
+        "ColumnAssetCondition":  null,
+        "SchematizedDataCondition":  null,
+        "LocaleSettings":  [
+                               "{\"LocaleKey\":\"displayName\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Confidential\"}]}",
+                               "{\"LocaleKey\":\"tooltip\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Sensitive business data that could cause damage to the business if shared with unauthorized people. Examples include contracts, security reports, forecast summaries, and sales account data.\"}]}"
+                           ],
+        "ContentTypeRemovalViolations":  null,
+        "DisplayName":  "Confidential",
+        "ParentId":  null,
+        "AbacEnabled":  null,
+        "CustomSecurityAttributeRequired":  null,
+        "IsParent":  true,
+        "IsLabelGroup":  false,
+        "Tooltip":  "Sensitive business data that could cause damage to the business if shared with unauthorized people. Examples include contracts, security reports, forecast summaries, and sales account data.",
+        "DefaultContentLabel":  null,
+        "ContentType":  "File, Email",
+        "Capabilities":  [
+
+                         ],
+        "ParentLabelDisplayName":  null,
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "ImmutableId":  "0c719dbe-6e3e-4b75-86fd-7d03fc832554",
+        "Priority":  5,
+        "Workload":  "Exchange, SharePoint",
+        "Policy":  "63530f6f-ac52-40ca-97bf-92ea929544ea",
+        "Comment":  "",
+        "Disabled":  false,
+        "Mode":  "Enforce",
+        "ObjectVersion":  "e26e2812-a06f-432b-b4ea-08de22c1cac5",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "Guid":  "0c719dbe-6e3e-4b75-86fd-7d03fc832554",
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0005-bc88714345d2",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0005-bc88714345d2",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "defa4170-0d19-0005-0005-bc88714345d2",
+        "DistinguishedName":  "CN=defa4170-0d19-0005-0005-bc88714345d2,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedRule"
+                        ],
+        "WhenChanged":  "\/Date(1763044485000)\/",
+        "WhenCreated":  "\/Date(1763044482000)\/",
+        "WhenChangedUTC":  "\/Date(1763044485000)\/",
+        "WhenCreatedUTC":  "\/Date(1763044482000)\/",
+        "ExchangeObjectId":  "0c719dbe-6e3e-4b75-86fd-7d03fc832554",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "OriginatingServer":  "",
+        "ObjectState":  "Unchanged"
+    },
+    {
+        "Settings":  [
+                         "[parentid, 0c719dbe-6e3e-4b75-86fd-7d03fc832554]",
+                         "[contenttype, File, Email, Teamwork]",
+                         "[tooltip, Confidential data that doesn\u0027t need to be encrypted. Use this option with care and with appropriate business justification. Make sure to protect the data through other means like DLP.]",
+                         "[isparent, False]",
+                         "[displayname, Anyone (unrestricted)]"
+                     ],
+        "LabelActions":  [
+                             "{\"Type\":\"applycontentmarking\",\"SubType\":\"footer\",\"Settings\":[{\"Key\":\"text\",\"Value\":\"Classified as Confidential\"},{\"Key\":\"fontsize\",\"Value\":\"8\"},{\"Key\":\"fontcolor\",\"Value\":\"#000000\"},{\"Key\":\"alignment\",\"Value\":\"Left\"},{\"Key\":\"margin\",\"Value\":\"5\"},{\"Key\":\"placement\",\"Value\":\"Footer\"}]}"
+                         ],
+        "Conditions":  [
+                           "{\"Or\":[{\"And\":[{\"Key\":\"CCSI\",\"Value\":\"50842eb7-edc8-4019-85dd-5a5c1f2bb085\",\"Properties\":null,\"Settings\":[{\"Key\":\"mincount\",\"Value\":\"1\"},{\"Key\":\"maxconfidence\",\"Value\":\"100\"},{\"Key\":\"groupname\",\"Value\":\"Default\"},{\"Key\":\"rulepackage\",\"Value\":\"00000000-0000-0000-0000-000000000000\"},{\"Key\":\"name\",\"Value\":\"Credit Card Number\"},{\"Key\":\"minconfidence\",\"Value\":\"85\"},{\"Key\":\"maxcount\",\"Value\":\"9\"},{\"Key\":\"confidencelevel\",\"Value\":\"High\"},{\"Key\":\"autoapplytype\",\"Value\":\"Recommend\"}]}]}]}"
+                       ],
+        "ColumnAssetCondition":  null,
+        "SchematizedDataCondition":  null,
+        "LocaleSettings":  [
+                               "{\"LocaleKey\":\"displayName\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Anyone (unrestricted)\"}]}",
+                               "{\"LocaleKey\":\"tooltip\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Confidential data that doesn\u0027t need to be encrypted. Use this option with care and with appropriate business justification. Make sure to protect the data through other means like DLP.\"}]}"
+                           ],
+        "ContentTypeRemovalViolations":  null,
+        "DisplayName":  "Anyone (unrestricted)",
+        "ParentId":  "0c719dbe-6e3e-4b75-86fd-7d03fc832554",
+        "AbacEnabled":  null,
+        "CustomSecurityAttributeRequired":  null,
+        "IsParent":  false,
+        "IsLabelGroup":  false,
+        "Tooltip":  "Confidential data that doesn\u0027t need to be encrypted. Use this option with care and with appropriate business justification. Make sure to protect the data through other means like DLP.",
+        "DefaultContentLabel":  null,
+        "ContentType":  "File, Email, Teamwork",
+        "Capabilities":  [
+                             "AutoLabel"
+                         ],
+        "ParentLabelDisplayName":  "Confidential",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "ImmutableId":  "3deb8e8a-aec7-45ce-86db-36852135e357",
+        "Priority":  6,
+        "Workload":  "Exchange, SharePoint",
+        "Policy":  "63530f6f-ac52-40ca-97bf-92ea929544ea",
+        "Comment":  "",
+        "Disabled":  false,
+        "Mode":  "Enforce",
+        "ObjectVersion":  "6249fdc4-4293-4c39-e535-08de22c1caa6",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "Guid":  "3deb8e8a-aec7-45ce-86db-36852135e357",
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0006-bc88714345d2",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0006-bc88714345d2",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "defa4170-0d19-0005-0006-bc88714345d2",
+        "DistinguishedName":  "CN=defa4170-0d19-0005-0006-bc88714345d2,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedRule"
+                        ],
+        "WhenChanged":  "\/Date(1763044485000)\/",
+        "WhenCreated":  "\/Date(1763044485000)\/",
+        "WhenChangedUTC":  "\/Date(1763044485000)\/",
+        "WhenCreatedUTC":  "\/Date(1763044485000)\/",
+        "ExchangeObjectId":  "3deb8e8a-aec7-45ce-86db-36852135e357",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "OriginatingServer":  "",
+        "ObjectState":  "New"
+    },
+    {
+        "Settings":  [
+                         "[parentid, 0c719dbe-6e3e-4b75-86fd-7d03fc832554]",
+                         "[contenttype, File, Email, Teamwork]",
+                         "[tooltip, Confidential data that requires protection, which allows all employees full permission. Data owners can track and revoke content.]",
+                         "[isparent, False]",
+                         "[displayname, All Employees]"
+                     ],
+        "LabelActions":  [
+                             "{\"Type\":\"encrypt\",\"SubType\":null,\"Settings\":[{\"Key\":\"protectiontype\",\"Value\":\"template\"},{\"Key\":\"disabled\",\"Value\":\"false\"},{\"Key\":\"templateid\",\"Value\":\"215ca265-9884-4aa1-9a3a-88d43ad076ac\"},{\"Key\":\"templatearchived\",\"Value\":\"False\"},{\"Key\":\"linkedtemplateid\",\"Value\":\"215ca265-9884-4aa1-9a3a-88d43ad076ac\"},{\"Key\":\"contentexpiredondateindaysornever\",\"Value\":\"Never\"},{\"Key\":\"offlineaccessdays\",\"Value\":\"-1\"},{\"Key\":\"rightsdefinitions\",\"Value\":\"[{\\\"Identity\\\":\\\"MngEnv282784.onmicrosoft.com\\\",\\\"Rights\\\":\\\"VIEW,VIEWRIGHTSDATA,DOCEDIT,EDIT,PRINT,EXTRACT,REPLY,REPLYALL,FORWARD,OBJMODEL\\\"}]\"}]}",
+                             "{\"Type\":\"applycontentmarking\",\"SubType\":\"footer\",\"Settings\":[{\"Key\":\"text\",\"Value\":\"Classified as Confidential\"},{\"Key\":\"fontsize\",\"Value\":\"8\"},{\"Key\":\"fontcolor\",\"Value\":\"#000000\"},{\"Key\":\"alignment\",\"Value\":\"Left\"},{\"Key\":\"margin\",\"Value\":\"5\"},{\"Key\":\"placement\",\"Value\":\"Footer\"}]}"
+                         ],
+        "Conditions":  [
+                           "{\"Or\":[{\"And\":[{\"Key\":\"CCSI\",\"Value\":\"50842eb7-edc8-4019-85dd-5a5c1f2bb085\",\"Properties\":null,\"Settings\":[{\"Key\":\"mincount\",\"Value\":\"10\"},{\"Key\":\"maxconfidence\",\"Value\":\"100\"},{\"Key\":\"groupname\",\"Value\":\"Default\"},{\"Key\":\"rulepackage\",\"Value\":\"00000000-0000-0000-0000-000000000000\"},{\"Key\":\"name\",\"Value\":\"Credit Card Number\"},{\"Key\":\"minconfidence\",\"Value\":\"85\"},{\"Key\":\"confidencelevel\",\"Value\":\"High\"},{\"Key\":\"autoapplytype\",\"Value\":\"Recommend\"}]}]}]}"
+                       ],
+        "ColumnAssetCondition":  null,
+        "SchematizedDataCondition":  null,
+        "LocaleSettings":  [
+                               "{\"LocaleKey\":\"displayName\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"All Employees\"}]}",
+                               "{\"LocaleKey\":\"tooltip\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Confidential data that requires protection, which allows all employees full permission. Data owners can track and revoke content.\"}]}"
+                           ],
+        "ContentTypeRemovalViolations":  null,
+        "DisplayName":  "All Employees",
+        "ParentId":  "0c719dbe-6e3e-4b75-86fd-7d03fc832554",
+        "AbacEnabled":  null,
+        "CustomSecurityAttributeRequired":  null,
+        "IsParent":  false,
+        "IsLabelGroup":  false,
+        "Tooltip":  "Confidential data that requires protection, which allows all employees full permission. Data owners can track and revoke content.",
+        "DefaultContentLabel":  null,
+        "ContentType":  "File, Email, Teamwork",
+        "Capabilities":  [
+                             "AutoLabel"
+                         ],
+        "ParentLabelDisplayName":  "Confidential",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "ImmutableId":  "8ee26fce-431a-44a0-92e5-277b41da1a86",
+        "Priority":  7,
+        "Workload":  "Exchange, SharePoint",
+        "Policy":  "63530f6f-ac52-40ca-97bf-92ea929544ea",
+        "Comment":  "",
+        "Disabled":  false,
+        "Mode":  "Enforce",
+        "ObjectVersion":  "1746701f-cc91-4390-c6a9-08de22c1cf16",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "Guid":  "8ee26fce-431a-44a0-92e5-277b41da1a86",
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0007-bc88714345d2",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0007-bc88714345d2",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "defa4170-0d19-0005-0007-bc88714345d2",
+        "DistinguishedName":  "CN=defa4170-0d19-0005-0007-bc88714345d2,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedRule"
+                        ],
+        "WhenChanged":  "\/Date(1763046347000)\/",
+        "WhenCreated":  "\/Date(1763044493000)\/",
+        "WhenChangedUTC":  "\/Date(1763046347000)\/",
+        "WhenCreatedUTC":  "\/Date(1763044493000)\/",
+        "ExchangeObjectId":  "8ee26fce-431a-44a0-92e5-277b41da1a86",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "OriginatingServer":  "",
+        "ObjectState":  "Unchanged"
+    },
+    {
+        "Settings":  [
+                         "[parentid, 0c719dbe-6e3e-4b75-86fd-7d03fc832554]",
+                         "[contenttype, File, Email, Teamwork]",
+                         "[tooltip, Confidential data for internal/external sharing that can be reshared by trusted recipients.]",
+                         "[isparent, False]",
+                         "[displayname, Trusted People]"
+                     ],
+        "LabelActions":  [
+                             "{\"Type\":\"encrypt\",\"SubType\":null,\"Settings\":[{\"Key\":\"protectiontype\",\"Value\":\"userdefined\"},{\"Key\":\"donotforward\",\"Value\":\"false\"},{\"Key\":\"promptuser\",\"Value\":\"true\"},{\"Key\":\"encryptonly\",\"Value\":\"true\"},{\"Key\":\"disabled\",\"Value\":\"false\"}]}",
+                             "{\"Type\":\"applycontentmarking\",\"SubType\":\"footer\",\"Settings\":[{\"Key\":\"text\",\"Value\":\"Classified as Confidential\"},{\"Key\":\"fontsize\",\"Value\":\"10\"},{\"Key\":\"fontcolor\",\"Value\":\"#000000\"},{\"Key\":\"alignment\",\"Value\":\"Left\"},{\"Key\":\"margin\",\"Value\":\"5\"},{\"Key\":\"placement\",\"Value\":\"Footer\"}]}"
+                         ],
+        "Conditions":  [
+
+                       ],
+        "ColumnAssetCondition":  null,
+        "SchematizedDataCondition":  null,
+        "LocaleSettings":  [
+                               "{\"LocaleKey\":\"displayName\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Trusted People\"}]}",
+                               "{\"LocaleKey\":\"tooltip\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Confidential data for internal/external sharing that can be reshared by trusted recipients.\"}]}"
+                           ],
+        "ContentTypeRemovalViolations":  null,
+        "DisplayName":  "Trusted People",
+        "ParentId":  "0c719dbe-6e3e-4b75-86fd-7d03fc832554",
+        "AbacEnabled":  null,
+        "CustomSecurityAttributeRequired":  null,
+        "IsParent":  false,
+        "IsLabelGroup":  false,
+        "Tooltip":  "Confidential data for internal/external sharing that can be reshared by trusted recipients.",
+        "DefaultContentLabel":  null,
+        "ContentType":  "File, Email, Teamwork",
+        "Capabilities":  [
+                             "EncryptOnly"
+                         ],
+        "ParentLabelDisplayName":  "Confidential",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "ImmutableId":  "c09f60df-f714-491b-8fbc-02397583e93e",
+        "Priority":  8,
+        "Workload":  "Exchange, SharePoint",
+        "Policy":  "63530f6f-ac52-40ca-97bf-92ea929544ea",
+        "Comment":  "",
+        "Disabled":  false,
+        "Mode":  "Enforce",
+        "ObjectVersion":  "d102955d-b283-4245-f6b2-08de22c1d48d",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "Guid":  "c09f60df-f714-491b-8fbc-02397583e93e",
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0008-bc88714345d2",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0008-bc88714345d2",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "defa4170-0d19-0005-0008-bc88714345d2",
+        "DistinguishedName":  "CN=defa4170-0d19-0005-0008-bc88714345d2,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedRule"
+                        ],
+        "WhenChanged":  "\/Date(1763044502000)\/",
+        "WhenCreated":  "\/Date(1763044502000)\/",
+        "WhenChangedUTC":  "\/Date(1763044502000)\/",
+        "WhenCreatedUTC":  "\/Date(1763044502000)\/",
+        "ExchangeObjectId":  "c09f60df-f714-491b-8fbc-02397583e93e",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "OriginatingServer":  "",
+        "ObjectState":  "New"
+    },
+    {
+        "Settings":  [
+                         "[isparent, True]",
+                         "[contenttype, File, Email]",
+                         "[tooltip, Very sensitive business data that would cause damage to the business if it was shared with unauthorized people. Examples include employee and customer information, passwords, source code, and pre-announced financial reports.]",
+                         "[displayname, Highly Confidential]"
+                     ],
+        "LabelActions":  [
+                             "{\"Type\":\"encrypt\",\"SubType\":null,\"Settings\":[{\"Key\":\"protectiontype\",\"Value\":\"template\"},{\"Key\":\"disabled\",\"Value\":\"false\"},{\"Key\":\"templateid\",\"Value\":\"6b39ab8a-12a7-4fd6-9a8e-a599916048b8\"},{\"Key\":\"templatearchived\",\"Value\":\"False\"},{\"Key\":\"linkedtemplateid\",\"Value\":\"6b39ab8a-12a7-4fd6-9a8e-a599916048b8\"},{\"Key\":\"contentexpiredondateindaysornever\",\"Value\":\"Never\"},{\"Key\":\"offlineaccessdays\",\"Value\":\"0\"},{\"Key\":\"rightsdefinitions\",\"Value\":\"[{\\\"Identity\\\":\\\"IPC_USER_ID_OWNER\\\",\\\"Rights\\\":\\\"OWNER\\\"}]\"}]}",
+                             "{\"Type\":\"applywatermarking\",\"SubType\":null,\"Settings\":[{\"Key\":\"text\",\"Value\":\"HIGHLY CONFIDENTIAL\"},{\"Key\":\"fontsize\",\"Value\":\"10\"},{\"Key\":\"fontcolor\",\"Value\":\"#000000\"},{\"Key\":\"layout\",\"Value\":\"Diagonal\"},{\"Key\":\"disabled\",\"Value\":\"false\"}]}"
+                         ],
+        "Conditions":  [
+
+                       ],
+        "ColumnAssetCondition":  null,
+        "SchematizedDataCondition":  null,
+        "LocaleSettings":  [
+                               "{\"LocaleKey\":\"displayName\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Highly Confidential\"}]}",
+                               "{\"LocaleKey\":\"tooltip\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Very sensitive business data that would cause damage to the business if it was shared with unauthorized people. Examples include employee and customer information, passwords, source code, and pre-announced financial reports.\"}]}"
+                           ],
+        "ContentTypeRemovalViolations":  null,
+        "DisplayName":  "Highly Confidential",
+        "ParentId":  null,
+        "AbacEnabled":  null,
+        "CustomSecurityAttributeRequired":  null,
+        "IsParent":  true,
+        "IsLabelGroup":  false,
+        "Tooltip":  "Very sensitive business data that would cause damage to the business if it was shared with unauthorized people. Examples include employee and customer information, passwords, source code, and pre-announced financial reports.",
+        "DefaultContentLabel":  null,
+        "ContentType":  "File, Email",
+        "Capabilities":  [
+
+                         ],
+        "ParentLabelDisplayName":  null,
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "ImmutableId":  "44dbaf27-09da-423e-b015-5f819a222106",
+        "Priority":  9,
+        "Workload":  "Exchange, SharePoint",
+        "Policy":  "63530f6f-ac52-40ca-97bf-92ea929544ea",
+        "Comment":  "",
+        "Disabled":  false,
+        "Mode":  "Enforce",
+        "ObjectVersion":  "dd9b4943-342a-4691-780c-08de22c1db35",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "Guid":  "44dbaf27-09da-423e-b015-5f819a222106",
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0009-bc88714345d2",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-0009-bc88714345d2",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "defa4170-0d19-0005-0009-bc88714345d2",
+        "DistinguishedName":  "CN=defa4170-0d19-0005-0009-bc88714345d2,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedRule"
+                        ],
+        "WhenChanged":  "\/Date(1763046348000)\/",
+        "WhenCreated":  "\/Date(1763044507000)\/",
+        "WhenChangedUTC":  "\/Date(1763046348000)\/",
+        "WhenCreatedUTC":  "\/Date(1763044507000)\/",
+        "ExchangeObjectId":  "44dbaf27-09da-423e-b015-5f819a222106",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "OriginatingServer":  "",
+        "ObjectState":  "Unchanged"
+    },
+    {
+        "Settings":  [
+                         "[parentid, 44dbaf27-09da-423e-b015-5f819a222106]",
+                         "[contenttype, File, Email, Teamwork]",
+                         "[tooltip, Highly confidential data that allows all employees view, edit, and reply permissions to this content. Data owners can track and revoke content.]",
+                         "[isparent, False]",
+                         "[displayname, All Employees]"
+                     ],
+        "LabelActions":  [
+                             "{\"Type\":\"encrypt\",\"SubType\":null,\"Settings\":[{\"Key\":\"protectiontype\",\"Value\":\"template\"},{\"Key\":\"disabled\",\"Value\":\"false\"},{\"Key\":\"templateid\",\"Value\":\"59a78050-72a9-49b0-a288-1604b6e992dc\"},{\"Key\":\"templatearchived\",\"Value\":\"False\"},{\"Key\":\"linkedtemplateid\",\"Value\":\"59a78050-72a9-49b0-a288-1604b6e992dc\"},{\"Key\":\"contentexpiredondateindaysornever\",\"Value\":\"Never\"},{\"Key\":\"offlineaccessdays\",\"Value\":\"-1\"},{\"Key\":\"rightsdefinitions\",\"Value\":\"[{\\\"Identity\\\":\\\"MngEnv282784.onmicrosoft.com\\\",\\\"Rights\\\":\\\"VIEW,VIEWRIGHTSDATA,DOCEDIT,EDIT,PRINT,EXTRACT,REPLY,REPLYALL,FORWARD,OBJMODEL\\\"}]\"}]}",
+                             "{\"Type\":\"applycontentmarking\",\"SubType\":\"footer\",\"Settings\":[{\"Key\":\"text\",\"Value\":\"Classified as Highly Confidential\"},{\"Key\":\"fontsize\",\"Value\":\"8\"},{\"Key\":\"fontcolor\",\"Value\":\"#000000\"},{\"Key\":\"alignment\",\"Value\":\"Left\"},{\"Key\":\"margin\",\"Value\":\"5\"},{\"Key\":\"placement\",\"Value\":\"Footer\"}]}"
+                         ],
+        "Conditions":  [
+
+                       ],
+        "ColumnAssetCondition":  null,
+        "SchematizedDataCondition":  null,
+        "LocaleSettings":  [
+                               "{\"LocaleKey\":\"displayName\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"All Employees\"}]}",
+                               "{\"LocaleKey\":\"tooltip\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Highly confidential data that allows all employees view, edit, and reply permissions to this content. Data owners can track and revoke content.\"}]}"
+                           ],
+        "ContentTypeRemovalViolations":  null,
+        "DisplayName":  "All Employees",
+        "ParentId":  "44dbaf27-09da-423e-b015-5f819a222106",
+        "AbacEnabled":  null,
+        "CustomSecurityAttributeRequired":  null,
+        "IsParent":  false,
+        "IsLabelGroup":  false,
+        "Tooltip":  "Highly confidential data that allows all employees view, edit, and reply permissions to this content. Data owners can track and revoke content.",
+        "DefaultContentLabel":  null,
+        "ContentType":  "File, Email, Teamwork",
+        "Capabilities":  [
+
+                         ],
+        "ParentLabelDisplayName":  "Highly Confidential",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "ImmutableId":  "dfbee709-6a5f-4ae0-87d1-b92048bbcbf7",
+        "Priority":  10,
+        "Workload":  "Exchange, SharePoint",
+        "Policy":  "63530f6f-ac52-40ca-97bf-92ea929544ea",
+        "Comment":  "",
+        "Disabled":  false,
+        "Mode":  "Enforce",
+        "ObjectVersion":  "3c3dbb08-30d1-437d-a82b-08de22c1db12",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "Guid":  "dfbee709-6a5f-4ae0-87d1-b92048bbcbf7",
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-000a-bc88714345d2",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-000a-bc88714345d2",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "defa4170-0d19-0005-000a-bc88714345d2",
+        "DistinguishedName":  "CN=defa4170-0d19-0005-000a-bc88714345d2,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedRule"
+                        ],
+        "WhenChanged":  "\/Date(1763046349000)\/",
+        "WhenCreated":  "\/Date(1763044513000)\/",
+        "WhenChangedUTC":  "\/Date(1763046349000)\/",
+        "WhenCreatedUTC":  "\/Date(1763044513000)\/",
+        "ExchangeObjectId":  "dfbee709-6a5f-4ae0-87d1-b92048bbcbf7",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "OriginatingServer":  "",
+        "ObjectState":  "Unchanged"
+    },
+    {
+        "Settings":  [
+                         "[parentid, 44dbaf27-09da-423e-b015-5f819a222106]",
+                         "[contenttype, File, Email, Teamwork]",
+                         "[tooltip, Highly confidential data that requires protection and can be viewed only by people you specify and with the permission level you choose.]",
+                         "[isparent, False]",
+                         "[displayname, Specific People]"
+                     ],
+        "LabelActions":  [
+                             "{\"Type\":\"encrypt\",\"SubType\":null,\"Settings\":[{\"Key\":\"protectiontype\",\"Value\":\"userdefined\"},{\"Key\":\"donotforward\",\"Value\":\"true\"},{\"Key\":\"promptuser\",\"Value\":\"true\"},{\"Key\":\"encryptonly\",\"Value\":\"false\"},{\"Key\":\"disabled\",\"Value\":\"false\"}]}",
+                             "{\"Type\":\"applycontentmarking\",\"SubType\":\"footer\",\"Settings\":[{\"Key\":\"text\",\"Value\":\"Classified as Highly Confidential\"},{\"Key\":\"fontsize\",\"Value\":\"10\"},{\"Key\":\"fontcolor\",\"Value\":\"#000000\"},{\"Key\":\"alignment\",\"Value\":\"Left\"},{\"Key\":\"margin\",\"Value\":\"5\"},{\"Key\":\"placement\",\"Value\":\"Footer\"}]}"
+                         ],
+        "Conditions":  [
+
+                       ],
+        "ColumnAssetCondition":  null,
+        "SchematizedDataCondition":  null,
+        "LocaleSettings":  [
+                               "{\"LocaleKey\":\"displayName\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Specific People\"}]}",
+                               "{\"LocaleKey\":\"tooltip\",\"Settings\":[{\"Key\":\"default\",\"Value\":\"Highly confidential data that requires protection and can be viewed only by people you specify and with the permission level you choose.\"}]}"
+                           ],
+        "ContentTypeRemovalViolations":  null,
+        "DisplayName":  "Specific People",
+        "ParentId":  "44dbaf27-09da-423e-b015-5f819a222106",
+        "AbacEnabled":  null,
+        "CustomSecurityAttributeRequired":  null,
+        "IsParent":  false,
+        "IsLabelGroup":  false,
+        "Tooltip":  "Highly confidential data that requires protection and can be viewed only by people you specify and with the permission level you choose.",
+        "DefaultContentLabel":  null,
+        "ContentType":  "File, Email, Teamwork",
+        "Capabilities":  [
+
+                         ],
+        "ParentLabelDisplayName":  "Highly Confidential",
+        "ReadOnly":  false,
+        "ExternalIdentity":  "",
+        "ImmutableId":  "41ee2320-5d8d-492d-8604-afc8acde87b4",
+        "Priority":  11,
+        "Workload":  "Exchange, SharePoint",
+        "Policy":  "63530f6f-ac52-40ca-97bf-92ea929544ea",
+        "Comment":  "",
+        "Disabled":  false,
+        "Mode":  "Enforce",
+        "ObjectVersion":  "f96ee377-f0e1-45f6-29f7-08de22c1de7d",
+        "CreatedBy":  "MOD Administrator",
+        "LastModifiedBy":  "MOD Administrator",
+        "Guid":  "41ee2320-5d8d-492d-8604-afc8acde87b4",
+        "Identity":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-000b-bc88714345d2",
+        "Id":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration/defa4170-0d19-0005-000b-bc88714345d2",
+        "IsValid":  true,
+        "ExchangeVersion":  "0.20 (15.0.0.0)",
+        "Name":  "defa4170-0d19-0005-000b-bc88714345d2",
+        "DistinguishedName":  "CN=defa4170-0d19-0005-000b-bc88714345d2,CN=Configuration,CN=MngEnv282784.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=FFO,DC=extest,DC=microsoft,DC=com",
+        "ObjectCategory":  null,
+        "ObjectClass":  [
+                            "msExchUnifiedRule"
+                        ],
+        "WhenChanged":  "\/Date(1763044518000)\/",
+        "WhenCreated":  "\/Date(1763044518000)\/",
+        "WhenChangedUTC":  "\/Date(1763044518000)\/",
+        "WhenCreatedUTC":  "\/Date(1763044518000)\/",
+        "ExchangeObjectId":  "41ee2320-5d8d-492d-8604-afc8acde87b4",
+        "OrganizationalUnitRoot":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com",
+        "OrganizationId":  "FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com - FFO.extest.microsoft.com/Microsoft Exchange Hosted Organizations/MngEnv282784.onmicrosoft.com/Configuration",
+        "OriginatingServer":  "",
+        "ObjectState":  "New"
+    }
+]

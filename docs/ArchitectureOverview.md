@@ -30,7 +30,7 @@ The accelerator orchestrates Microsoft Purview DSPM for AI, Defender for AI, and
 | **AiFoundryConfig** | Azure AI Foundry workspace metadata | Used by `30-Foundry-RegisterResources.ps1` |
 | **FoundryConfig** | Foundry projects, Content Safety blocklists | `31-Foundry-ConfigureContentSafety.ps1` |
 | **FabricConfig** | OneLake and Fabric workspace registration | `26-Register-OneLake.ps1`, `27-Register-FabricWorkspace.ps1` (commented out) |
-| **DlpPolicy** | Data Loss Prevention rules for M365 | `12-Create-DlpPolicy.ps1` |
+| **DlpPolicies** | Data Loss Prevention rules for M365 | `12-Create-DlpPolicy.ps1` |
 | **Label[]** | Sensitivity labels | `13-Create-SensitivityLabel.ps1` |
 | **RetentionPolicy[]** | Retention rules for AI interaction data | `14-Create-RetentionPolicy.ps1` |
 | **ActivityExport** | Audit log export configuration | `20-Subscribe-ManagementActivity.ps1`, `21-Export-Audit.ps1` |
@@ -82,7 +82,7 @@ The accelerator orchestrates Microsoft Purview DSPM for AI, Defender for AI, and
   - PurviewConfig → DataSources, Scans
   - FoundryConfig → FoundryResources
 - **Optional blocks** (0..1 cardinality):
-  - DlpPolicy, ActivityExport, FabricConfig (gracefully skipped if missing)
+  - DlpPolicies, ActivityExport, FabricConfig (gracefully skipped if missing)
 
 ---
 

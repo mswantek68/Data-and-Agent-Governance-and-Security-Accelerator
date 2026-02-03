@@ -150,21 +150,23 @@ These sections are only needed if you're running the `m365` tag for DLP, labels,
 
 ```json
 {
-  "dlpPolicy": {
-    "name": "AI Egress Control",
-    "mode": "Enforce",
-    "locations": { "Exchange": "All", "SharePoint": "All", "OneDrive": "All", "Teams": "All" },
-    "rules": [
-      {
-        "name": "Block Sensitive Data to AI",
-        "sensitiveInfoTypes": [
-          { "name": "Credit Card Number", "count": 1, "confidence": 85 }
-        ],
-        "blockAccess": true,
-        "notifyUser": true
-      }
-    ]
-  },
+  "dlpPolicies": [
+    {
+      "name": "AI Egress Control",
+      "mode": "Enforce",
+      "locations": { "Exchange": "All", "SharePoint": "All", "OneDrive": "All", "Teams": "All", "Endpoint": "All" },
+      "rules": [
+        {
+          "name": "Block Sensitive Data to AI",
+          "sensitiveInfoTypes": [
+            { "name": "Credit Card Number", "count": 1, "confidence": 85 }
+          ],
+          "blockAccess": true,
+          "notifyUser": true
+        }
+      ]
+    }
+  ],
   "labels": [
     {
       "name": "Confidential - AI Restricted",
@@ -242,9 +244,10 @@ Run `./run.ps1 -Tags m365 -ConnectM365 -M365UserPrincipalName <upn>` from a work
 ## 6. Post-deployment actions
 
 1. **Purview portal toggles** – enable *Secure interactions for enterprise AI apps* in the Purview portal (Data Security Posture Management for AI > Recommendations).
-2. **Role assignments** – ensure the operator account has the Audit Reader (or Compliance Administrator) role before running the audit export scripts.
-3. **Evidence collection** – rerun `./scripts/governance/dspmPurview/17-Export-ComplianceInventory.ps1` when you are ready to archive posture evidence.
-4. **Cost management** – review [Cost Guidance](./CostGuidance.md) and set budget alerts or run `azd down` when the environment is no longer required.
+2. **Fabric sensitivity labels** – in the Fabric admin portal, enable **Information protection > Allow users to apply sensitivity labels for content** and scope it to the users/groups in your label policy. This setting is manual; there is no supported automation in Microsoft docs today.
+3. **Role assignments** – ensure the operator account has the Audit Reader (or Compliance Administrator) role before running the audit export scripts.
+4. **Evidence collection** – rerun `./scripts/governance/dspmPurview/17-Export-ComplianceInventory.ps1` when you are ready to archive posture evidence.
+5. **Cost management** – review [Cost Guidance](./CostGuidance.md) and set budget alerts or run `azd down` when the environment is no longer required.
 
 ---
 

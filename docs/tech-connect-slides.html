@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Agent Governance & Security Accelerator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0d0f1c;
+      --card: #0f172a;
+      --accent: #5bd6ff;
+      --accent-2: #9c7bff;
+      --muted: #b8c1d6;
+      --success: #4ade80;
+      --warning: #fbbf24;
+      --danger: #f87171;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+      color: #eef2ff;
+      background: radial-gradient(circle at 20% 20%, rgba(91,214,255,0.15), transparent 30%),
+                  radial-gradient(circle at 80% 30%, rgba(156,123,255,0.18), transparent 32%),
+                  radial-gradient(circle at 50% 80%, rgba(74,222,128,0.14), transparent 30%),
+                  linear-gradient(135deg, #0b1224, #0d1020 50%, #0b1224);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+    .frame {
+      width: min(1200px, 100%);
+      height: min(720px, 85vh);
+      background: rgba(12, 18, 34, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      overflow: hidden;
+      position: relative;
+      backdrop-filter: blur(6px);
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(closest-side at 15% 25%, rgba(91,214,255,0.12), transparent 55%),
+                  radial-gradient(closest-side at 85% 75%, rgba(156,123,255,0.12), transparent 55%);
+      pointer-events: none;
+    }
+    .slides {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 44px 56px 96px 56px;
+      display: none;
+      flex-direction: column;
+      gap: 18px;
+      animation: fade 420ms ease;
+    }
+    .slide.active { display: flex; }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1, h2 {
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    h1 { font-size: 46px; }
+    h2 { font-size: 28px; color: #e2e8f0; }
+    p { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.5; }
+    code { word-break: break-all; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: linear-gradient(120deg, rgba(91,214,255,0.24), rgba(156,123,255,0.22));
+      color: #e0f2fe;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .pill img { width: 24px; height: 24px; }
+    .pill span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      font-size: 14px;
+      color: #fff;
+    }
+    .list {
+      display: grid;
+      gap: 10px;
+    }
+    .list-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: #e2e8f0;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      margin-top: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      flex-shrink: 0;
+      box-shadow: 0 0 0 6px rgba(91,214,255,0.12);
+    }
+    .image-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 340px;
+    }
+    .image-card img {
+      max-width: 100%;
+      max-height: 320px;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+    }
+    .cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .button {
+      border: none;
+      cursor: pointer;
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #0b1224;
+      background: linear-gradient(135deg, #5bd6ff, #9c7bff);
+      box-shadow: 0 10px 30px rgba(92, 214, 255, 0.35);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+    .button.secondary {
+      background: rgba(255,255,255,0.08);
+      color: #e2e8f0;
+      box-shadow: none;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .button:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(92,214,255,0.45); }
+    .button.secondary:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(0,0,0,0.25); }
+    .nav {
+      position: absolute;
+      inset: auto 32px 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .nav-buttons { display: flex; gap: 12px; }
+    .ghost {
+      background: rgba(255,255,255,0.04);
+      color: #e2e8f0;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .progress {
+      height: 4px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(135deg, #5bd6ff, #9c7bff);
+      transition: width 220ms ease;
+    }
+    @media (max-width: 900px) {
+      .slide { padding: 34px 28px 96px 28px; }
+      h1 { font-size: 34px; }
+      h2 { font-size: 22px; }
+      p { font-size: 16px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame" role="presentation">
+    <div class="overlay"></div>
+    <div class="slides" aria-live="polite">
+      <section class="slide active" aria-label="Slide 1: Title">
+        <h1>Data & Agent Governance Accelerator</h1>
+        <p>Configuration-driven automation that enables Purview DSPM for AI, Defender for AI, Microsoft Foundry, and Fabric governance controls in a single deployment—without clicking through multiple portals.</p>
+        <div class="badges">
+          <div class="pill"><img src="./icons/defender.svg" alt="Defender icon">Microsoft Defender for AI</div>
+          <div class="pill"><img src="./icons/purview.svg" alt="Purview icon">Microsoft Purview DSPM for AI</div>
+          <div class="pill"><img src="./icons/foundry.svg" alt="Foundry icon">Microsoft Foundry</div>
+          <div class="pill"><img src="./icons/fabric.svg" alt="Fabric icon">Microsoft Fabric</div>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h2>Audience</h2>
+            <p>Security, compliance, and platform teams who need consistent governance for Copilot, Foundry agents, and Fabric data.</p>
+          </div>
+          <div class="card">
+            <h2>Outcome</h2>
+            <p>One configuration file and one command: registers data sources, applies data security policies, enables threat detection, configures diagnostics, and exports audit logs.</p>
+          </div>
+          <div class="card">
+            <h2>Why Now</h2>
+            <p>Users are prompting AI today; security and governance controls need to catch up to protect production agent workloads.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Slide 2: Problem and stakes">
+        <h1>The Governance Gap</h1>
+        <p>AI interactions across Copilot, Foundry agents, and Fabric need consistent security controls. Without DSPM and Defender, prompts bypass data loss prevention, diagnostic settings become inconsistent, and auditors lack visibility.</p>
+        <div class="grid">
+          <div class="card">
+            <h2>Challenges</h2>
+            <div class="list">
+              <div class="list-item"><div class="dot"></div><p>Copilot and browser AI prompts bypass traditional DLP rules unless DSPM for AI captures and stores them in Exchange Online.</p></div>
+              <div class="list-item"><div class="dot"></div><p>Foundry projects become inconsistent when diagnostics, Defender plans, and Content Safety settings are configured manually.</p></div>
+              <div class="list-item"><div class="dot"></div><p>Audit, eDiscovery, and security operations teams need retained prompts, scan results, and policy evidence in a central location.</p></div>
+            </div>
+          </div>
+          <div class="card">
+            <h2>Paths this accelerator covers</h2>
+            <div class="list">
+              <div class="list-item"><div class="dot"></div><p><strong>M365 Copilot & 3rd-party AI</strong>: DSPM for AI policies capture prompts/responses to mailboxes for retention, eDiscovery, and DLP.</p></div>
+              <div class="list-item"><div class="dot"></div><p><strong>Microsoft Foundry & custom agents</strong>: Defender for AI threat detection + diagnostics to Log Analytics; Purview data-source classification; Content Safety blocklists.</p></div>
+              <div class="list-item"><div class="dot"></div><p>Run tags you need: <strong>m365</strong> (Copilot path), <strong>dspm</strong> (scans/audit), <strong>defender</strong> (plans), <strong>foundry</strong> (registration & safety).</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Slide 3: Technical proof points">
+        <h1>Technical proof points</h1>
+        <p>A single configuration file drives ordered modules that enable Purview DSPM for AI, Defender for AI, Content Safety, Azure Policy assignments, and exportable evidence.</p>
+        <div class="grid">
+          <div class="image-card" aria-label="Architecture diagram">
+            <img src="doc-images/architectureDAGSA.png" alt="Data Agent governance architecture diagram">
+          </div>
+          <div class="card">
+            <div class="list">
+              <div class="list-item"><div class="dot"></div><p><strong>Configuration file</strong>: A single JSON file (spec.local.json) defines tenants, Purview accounts, Foundry projects, policies, and export settings.</p></div>
+              <div class="list-item"><div class="dot"></div><p><strong>Orchestrator</strong>: Tag-based execution (foundation, m365, dspm, defender, foundry) runs modules in the correct order.</p></div>
+              <div class="list-item"><div class="dot"></div><p><strong>Controls enabled</strong>: DSPM scans and Secure Interactions, DLP policies with sensitivity labels and retention, Defender for AI with diagnostics, Content Safety blocklists, Azure Policy assignments.</p></div>
+              <div class="list-item"><div class="dot"></div><p><strong>Evidence</strong>: Compliance inventory, audit log exports, and diagnostics sent to Log Analytics for security operations—ready for audits and change requests.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Slide 4: How it works">
+        <h1>How it works</h1>
+        <p>From configuration to governed AI environment in four steps.</p>
+        <div class="grid">
+          <div class="card">
+            <h2>1) Define</h2>
+            <p>Copy <strong>spec.dspm.template.json</strong> → <strong>spec.local.json</strong>; add tenant, subscriptions, Purview accounts, Foundry projects, DLP/labels/retention, and audit export settings.</p>
+          </div>
+          <div class="card">
+            <h2>2) Deploy</h2>
+            <p>Run <code>azd up</code> or <code>run.ps1</code> with your chosen tags. Policies, data sources, scans, and Defender plans are applied automatically.</p>
+          </div>
+          <div class="card">
+            <h2>3) Verify</h2>
+            <p>Purview Audit captures Foundry AI activity. DSPM for AI stores Copilot prompts in Exchange Online for retention and eDiscovery. Content Safety blocklists protect agents.</p>
+          </div>
+          <div class="card">
+            <h2>4) Evidence</h2>
+            <p>Export audit logs and policy snapshots locally—ready for security reviews and compliance audits.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" aria-label="Slide 5: Value and next steps">
+        <h1>Value, evidence, and next steps</h1>
+        <p>Key benefits: unified controls, proof of enforcement, and a clear path to deployment.</p>
+        <div class="grid">
+          <div class="card">
+            <h2>Business outcomes</h2>
+            <div class="list">
+              <div class="list-item"><div class="dot"></div><p><strong>Unified controls</strong>: Purview DSPM, Defender for AI, and Content Safety configured from a single spec file.</p></div>
+              <div class="list-item"><div class="dot"></div><p><strong>Operational efficiency</strong>: 50+ manual portal steps replaced with repeatable azd or run.ps1 commands.</p></div>
+              <div class="list-item"><div class="dot"></div><p><strong>Audit-ready evidence</strong>: Retained prompts (M365), diagnostics (Foundry), compliance inventory, and audit exports—ready for audits and change requests.</p></div>
+              <div class="list-item"><div class="dot"></div><p><strong>Secure innovation</strong>: Security controls in place before agents go live—reduces prompt injection and data leakage risk.</p></div>
+            </div>
+          </div>
+          <div class="card">
+            <h2>Call to action</h2>
+            <div class="list">
+              <div class="list-item"><div class="dot"></div><p>Open <strong>docs/DeploymentGuide.md</strong> for step-by-step setup; ensure azd 1.9.0+.</p></div>
+              <div class="list-item"><div class="dot"></div><p>Decide your path: run <strong>m365</strong> tag for Copilot capture; <strong>defender,foundry</strong> for Foundry Agents; or both.</p></div>
+              <div class="list-item"><div class="dot"></div><p>Finish manual toggles: Purview Audit, Secure interactions, Defender user prompt evidence + Purview integration.</p></div>
+              <div class="list-item"><div class="dot"></div><p>Use <strong>docs/CostGuidance.md</strong> to set retention and monitor workspace ingestion.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="nav" aria-label="Slide navigation">
+      <div class="ghost" aria-live="polite" aria-atomic="true">
+        <span id="slideLabel">Slide 1 of 5</span>
+        <div class="progress" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+      </div>
+      <div class="nav-buttons">
+        <button class="button secondary" id="prevBtn" aria-label="Previous slide">◀ Back</button>
+        <button class="button" id="nextBtn" aria-label="Next slide">Next ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const label = document.getElementById('slideLabel');
+    const progress = document.getElementById('progressBar');
+    const total = slides.length;
+    let index = 0;
+
+    function show(i) {
+      index = (i + total) % total;
+      slides.forEach((slide, idx) => slide.classList.toggle('active', idx === index));
+      label.textContent = `Slide ${index + 1} of ${total}`;
+      progress.style.width = `${((index + 1) / total) * 100}%`;
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', () => show(index + 1));
+    document.getElementById('prevBtn').addEventListener('click', () => show(index - 1));
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { show(index + 1); }
+      if (e.key === 'ArrowLeft') { show(index - 1); }
+    });
+    show(0);
+  </script>
+</body>
+</html>

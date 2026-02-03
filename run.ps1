@@ -123,11 +123,11 @@ $plan = @(
   & $planEntry -Order  5 -File "scripts/governance/00-New-DspmSpec.ps1" -Tags @("ops") -NeedsSpec:$false -Parameters ([ordered]@{ OutFile = $SpecPath })
   & $planEntry -Order 10 -File "scripts/governance/01-Ensure-ResourceGroup.ps1" -Tags @("foundation","dspm") -NeedsSpec:$true -Parameters $null
   & $planEntry -Order 20 -File "scripts/governance/dspmPurview/02-Ensure-PurviewAccount.ps1" -Tags @("foundation","dspm") -NeedsSpec:$true -Parameters $null
-  & $planEntry -Order 30 -File "scripts/exchangeOnline/10-Connect-Compliance.ps1" -Tags @("m365") -NeedsSpec:$false -Parameters $null
-  & $planEntry -Order 40 -File "scripts/exchangeOnline/11-Enable-UnifiedAudit.ps1" -Tags @("m365") -NeedsSpec:$false -Parameters $null
-  & $planEntry -Order 50 -File "scripts/governance/dspmPurview/12-Create-DlpPolicy.ps1" -Tags @("m365") -NeedsSpec:$true -Parameters $null
-  & $planEntry -Order 60 -File "scripts/governance/dspmPurview/13-Create-SensitivityLabel.ps1" -Tags @("m365") -NeedsSpec:$true -Parameters $null
-  & $planEntry -Order 70 -File "scripts/governance/dspmPurview/14-Create-RetentionPolicy.ps1" -Tags @("m365") -NeedsSpec:$true -Parameters $null
+  & $planEntry -Order 30 -File "scripts/exchangeOnline/10-Connect-Compliance.ps1" -Tags @("m365","foundry") -NeedsSpec:$false -Parameters $null
+  & $planEntry -Order 40 -File "scripts/exchangeOnline/11-Enable-UnifiedAudit.ps1" -Tags @("m365","foundry") -NeedsSpec:$false -Parameters $null
+  & $planEntry -Order 50 -File "scripts/governance/dspmPurview/12-Create-DlpPolicy.ps1" -Tags @("m365","foundry") -NeedsSpec:$true -Parameters $null
+  & $planEntry -Order 60 -File "scripts/governance/dspmPurview/13-Create-SensitivityLabel.ps1" -Tags @("m365","foundry") -NeedsSpec:$true -Parameters $null
+  & $planEntry -Order 70 -File "scripts/governance/dspmPurview/14-Create-RetentionPolicy.ps1" -Tags @("m365","foundry") -NeedsSpec:$true -Parameters $null
   & $planEntry -Order 80 -File "scripts/governance/dspmPurview/03-Register-DataSource.ps1" -Tags @("scans","dspm","foundry") -NeedsSpec:$true -Parameters $null
   & $planEntry -Order 90 -File "scripts/governance/dspmPurview/04-Run-Scan.ps1" -Tags @("scans","dspm","foundry") -NeedsSpec:$true -Parameters $null
   & $planEntry -Order 100 -File "scripts/governance/dspmPurview/20-Subscribe-ManagementActivity.ps1" -Tags @("audit","dspm") -NeedsSpec:$true -Parameters $null
@@ -180,7 +180,15 @@ foreach ($step in $selected) {
     }
   }
 
-  $requiresM365 = $step.Tags -contains "m365"
+  # Scripts that require M365 connectivity (DLP, labels, retention, etc.)
+  $m365Scripts = @(
+    "10-Connect-Compliance.ps1",
+    "11-Enable-UnifiedAudit.ps1",
+    "12-Create-DlpPolicy.ps1",
+    "13-Create-SensitivityLabel.ps1",
+    "14-Create-RetentionPolicy.ps1"
+  )
+  $requiresM365 = ($step.Tags -contains "m365") -or ($m365Scripts | Where-Object { $step.File -like "*$_" })
   if ($requiresM365) {
     if (-not $ConnectM365) {
       throw "Step '$($step.File)' requires Microsoft 365 connectivity. Re-run with -ConnectM365 plus either -M365UserPrincipalName or app-only parameters."

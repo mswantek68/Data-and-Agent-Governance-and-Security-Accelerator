@@ -28,7 +28,9 @@ Follow the numbered flow to wire up Microsoft 365 governance, Azure resource pos
    - `../exchangeOnline/11-Enable-UnifiedAudit.ps1` turns on unified audit ingestion so DSPM and Activity Explorer receive data.
 
 3. **Policies and protection**
-   - `dspmPurview/12-Create-DlpPolicy.ps1` builds the DLP policy and rules defined in the spec.
+   - `dspmPurview/12-Create-DlpPolicy.ps1` builds the DLP policies and rules defined in the spec.
+   - `dspmPurview/33-Create-CommunicationCompliancePolicy.ps1` creates communication compliance policies when reviewers are provided.
+   - `dspmPurview/34-Create-InsiderRiskPolicy.ps1` surfaces insider risk policies from the spec (manual portal setup required).
    - `dspmPurview/13-Create-SensitivityLabel.ps1` creates sensitivity labels and publishes them.
    - `dspmPurview/14-Create-RetentionPolicy.ps1` configures retention labels and policies.
 
@@ -67,7 +69,9 @@ Follow the numbered flow to wire up Microsoft 365 governance, Azure resource pos
 | `dspmPurview/03-Register-DataSource.ps1` | Register data sources for scanning | Yes | `scans`, `dspm` |
 | `dspmPurview/04-Run-Scan.ps1` | Trigger DSPM scans | Yes | `scans`, `dspm` |
 | `dspmPurview/05-Assign-AzurePolicies.ps1` | Apply Azure Policies from the spec | Yes | `policies`, `dspm` |
-| `dspmPurview/12-Create-DlpPolicy.ps1` | Create DLP policy and rules | Yes | `policies`, `dspm` |
+| `dspmPurview/12-Create-DlpPolicy.ps1` | Create DLP policies and rules | Yes | `policies`, `dspm` |
+| `dspmPurview/33-Create-CommunicationCompliancePolicy.ps1` | Create Communication Compliance policies (requires reviewers) | Yes | `m365` |
+| `dspmPurview/34-Create-InsiderRiskPolicy.ps1` | Surface Insider Risk policies (manual enforcement) | Yes | `m365` |
 | `dspmPurview/13-Create-SensitivityLabel.ps1` | Create and publish labels | Yes | `policies`, `dspm` |
 | `dspmPurview/14-Create-RetentionPolicy.ps1` | Create retention labels and policies | Yes | `policies`, `dspm` |
 | `dspmPurview/19-Ensure-ActivityContentTypes.ps1` | Ensure audit content types are subscribed | Yes | `audit`, `dspm` |

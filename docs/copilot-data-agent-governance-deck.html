@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Copilot Data & Agent Governance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #0f172a;
+      --ink: #e2e8f0;
+      --muted: #94a3b8;
+      --border: rgba(255,255,255,0.08);
+      --accent: #5bd6ff;
+      --accent2: #9c7bff;
+      --glow: rgba(91,214,255,0.2);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Manrope', 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(91,214,255,0.12), transparent 32%),
+                  radial-gradient(circle at 80% 30%, rgba(156,123,255,0.14), transparent 35%),
+                  linear-gradient(135deg, #0b1020, #0f172a 55%, #0b1020);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+    }
+    .deck {
+      width: min(1280px, 100%);
+      height: min(720px, 90vh);
+      background: rgba(12, 18, 34, 0.88);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+    }
+    header {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      background: linear-gradient(90deg, rgba(91,214,255,0.12), rgba(156,123,255,0.12));
+      border-bottom: 1px solid var(--border);
+      z-index: 2;
+    }
+    header .title {
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .slides {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding-top: 56px;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 26px 80px 26px;
+      animation: fade 280ms ease;
+    }
+    .slide.active { display: flex; }
+    .slide img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+    }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .nav {
+      position: absolute;
+      inset: auto 18px 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 2;
+    }
+    .ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(15,23,42,0.45);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-weight: 600;
+    }
+    .progress {
+      width: 120px;
+      height: 4px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.1);
+    }
+    .bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      transition: width 200ms ease;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .button {
+      border: none;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #0b1020;
+      box-shadow: 0 10px 22px var(--glow);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+    .button.secondary {
+      background: rgba(255,255,255,0.08);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+    .button:hover { transform: translateY(-1px); box-shadow: 0 12px 28px var(--glow); }
+    .button.secondary:hover { box-shadow: 0 8px 18px rgba(0,0,0,0.2); }
+  </style>
+</head>
+<body>
+  <div class="deck" role="presentation">
+    <header>
+      <div class="title">Copilot Data & Agent Governance</div>
+      <div class="muted" aria-hidden="true">Slides 1–11</div>
+    </header>
+
+    <div class="slides" aria-live="polite">
+      <section class="slide active" aria-label="Slide 1"><img src="./ppt/Picture1.png" alt="Slide 1"></section>
+      <section class="slide" aria-label="Slide 2"><img src="./ppt/Picture2.png" alt="Slide 2"></section>
+      <section class="slide" aria-label="Slide 3"><img src="./ppt/Picture3.png" alt="Slide 3"></section>
+      <section class="slide" aria-label="Slide 4"><img src="./ppt/Picture4.png" alt="Slide 4"></section>
+      <section class="slide" aria-label="Slide 5"><img src="./ppt/Picture5.png" alt="Slide 5"></section>
+      <section class="slide" aria-label="Slide 6"><img src="./ppt/Picture6.png" alt="Slide 6"></section>
+      <section class="slide" aria-label="Slide 7"><img src="./ppt/Picture7.png" alt="Slide 7"></section>
+      <section class="slide" aria-label="Slide 8"><img src="./ppt/Picture8.png" alt="Slide 8"></section>
+      <section class="slide" aria-label="Slide 9"><img src="./ppt/Picture9.png" alt="Slide 9"></section>
+      <section class="slide" aria-label="Slide 10"><img src="./ppt/Picture10.png" alt="Slide 10"></section>
+      <section class="slide" aria-label="Slide 11"><img src="./ppt/Picture11.png" alt="Slide 11"></section>
+    </div>
+
+    <div class="nav" aria-label="Slide navigation">
+      <div class="ghost" aria-live="polite" aria-atomic="true">
+        <span id="label">Slide 1 of 11</span>
+        <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+      </div>
+      <div class="nav-buttons">
+        <button class="button secondary" id="prev" aria-label="Previous slide">&lt; Back</button>
+        <button class="button" id="next" aria-label="Next slide">Next &gt;</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const label = document.getElementById('label');
+    const bar = document.getElementById('bar');
+    const total = slides.length;
+    let index = 0;
+
+    function show(i) {
+      index = (i + total) % total;
+      slides.forEach((s, idx) => s.classList.toggle('active', idx === index));
+      label.textContent = `Slide ${index + 1} of ${total}`;
+      bar.style.width = `${((index + 1) / total) * 100}%`;
+    }
+
+    document.getElementById('next').addEventListener('click', () => show(index + 1));
+    document.getElementById('prev').addEventListener('click', () => show(index - 1));
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') show(index + 1);
+      if (e.key === 'ArrowLeft') show(index - 1);
+      if (e.key === 'Home') show(0);
+      if (e.key === 'End') show(total - 1);
+    });
+
+    show(0);
+  </script>
+</body>
+</html>

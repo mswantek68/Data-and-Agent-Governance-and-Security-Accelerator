@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data & Agent Governance and Security Accelerator</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0c1224 0%, #1a2332 100%);
+      color: #ffffff;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .presentation {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 60px 80px;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      animation: slideIn 0.6s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Navigation */
+    .nav-controls {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      display: flex;
+      gap: 15px;
+      z-index: 1000;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .slide-counter {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 72px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      text-align: center;
+      background: linear-gradient(135deg, #00d4ff 0%, #7c5bff 50%, #0078d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 56px;
+      font-weight: 700;
+      margin-bottom: 40px;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    h3 {
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #00d4ff;
+    }
+
+    .subtitle {
+      font-size: 28px;
+      color: #cbd5e1;
+      text-align: center;
+      max-width: 900px;
+      line-height: 1.5;
+      margin-bottom: 40px;
+    }
+
+    /* Act Headers */
+    .act-header {
+      font-size: 48px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #00d4ff 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .act-title {
+      font-size: 64px;
+      font-weight: 700;
+      margin-bottom: 60px;
+      color: #ffffff;
+    }
+
+    /* Icon Grid */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 1400px;
+      margin-top: 40px;
+    }
+
+    .icon-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: all 0.3s;
+      backdrop-filter: blur(10px);
+    }
+
+    .icon-card:hover {
+      transform: translateY(-10px);
+      border-color: #00d4ff;
+      box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
+    }
+
+    .icon {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+      padding: 15px;
+    }
+
+    .icon img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+    }
+
+    .icon.purview { background: linear-gradient(135deg, rgba(124, 91, 255, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%); border: 2px solid rgba(124, 91, 255, 0.4); }
+    .icon.defender { background: linear-gradient(135deg, rgba(0, 120, 212, 0.2) 0%, rgba(0, 212, 255, 0.2) 100%); border: 2px solid rgba(0, 120, 212, 0.4); }
+    .icon.foundry { background: linear-gradient(135deg, rgba(0, 120, 212, 0.2) 0%, rgba(0, 162, 255, 0.2) 100%); border: 2px solid rgba(0, 120, 212, 0.4); }
+    .icon.fabric { background: linear-gradient(135deg, rgba(74, 222, 128, 0.2) 0%, rgba(34, 197, 94, 0.2) 100%); border: 2px solid rgba(74, 222, 128, 0.4); }
+    .icon.copilot { background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 120, 212, 0.2) 100%); border: 2px solid rgba(0, 212, 255, 0.4); }
+    .icon.compliance { background: linear-gradient(135deg, rgba(0, 180, 120, 0.2) 0%, rgba(0, 120, 80, 0.2) 100%); border: 2px solid rgba(0, 180, 120, 0.4); }
+    .icon.monitor { background: linear-gradient(135deg, rgba(255, 165, 0, 0.2) 0%, rgba(255, 100, 0, 0.2) 100%); border: 2px solid rgba(255, 165, 0, 0.4); }
+
+    .icon-card h3 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+
+    .icon-card p {
+      font-size: 18px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    /* Bullet Points */
+    .bullets {
+      display: grid;
+      gap: 25px;
+      max-width: 1000px;
+      margin-top: 40px;
+    }
+
+    .bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 25px;
+      border-radius: 15px;
+      border-left: 5px solid #00d4ff;
+      transition: all 0.3s;
+    }
+
+    .bullet:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateX(10px);
+    }
+
+    .bullet-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(124, 91, 255, 0.2) 100%);
+      border: 2px solid rgba(0, 212, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      padding: 8px;
+    }
+
+    .bullet-icon img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    .bullet-text {
+      font-size: 24px;
+      color: #ffffff;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* Architecture */
+    .architecture-container {
+      width: 100%;
+      max-width: 1200px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    .architecture-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+    }
+
+    /* Product Badges */
+    .product-badges {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 20px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s;
+    }
+
+    .badge:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+    }
+
+    .badge.purview { border-color: #7c5bff; color: #a855f7; }
+    .badge.defender { border-color: #0078d4; color: #00d4ff; }
+    .badge.foundry { border-color: #0078d4; color: #00a2ff; }
+    .badge.fabric { border-color: #4ade80; color: #22c55e; }
+    .badge.copilot { border-color: #00d4ff; color: #00d4ff; }
+
+    .badge-icon {
+      font-size: 28px;
+    }
+
+    .badge-icon-img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    /* Demo Flow */
+    .demo-flow {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin-top: 40px;
+    }
+
+    .demo-step {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(124, 91, 255, 0.1) 100%);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 35px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .demo-step::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #00d4ff 0%, #7c5bff 100%);
+    }
+
+    .step-number {
+      font-size: 72px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.1);
+      position: absolute;
+      top: 10px;
+      right: 20px;
+    }
+
+    .demo-step h3 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .demo-step p {
+      font-size: 20px;
+      color: #cbd5e1;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Takeaways */
+    .takeaway-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin-top: 40px;
+    }
+
+    .takeaway-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .takeaway-card .icon {
+      margin-bottom: 25px;
+    }
+
+    .takeaway-card h3 {
+      font-size: 32px;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+
+    .takeaway-card p {
+      font-size: 20px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    /* Call to Action */
+    .cta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      max-width: 1200px;
+      margin-top: 40px;
+    }
+
+    .cta-card {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(124, 91, 255, 0.15) 100%);
+      border: 2px solid rgba(0, 212, 255, 0.4);
+      border-radius: 20px;
+      padding: 35px 25px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .cta-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(0, 212, 255, 0.4);
+    }
+
+    .cta-card .icon {
+      width: 80px;
+      height: 80px;
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .cta-card h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .cta-card p {
+      font-size: 18px;
+      color: #cbd5e1;
+    }
+
+    /* MCEM Flow */
+    .mcem-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .mcem-stage {
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px 25px;
+      text-align: center;
+      min-width: 180px;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .mcem-stage.mcem-inactive {
+      opacity: 0.5;
+    }
+
+    .mcem-stage.mcem-active {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(124, 91, 255, 0.2) 100%);
+      border-color: #00d4ff;
+      box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+      opacity: 1;
+    }
+
+    .mcem-number {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00d4ff 0%, #7c5bff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 auto 15px;
+      color: #fff;
+    }
+
+    .mcem-stage.mcem-inactive .mcem-number {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .mcem-stage h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .mcem-stage p {
+      font-size: 16px;
+      color: #cbd5e1;
+    }
+
+    .mcem-badge {
+      margin-top: 15px;
+      background: linear-gradient(135deg, #00d4ff 0%, #7c5bff 100%);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .mcem-arrow {
+      font-size: 32px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      h1 { font-size: 56px; }
+      h2 { font-size: 42px; }
+      .slide { padding: 40px 50px; }
+      .icon-grid { grid-template-columns: 1fr; }
+      .demo-flow { grid-template-columns: 1fr; }
+      .takeaway-grid { grid-template-columns: 1fr; }
+      .cta-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="presentation">
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+      <h1>Data and Agent Governance<br/>and Security Accelerator</h1>
+      <p class="subtitle">Automation-driven governance for AI agents across Copilot, Foundry, Fabric, and custom solutions</p>
+      <div class="product-badges">
+        <div class="badge purview">
+          <img src="./icons/purview.svg" alt="Purview" class="badge-icon-img">
+          <span>Purview DSPM</span>
+        </div>
+        <div class="badge defender">
+          <img src="./icons/defender.svg" alt="Defender" class="badge-icon-img">
+          <span>Defender for AI</span>
+        </div>
+        <div class="badge foundry">
+          <img src="./icons/foundry.svg" alt="Foundry" class="badge-icon-img">
+          <span>Azure AI Foundry</span>
+        </div>
+        <div class="badge fabric">
+          <img src="./icons/fabric.svg" alt="Fabric" class="badge-icon-img">
+          <span>Fabric</span>
+        </div>
+        <div class="badge copilot">
+          <img src="./icons/copilot.png" alt="Copilot" class="badge-icon-img">
+          <span>M365 Copilot</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Act One - Introduction -->
+    <div class="slide">
+      <div class="act-header">Act One</div>
+      <div class="act-title">Setting the Stage</div>
+      <div class="bullets">
+        <div class="bullet">
+          <div class="bullet-icon">⚠️</div>
+          <div class="bullet-text">AI agents introduce new security & compliance risks</div>
+        </div>
+        <div class="bullet">
+          <div class="bullet-icon">🎯</div>
+          <div class="bullet-text">Identity governance, data protection, and observability gaps</div>
+        </div>
+        <div class="bullet">
+          <div class="bullet-icon">✨</div>
+          <div class="bullet-text">One spec-driven accelerator for enterprise-ready AI</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Four Pillars -->
+    <div class="slide">
+      <h2>Four Governance Pillars</h2>
+      <div class="icon-grid">
+        <div class="icon-card">
+          <div class="icon purview"><img src="./icons/purview.svg" alt="Labels"></div>
+          <h3>Sensitivity Labels</h3>
+        </div>
+        <div class="icon-card">
+          <div class="icon defender"><img src="./icons/policy.svg" alt="DLP"></div>
+          <h3>DLP Policies</h3>
+        </div>
+        <div class="icon-card">
+          <div class="icon purview"><img src="./icons/compliance.svg" alt="DSPM"></div>
+          <h3>DSPM Scanning</h3>
+        </div>
+        <div class="icon-card">
+          <div class="icon defender"><img src="./icons/defender.svg" alt="Defender"></div>
+          <h3>Defender for AI</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Architecture -->
+    <div class="slide">
+      <h2>Architecture Overview</h2>
+      <div class="architecture-container">
+        <img src="./doc-images/architectureDAGSA.png" alt="Data & Agent Governance Architecture" />
+      </div>
+    </div>
+
+    <!-- Slide 5: Act Two - Demo -->
+    <div class="slide">
+      <div class="act-header">Act Two</div>
+      <div class="act-title">Deep Dive & Demo</div>
+      <p class="subtitle">See governance automation in action</p>
+    </div>
+
+    <!-- Slide 6: Demo Flow Part 1 -->
+    <div class="slide">
+      <h2>Deployment Workflow</h2>
+      <div class="demo-flow">
+        <div class="demo-step">
+          <span class="step-number">01</span>
+          <h3>Apply Sensitivity Labels</h3>
+          <p>Auto-classify and label data leveraged by AI interactions across Microsoft Foundry, M365 Copilot and custom agents</p>
+        </div>
+        <div class="demo-step">
+          <span class="step-number">02</span>
+          <h3>Run DSPM Scans</h3>
+          <p>Discover and classify data sources: OneLake, Fabric workspaces, Foundry projects</p>
+        </div>
+        <div class="demo-step">
+          <span class="step-number">03</span>
+          <h3>Enforce DLP Policies</h3>
+          <p>Block sensitive data leakage in Copilot/ Foundry prompts and responses</p>
+        </div>
+        <div class="demo-step">
+          <span class="step-number">04</span>
+          <h3>Configure Defender</h3>
+          <p>Enable threat detection for prompt injection and model manipulation</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: Demo Flow Part 2 -->
+    <div class="slide">
+      <h2>Observability & Compliance</h2>
+      <div class="demo-flow">
+        <div class="demo-step">
+          <span class="step-number">05</span>
+          <h3>Capture Telemetry</h3>
+          <p>Route diagnostics to Log Analytics for Foundry and custom agents</p>
+        </div>
+        <div class="demo-step">
+          <span class="step-number">06</span>
+          <h3>Export Audit Trail</h3>
+          <p>Unified audit log for compliance investigation and evidence</p>
+        </div>
+        <div class="demo-step">
+          <span class="step-number">07</span>
+          <h3>Retention Policies</h3>
+          <p>Auto-retain Copilot prompts in mailboxes for eDiscovery</p>
+        </div>
+        <div class="demo-step">
+          <span class="step-number">08</span>
+          <h3>Proof-of-Concept</h3>
+          <p>Deploy full governance stack in minutes with spec.local.json</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: Role-Based & Policy-Driven Workflows -->
+    <div class="slide">
+      <h2>Role-Based & Policy-Driven Workflows</h2>
+      <div class="demo-flow">
+        <div class="demo-step">
+          <span class="step-number">🔐</span>
+          <h3>Role-Based Access</h3>
+          <p>Purview Data Source Admin, Security Reader, Compliance Admin roles enforced</p>
+        </div>
+        <div class="demo-step">
+          <span class="step-number">📋</span>
+          <h3>Policy-Driven Governance</h3>
+          <p>Spec defines labels, DLP rules, retention policies applied consistently</p>
+        </div>
+        <div class="demo-step">
+          <span class="step-number">✅</span>
+          <h3>Enterprise Security</h3>
+          <p>Zero Trust principles, least privilege, audit trails, compliance evidence</p>
+        </div>
+        <div class="demo-step">
+          <span class="step-number">🚀</span>
+          <h3>Production Accelerator</h3>
+          <p>Fast-track Stage 3 → Stage 4 with governance built in from day one</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: MCEM Alignment -->
+    <div class="slide">
+      <h2>MCEM Readiness Stages</h2>
+      <div class="mcem-flow">
+        <div class="mcem-stage mcem-inactive">
+          <div class="mcem-number">1</div>
+          <h3>Inspire</h3>
+          <p>Vision & strategy</p>
+        </div>
+        <div class="mcem-arrow">→</div>
+        <div class="mcem-stage mcem-inactive">
+          <div class="mcem-number">2</div>
+          <h3>Design</h3>
+          <p>Architecture & planning</p>
+        </div>
+        <div class="mcem-arrow">→</div>
+        <div class="mcem-stage mcem-active">
+          <div class="mcem-number">3</div>
+          <h3>Empower</h3>
+          <p>POC & Pilot</p>
+          <div class="mcem-badge">✅ Governance Ready</div>
+        </div>
+        <div class="mcem-arrow">→</div>
+        <div class="mcem-stage mcem-active">
+          <div class="mcem-number">4</div>
+          <h3>Realize</h3>
+          <p>Production deployment</p>
+          <div class="mcem-badge">🚀 Secure & Compliant</div>
+        </div>
+      </div>
+      <div class="bullets" style="margin-top: 40px;">
+        <div class="bullet">
+          <div class="bullet-icon">⚡</div>
+          <div class="bullet-text">Reach production faster with security & governance pre-configured</div>
+        </div>
+        <div class="bullet">
+          <div class="bullet-icon">🔒</div>
+          <div class="bullet-text">Deploy with confidence: compliance controls verified from day one</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10: Act Three - Takeaways -->
+    <div class="slide">
+      <div class="act-header">Act Three</div>
+      <div class="act-title">Key Takeaways</div>
+    </div>
+
+    <!-- Slide 11: Why Governance-First -->
+    <div class="slide">
+      <h2>Why Governance-First Matters</h2>
+      <div class="bullets">
+        <div class="bullet">
+          <div class="bullet-icon">🚀</div>
+          <div class="bullet-text">Accelerate from POC to production with built-in compliance</div>
+        </div>
+        <div class="bullet">
+          <div class="bullet-icon">🔐</div>
+          <div class="bullet-text">Reduce risk with automated policy enforcement</div>
+        </div>
+        <div class="bullet">
+          <div class="bullet-icon">👁️</div>
+          <div class="bullet-text">Gain full observability across AI workloads</div>
+        </div>
+        <div class="bullet">
+          <div class="bullet-icon">⚡</div>
+          <div class="bullet-text">One spec drives Purview, Defender, and diagnostics</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 12: Benefits -->
+    <div class="slide">
+      <h2>Enterprise Benefits</h2>
+      <div class="takeaway-grid">
+        <div class="takeaway-card">
+          <div class="icon compliance"><img src="./icons/compliance.svg" alt="Compliance"></div>
+          <h3>Compliance</h3>
+          <p>Automated retention, DLP, and audit trails</p>
+        </div>
+        <div class="takeaway-card">
+          <div class="icon defender"><img src="./icons/defender.svg" alt="Security"></div>
+          <h3>Security</h3>
+          <p>Threat detection and Content Safety guardrails</p>
+        </div>
+        <div class="takeaway-card">
+          <div class="icon monitor"><img src="./icons/monitor.svg" alt="Observability"></div>
+          <h3>Observability</h3>
+          <p>Unified telemetry and compliance dashboards</p>
+        </div>
+        <div class="takeaway-card">
+          <div class="icon purview"><img src="./icons/automation.svg" alt="Automation"></div>
+          <h3>Speed</h3>
+          <p>50+ manual steps reduced to one run</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 13: Microsoft Solution Play -->
+    <div class="slide">
+      <h2>Secure & Govern AI Solution Play</h2>
+      <div class="bullets">
+        <div class="bullet">
+          <div class="bullet-icon">🎯</div>
+          <div class="bullet-text">Aligns with Microsoft's Secure & Govern AI strategy</div>
+        </div>
+        <div class="bullet">
+          <div class="bullet-icon">🔗</div>
+          <div class="bullet-text">Integrates Purview, Defender, Foundry, and Fabric</div>
+        </div>
+        <div class="bullet">
+          <div class="bullet-icon">📚</div>
+          <div class="bullet-text">Builds on MCEM readiness stages</div>
+        </div>
+        <div class="bullet">
+          <div class="bullet-icon">🌐</div>
+          <div class="bullet-text">Supports hybrid AI workloads: M365 + Azure</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 14: Related Sessions -->
+    <div class="slide">
+      <h2>Related Sessions</h2>
+      <div class="cta-grid">
+        <div class="cta-card">
+          <div class="icon purview"><img src="./icons/purview.svg" alt="Purview"></div>
+          <h3>Purview DSPM</h3>
+          <p>Data Security Posture Management deep dive</p>
+        </div>
+        <div class="cta-card">
+          <div class="icon defender"><img src="./icons/defender.svg" alt="Defender"></div>
+          <h3>Defender for AI</h3>
+          <p>AI threat protection and detection</p>
+        </div>
+        <div class="cta-card">
+          <div class="icon foundry"><img src="./icons/foundry.svg" alt="Foundry"></div>
+          <h3>Foundry Observability</h3>
+          <p>Monitoring AI agents in production</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 15: Next Steps -->
+    <div class="slide">
+      <h2>Next Steps</h2>
+      <div class="cta-grid">
+        <div class="cta-card">
+          <div class="icon copilot"><img src="./icons/github.svg" alt="GitHub"></div>
+          <h3>GitHub Repo</h3>
+          <p>Clone and deploy the accelerator</p>
+        </div>
+        <div class="cta-card">
+          <div class="icon foundry"><img src="./icons/learn.svg" alt="Learn"></div>
+          <h3>Microsoft Learn</h3>
+          <p>Official documentation and tutorials</p>
+        </div>
+        <div class="cta-card">
+          <div class="icon purview"><img src="./icons/enablement.svg" alt="Enablement"></div>
+          <h3>Enablement</h3>
+          <p>Training and implementation resources</p>
+        </div>
+      </div>
+      <div class="bullets" style="margin-top: 50px;">
+        <div class="bullet">
+          <div class="bullet-icon"><img src="./icons/vscode.svg" alt="VS Code" style="width:24px;height:24px;"></div>
+          <div class="bullet-text">Start with spec.local.json and run ./run.ps1 with tags</div>
+        </div>
+        <div class="bullet">
+          <div class="bullet-icon">❓</div>
+          <div class="bullet-text">Questions? Reach out to the team</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="slide-counter">
+      <span id="current">1</span> / <span id="total">13</span>
+    </div>
+    
+    <div class="nav-controls">
+      <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">◀ Previous</button>
+      <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next ▶</button>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    
+    document.getElementById('total').textContent = totalSlides;
+
+    function showSlide(n) {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (n + totalSlides) % totalSlides;
+      slides[currentSlide].classList.add('active');
+      document.getElementById('current').textContent = currentSlide + 1;
+      
+      // Update button states
+      document.getElementById('prevBtn').disabled = currentSlide === 0;
+      document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+    }
+
+    function changeSlide(direction) {
+      showSlide(currentSlide + direction);
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') changeSlide(-1);
+      if (e.key === 'ArrowRight') changeSlide(1);
+      if (e.key === 'Home') showSlide(0);
+      if (e.key === 'End') showSlide(totalSlides - 1);
+    });
+
+    // Initialize
+    showSlide(0);
+  </script>
+</body>
+</html>
