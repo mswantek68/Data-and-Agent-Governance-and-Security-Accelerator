@@ -3,6 +3,7 @@
   "subscriptionId": "<subscription-guid>",
   "resourceGroup": "<resource-group-name>",
   "location": "<azure-region>",
+  "tags": ["dspm", "defender", "foundry"],
   "purviewAccount": "<purview-account-name>",
   "purviewResourceGroup": "<purview-resource-group>",
   "purviewSubscriptionId": "<purview-subscription-guid>",

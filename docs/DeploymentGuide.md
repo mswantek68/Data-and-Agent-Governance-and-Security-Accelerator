@@ -26,6 +26,7 @@ Gather this information before configuring your spec file:
 |-------------|------------------|----------|
 | Tenant ID | Azure Portal → Entra ID → Overview | `12345678-1234-1234-1234-123456789012` |
 | Subscription ID | Azure Portal → Subscriptions | `87654321-4321-4321-4321-210987654321` |
+| Resource Group | Azure Portal → Resource groups | `rg-resourcegroup-name` |
 | Purview account name | Azure Portal → Microsoft Purview accounts | `contoso-purview` |
 | Purview resource group | Azure Portal → Microsoft Purview accounts → Overview | `rg-purview-prod` |
 | AI Foundry project name | Azure AI Foundry portal → Settings | `contoso-ai-project` |
@@ -36,6 +37,8 @@ Gather this information before configuring your spec file:
 
 - [ ] **Azure Contributor** on subscription(s) with Purview, AI Foundry, and Defender resources
 - [ ] **Purview Data Source Administrator** for registering data sources
+- [ ] **Purview Data Security and Posture Management (DSPM)** for AI access
+- [ ] **Purview Data Security AI Content Viewer** role for accessing AI prompts
 - [ ] **Microsoft 365 E5 or E5 Compliance license** (for m365 tag)
 - [ ] **Compliance Administrator** role in Microsoft 365 (for Unified Audit and DLP)
 - [ ] **Exchange Online admin** access from MFA-capable workstation (for m365 tag)
@@ -59,14 +62,42 @@ Open the folder in VS Code, Codespaces, or a devcontainer if you prefer a manage
 All provisioning relies on the credentials already cached by the Azure CLI and Az PowerShell. Run the following commands **in the same terminal** you will use for `azd up`:
 
 ```powershell
+# Azure CLI - for resource management operations
 az login
+
+# Azure Developer CLI - for azd-specific deployment operations
 azd auth login
+
+# PowerShell Az module - for automation scripts and governance operations
 Connect-AzAccount -Tenant <tenantId> -Subscription <subscriptionId>
+
+# Set active context - ensures all subsequent commands target the correct subscription
 Set-AzContext -Subscription <subscriptionId>
-Get-AzContext    # confirm the tenant/subscription match your spec
+
+# Verify your authentication context matches your spec file
+Get-AzContext
 ```
 
-Replace the placeholders with the values at the top of your `spec.local.json`. If you are using a service principal, pass `-ServicePrincipal` parameters to `Connect-AzAccount` instead.
+Replace the placeholders (`<tenantId>` and `<subscriptionId>`) with the values at the top of your `spec.local.json`.
+
+**Expected output from `Get-AzContext`:**
+Verify that the following values match your `spec.local.json`:
+- **Name**: Your subscription name
+- **Account**: Your signed-in user account
+- **TenantId**: Should match the `tenantId` in your spec file
+- **SubscriptionId**: Should match the `subscriptionId` in your spec file
+
+**Using a service principal:**
+If you are using a service principal for authentication instead of interactive login, use the following command:
+
+```powershell
+# Service principal authentication
+$credential = Get-Credential  # Enter Application (client) ID as username and secret as password
+Connect-AzAccount -ServicePrincipal -Tenant <tenantId> -Credential $credential -Subscription <subscriptionId>
+
+# Or using a certificate
+Connect-AzAccount -ServicePrincipal -Tenant <tenantId> -CertificateThumbprint <thumbprint> -ApplicationId <appId> -Subscription <subscriptionId>
+```
 
 ---
 
@@ -85,6 +116,10 @@ pwsh ./scripts/governance/00-New-DspmSpec.ps1 -OutFile ./spec.dspm.template.json
 
 # Create your working copy (this file is gitignored)
 Copy-Item ./spec.dspm.template.json ./spec.local.json
+```
+```bash
+# Bash command
+cp ./spec.dspm.template.json ./spec.local.json
 ```
 
 ### Step 3.2: Configure required fields
@@ -222,7 +257,26 @@ Environment variables (`DAGA_SPEC_PATH`, `DAGA_POSTPROVISION_TAGS`, etc.) overri
 
 ---
 
-## 5. Deploy with `azd up`
+## 5. Install AZ modules (Optional)
+
+If you don't have the required Azure PowerShell modules installed, run the following commands to install them:
+
+```powershell
+# Installs the main Azure PowerShell module, which provides cmdlets for managing Azure resources
+Install-Module Az -Scope CurrentUser -Repository PSGallery -Force
+
+# Installs the Azure Accounts module for authentication and context management
+Install-Module Az.Accounts -Scope CurrentUser -Repository PSGallery -Force
+
+# Installs the Azure Purview module for managing Microsoft Purview resources and data governance
+Install-Module Az.Purview -Scope CurrentUser -Repository PSGallery -Force
+```
+
+These modules enable the PowerShell automation scripts to interact with Azure services. The `-Scope CurrentUser` parameter installs the modules for your user profile only, without requiring administrator privileges.
+
+---
+
+## 6. Deploy with `azd up`
 
 ```powershell
 azd up
@@ -242,7 +296,7 @@ Run `./run.ps1 -Tags m365 -ConnectM365 -M365UserPrincipalName <upn>` from a work
 
 ---
 
-## 6. Post-deployment actions
+## 7. Post-deployment actions
 
 1. **Purview portal toggles** – enable *Secure interactions for enterprise AI apps* in the Purview portal (Data Security Posture Management for AI > Recommendations).
 2. **Role assignments** – ensure the operator account has the Audit Reader (or Compliance Administrator) role before running the audit export scripts.
@@ -251,7 +305,7 @@ Run `./run.ps1 -Tags m365 -ConnectM365 -M365UserPrincipalName <upn>` from a work
 
 ---
 
-## 7. Next steps
+## 8. Next steps
 
 - Customize the spec for additional Foundry projects or Fabric workspaces.
 - Integrate the accelerator into CI/CD by invoking `run.ps1` from GitHub Actions or Azure DevOps.
