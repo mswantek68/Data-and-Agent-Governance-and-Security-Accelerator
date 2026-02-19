@@ -13,7 +13,7 @@ jobs:
     environment: production
     env:
       SPEC_PATH: ./spec.ci.json
-      CERT_PATH: ${{ runner.temp }}/daga-exo-cert.pfx
+      CERT_PATH: /tmp/daga-exo-cert.pfx
       HAS_M365_CERT: ${{ secrets.DAGA_M365_CERT_PFX != '' }}
     steps:
       - name: Checkout
