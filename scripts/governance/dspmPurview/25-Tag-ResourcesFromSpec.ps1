@@ -19,9 +19,11 @@ if ($spec.foundry -and $spec.foundry.resources) {
     if(-not $res){ Write-Warning "Resource not found, skipping tag update: $($r.resourceId)"; continue }
     if($res.ResourceType -and $res.ResourceType -match '/projects'){ Write-Host "Skipping tag update for project-level resource $($res.ResourceId); Azure tags only apply to the parent account." -ForegroundColor Yellow; continue }
     $merged = @{}
-    if($res.Tags -is [Collections.IDictionary]){ $merged += $res.Tags }
-    $merged += $desiredTags
-    Set-AzResource -ResourceId $res.ResourceId -Tag $merged -Force | Out-Null
+    if($res.Tags -is [Collections.IDictionary]){
+      foreach($key in $res.Tags.Keys){ $merged[$key] = $res.Tags[$key] }
+    }
+    foreach($key in $desiredTags.Keys){ $merged[$key] = $desiredTags[$key] }
+    Update-AzTag -ResourceId $res.ResourceId -Tag $merged -Operation Merge | Out-Null
     Write-Host "Tagged $($res.Name)" -ForegroundColor Green
   }
 } else {

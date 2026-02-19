@@ -1,25 +1,28 @@
 {
-  "tenantId": "<tenant-guid>",
-  "subscriptionId": "<subscription-guid>",
-  "resourceGroup": "<resource-group-name>",
-  "location": "<azure-region>",
-  "tags": ["dspm", "defender", "foundry"],
-  "purviewAccount": "<purview-account-name>",
-  "purviewResourceGroup": "<purview-resource-group>",
-  "purviewSubscriptionId": "<purview-subscription-guid>",
-  "aiResourceGroup": "<ai-resource-group>",
-  "aiSubscriptionId": "<ai-subscription-guid>",
+  "tenantId": "11111111-2222-3333-4444-555555555555",
+  "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+  "resourceGroup": "rg-governance-demo",
+  "location": "eastus2",
+  "purviewAccount": "pvw-demo-governance",
+  "purviewResourceGroup": "rg-governance-demo",
+  "purviewSubscriptionId": "99999999-8888-7777-6666-555555555555",
+  "aiResourceGroup": "rg-ai-demo-001",
+  "aiSubscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
   "aiFoundry": {
-    "name": "<azure-ai-foundry-name>",
-    "resourceId": "/subscriptions/<ai-subscription-guid>/resourceGroups/<ai-resource-group>/providers/Microsoft.CognitiveServices/accounts/<azure-ai-foundry-name>"
+    "name": "project-demo-ai-001",
+    "resourceId": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg-ai-demo-001/providers/Microsoft.CognitiveServices/accounts/ai-demo-001/projects/project-demo-ai-001"
   },
   "foundry": {
     "resources": [
       {
-        "name": "<resource-name>",
-        "resourceId": "/subscriptions/<ai-subscription-guid>/resourceGroups/<ai-resource-group>/providers/Microsoft.CognitiveServices/accounts/<resource-name>",
+        "name": "project-demo-ai-001",
+        "resourceId": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg-ai-demo-001/providers/Microsoft.CognitiveServices/accounts/ai-demo-001",
         "diagnostics": true,
-        "tags": {}
+        "tags": {
+          "Environment": "Dev",
+          "Owner": "DataGov",
+          "CostCenter": "dev011426g"
+        }
       }
     ],
     "contentSafety": {
@@ -32,31 +35,7 @@
       "harmSeverityThreshold": null
     }
   },
-  "fabric": {
-    "oneLakeRoots": [
-      {
-        "name": "<onelake-root-name>",
-        "resourceId": "/subscriptions/<subscription-guid>/resourceGroups/<resource-group>/providers/Microsoft.Fabric/oneLakeWorkspaces/<onelake-root-name>",
-        "scanName": "<onelake-scan-name>"
-      }
-    ],
-    "workspaces": [
-      {
-        "name": "<fabric-workspace-name>",
-        "resourceId": "/subscriptions/<subscription-guid>/resourceGroups/<resource-group>/providers/Microsoft.Fabric/workspaces/<fabric-workspace-name>",
-        "scanName": "<fabric-workspace-scan-name>"
-      }
-    ]
-  },
-  "contentSafety": {
-    "endpoint": "",
-    "keyVault": {
-      "vaultName": "",
-      "resourceId": "",
-      "secretName": ""
-    }
-  },
-  "logAnalyticsWorkspaceId": "",
+  "logAnalyticsWorkspaceId": "12345678-90ab-cdef-1234-567890abcdef",
   "dataSources": [],
   "scans": [],
   "dlpPolicy": {
@@ -65,8 +44,7 @@
     "locations": {
       "Exchange": "All",
       "SharePoint": "All",
-      "OneDrive": "All",
-      "Teams": "All"
+      "OneDrive": "All"
     },
     "rules": [
       {
@@ -90,9 +68,9 @@
   },
   "labels": [
     {
-      "name": "Confidential",
+      "name": "NewSemiConfidential",
       "publishPolicyName": "Publish: Confidential",
-      "encryptionEnabled": true,
+      "encryptionEnabled": false,
       "publishScopes": {
         "Exchange": "All",
         "SharePoint": "All",
@@ -100,52 +78,15 @@
       }
     }
   ],
-  "retentionPolicies": [
-    {
-      "name": "AI Data - 7 Years",
-      "rules": [
-        {
-          "name": "Keep 7y then Delete",
-          "durationDays": 2557,
-          "action": "Delete"
-        }
-      ],
-      "locations": {
-        "Exchange": "All",
-        "SharePoint": "All",
-        "OneDrive": "All",
-        "TeamsChat": "All",
-        "TeamsChannel": "All"
-      }
-    }
-  ],
-  "activityExport": {
-    "outputPath": "./audit_export",
-    "contentTypes": [
-      "Audit.General",
-      "Audit.SharePoint",
-      "Audit.Exchange",
-      "DLP.All",
-      "Audit.AzureActiveDirectory",
-      "Audit.PowerBI"
-    ]
-  },
-  "azurePolicies": [
-    {
-      "name": "deny-public-access-cognitiveservices",
-      "displayName": "Cognitive Services accounts should disable public network access",
-      "scope": "resourceGroup",
-      "enabled": true,
-      "parameters": {}
-    }
-  ],
+  "retentionPolicies": [],
+  "activityExport": null,
   "defenderForAI": {
     "enableDefenderForCloudPlans": [
       "CognitiveServices",
       "Storage",
       "Containers"
     ],
-    "logAnalyticsWorkspaceId": "",
+    "logAnalyticsWorkspaceId": "12345678-90ab-cdef-1234-567890abcdef",
     "diagnosticCategories": [
       "Audit",
       "RequestResponse",
