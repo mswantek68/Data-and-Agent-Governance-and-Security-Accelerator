@@ -1,14 +1,14 @@
-# Tech Connect Deck — Speaker Notes
-## Data and Agent Governance and Security Accelerator
+# Tech Connect Speaker Notes
+## Data & Agent Governance and Security Accelerator
 
 ---
 
-## Slide 1: Title — Data & Agent Governance & Security Accelerator
+## Slide 1: Title - Data & Agent Governance and Security Accelerator
 
 ### Key Points
-- Gold Standard Asset from Scale AI Solutioning—POC in hours, not weeks
-- One spec file, one command—Purview DSPM, Defender for AI, Foundry, Copilot, Fabric all governed
-- Built for security, compliance, and platform teams who need consistency without portal-hopping
+- Configuration-driven automation for AI governance across Microsoft's platform
+- Eliminates manual portal navigation—one spec file, one command deployment
+- Covers Purview DSPM for AI, Defender for AI, Microsoft Foundry, and Fabric
 
 ### Audience
 Security, compliance, and platform teams who need consistent governance for Copilot, Foundry agents, and Fabric data.
@@ -20,219 +20,213 @@ One configuration file and one command: registers data sources, applies data sec
 Users are prompting AI today; security and governance controls need to catch up to protect production agent workloads.
 
 ### Short (≈30 sec, Executive Summary)
-This is a Gold Standard Asset from the Scale AI Solutioning org—designed to get you from zero to governed AI environment in hours. One configuration file. One command. **Purview Data Security Posture Management for AI**, Defender for AI, Microsoft Foundry, M365 Copilot, and Fabric—all configured automatically. No navigating between multiple admin portals. Less clicking. No manual drift. Built for security, compliance, and platform teams who need controls that actually stick.
+This accelerator automates governance for AI workloads across Copilot, Foundry, and Fabric. Instead of manually navigating between Purview, M365 Compliance Center, and Azure Portal to configure dozens of controls, you define everything in a single JSON spec file and deploy with one command. Configuration-driven automation that turns weeks of manual setup into minutes of repeatable deployment.
 
 ### Long (≈3 min, Technical Deep Dive)
-Welcome! We're here to talk about the Data and Agent Governance and Security Accelerator—a new type of Gold Standard Asset from the Scale AI Solutioning team.
+Welcome to the Data & Agent Governance and Security Accelerator—designed to eliminate the operational burden of securing AI workloads at scale.
 
-Let me start with the problem we're solving. You've got AI agents everywhere—Copilot helping users write emails, Foundry custom agents answering customer questions, Fabric analytics agents processing sensitive datasets. Each one of these types ofagents needs governance: sensitivity labels, DLP policies, threat detection, diagnostics, audit logs. But here's the challenge—configuring all that governance manually means logging into three different portals. **Purview Data Security Posture Management for AI** for data classification and prompt capture. M365 Compliance for labels and DLP. Azure Portal for Defender threat detection and diagnostics.
+When you deploy AI agents in production, you face a governance challenge: You need Purview DSPM for AI to capture Copilot prompts for retention and eDiscovery. You need Defender for AI to detect prompt injection and jailbreak attempts. You need diagnostic settings configured on every Foundry project so alerts reach your Log Analytics workspace. You need sensitivity labels published across M365, Foundry, and Fabric. You need DLP policies that target AI interactions specifically. You need unified audit logging configured for compliance investigations. And you need all of this to work consistently across dev, test, and production environments.
 
-Manual portal navigation across multiple admin consoles. Coordinating configuration across separate teams. And when you're done, you've got no guarantee that what you configured in dev matches what's in test or prod. Manual governance creates drift. Drift creates risk.
+The traditional approach is manual portal configuration. You log into the M365 Compliance Center to create labels and DLP policies. You switch to Purview to register Fabric workspaces and configure data scans. You navigate to Azure Portal to enable Defender plans and configure diagnostic settings on each Foundry project. Each portal has its own authentication, configuration model, and API surface. It's slow, error-prone, and impossible to replicate consistently.
 
-This accelerator eliminates that entire problem.
+This accelerator takes a different approach: **configuration-driven governance**. You define your entire governance posture in a single JSON specification file called `spec.local.json`. That spec declares your tenant ID, subscriptions, Purview accounts, Foundry projects, Fabric workspaces, sensitivity labels, DLP rules, retention policies, and audit export settings. Then you run one command—`azd up` or `run.ps1` with tag-based execution—and the PowerShell orchestrator reads your spec and calls the appropriate Microsoft APIs: Purview REST APIs, Microsoft Graph Compliance APIs, Azure Resource Manager, and Defender for Cloud.
 
-One configuration file—`spec.local.json`—defines your entire governance posture. Your tenant. Your subscriptions. Your Purview account. Your Foundry projects. Your Fabric workspaces. The sensitivity labels you want. The DLP policies you need. The retention rules for eDiscovery.
+The result: Labels get created and published. Purview data sources get registered for Fabric and OneLake. DLP policies get created and enforced. Defender for AI gets enabled with diagnostics routed to Log Analytics. Audit subscriptions get configured for the right content types. And all of it is idempotent—run it again, and it updates only what's changed. Version-control your spec in Git, deploy the same configuration to production, and you have governance that's automated, repeatable, and auditable.
 
-Then you run one command: `azd up` or `run.ps1`. The automation reads your spec and orchestrates everything. Labels created. DLP policies enforced. Purview scans triggered. Defender for AI enabled. Diagnostics configured. Audit logs captured.
-
-What used to take weeks now takes minutes. What required expertise in five different products now requires editing one JSON file. And what used to drift between environments now deploys consistently every single time.
-
-The audience for this is security teams who need threat detection, compliance teams who need audit evidence, and platform teams who need governance that scales. For GBBs and Solutions Architects: this demonstrates role-based access control (Purview Data Source Admin, Compliance Admin, Security Reader—no Global Admin required), API orchestration patterns across Microsoft Cloud services, and repeatable customer engagement accelerators. This is configuration-driven governance—protecting AI agents in production from day one, not as an afterthought.
+This accelerator integrates four core technologies shown in the badges: **Microsoft Purview DSPM for AI** for capturing Copilot prompts and enforcing secure interactions, **Defender for AI** for threat detection, **Microsoft Foundry** for custom agent hosting, and **Microsoft Fabric** for data lakehouse workloads. Each brings critical governance capabilities, and this accelerator wires them together into one cohesive deployment.
 
 ---
 
 ## Slide 2: The Governance Gap
 
 ### Key Points
-- AI agents access data across your estate without automatic governance visibility
-- AI prompts bypass traditional DLP unless DSPM for AI captures them
-- Foundry projects drift when configured manually—no consistency, no accountability
-- Auditors need evidence: retained prompts, scan results, policy states—not just promises
+- AI interactions need consistent security controls across Copilot, Foundry, and Fabric
+- Three major challenges: prompts bypassing DLP, inconsistent diagnostic settings, lack of centralized audit evidence
+- Two deployment paths: M365 Copilot & 3rd-party AI, or Microsoft Foundry & custom agents
 
 ### Short (≈30 sec, Executive Summary)
-Here's the gap: AI agents can access data sources you know about and data you forgot about—without automatic governance controls. AI prompts bypass traditional DLP unless DSPM detects and blocks sensitive content. Foundry projects drift when configured manually. And auditors need evidence—policy enforcement logs, scan results, policy snapshots—not just "trust us, we configured it." This accelerator closes all three gaps with automated, verifiable governance.
+AI interactions introduce governance gaps that traditional tools don't cover. Copilot prompts bypass DLP unless DSPM for AI captures them in Exchange Online. Foundry projects become inconsistent when diagnostics, Defender plans, and Content Safety are manually configured. Audit teams need prompts, scan results, and policy evidence in one location for compliance investigations. This accelerator addresses both paths: M365 Copilot with DSPM for AI, and Foundry agents with Defender for AI and diagnostics to Log Analytics.
 
 ### Long (≈3 min, Technical Deep Dive)
-Let me frame the operational governance gaps that IT teams face when governing AI agents.
+Let me walk you through the governance gaps we're closing.
 
-**The Governance Gap Reality.** When you deploy Microsoft Foundry agents, Fabric lakehouses, or M365 Copilot with custom data sources, the governance challenge isn't theoretical—it's operational. AI agents can access data across your estate—structured data in Fabric lakehouses, unstructured data in SharePoint, indexed content in Azure AI Search. Some data sources are documented and governed. Others are forgotten or unknown. When an agent accesses data it shouldn't, or shares sensitive information with unauthorized users, what's the accountability? How do you investigate? How do you prove what happened? How do you prevent it from happening again?
+**Challenge One: Copilot and browser AI prompts bypass traditional DLP rules.** When a user prompts Copilot or uses browser-based AI tools, that interaction happens outside the traditional data loss prevention perimeter. DLP policies that protect email attachments and SharePoint documents don't see the prompt or response unless you explicitly configure DSPM for AI. Without DSPM, those prompts aren't retained, they're not available for eDiscovery, and they can't be inspected for sensitive data leakage. A user could paste confidential intellectual property or customer PII into a prompt, and you'd have no evidence it happened and no way to block it.
 
-The governance gap shows up in three places:
+DSPM for AI solves this by capturing prompts and responses and storing them in the user's Exchange Online mailbox as compliance records. Once stored, they're subject to retention policies, available for eDiscovery searches, and can be inspected by DLP policies in real time. This brings AI interactions into the existing M365 compliance framework.
 
-**First: AI prompts bypass traditional DLP.** Your existing DLP policies were designed for email attachments and file shares. They don't understand AI prompts. A user can paste proprietary source code or confidential product roadmap details into a Copilot chat, and unless you have DSPM for AI enabled, that intellectual property isn't detected. The policy violation isn't blocked. The attempt isn't logged. You have no evidence that a leak was attempted or prevented.
+**Challenge Two: Foundry projects become inconsistent when configured manually.** Microsoft Foundry hosts your custom AI agents, and each Foundry project needs governance controls: Defender for AI to detect threats, diagnostic settings to route alerts to Log Analytics, and Content Safety filters to block harmful content. When you configure these manually through the Azure Portal, you introduce inconsistency. One project gets Defender enabled; another doesn't. One has diagnostics configured; another has them pointing to the wrong workspace. Manual configuration doesn't scale, and it creates gaps that attackers can exploit.
 
-**Second: Foundry projects drift without automation.** Defender for AI is enabled once at the subscription level, but **diagnostic settings must be configured on each Foundry project individually** to ship threat detection logs to Log Analytics. When diagnostics are enabled in dev but missing in prod, you've got drift. When Content Safety blocklists are applied inconsistently across deployments, you've got drift. When governance tags are missing on new projects, you've got drift. And drift creates risk—because you can't protect what you can't see, and you can't enforce what you haven't configured.
+This accelerator automates Foundry project governance. The spec file lists all your Foundry projects, and the scripts enable Defender for AI on each one, configure diagnostic settings consistently, and apply Content Safety blocklists. Every project gets the sam governance posture, every time.
 
-**Third: Auditors need evidence, not promises.** Compliance teams, security teams, auditors—they don't want to hear "we think we configured DLP correctly" or "we're pretty sure Defender is enabled." They want proof. Retained prompts in Exchange Online. Purview scan results in the Data Map. Diagnostic logs in Log Analytics. Policy snapshots they can download and review.
+**Challenge Three: Audit, eDiscovery, and security teams need centralized evidence.** Compliance investigations require evidence from multiple systems: Copilot prompts from M365, Purview scan results showing what data was classified, DLP policy violations, Defender alerts, and diagnostic logs. When these are scattered across Exchange Online, Purview portals, Log Analytics, and Azure Storage, investigations take days. Teams waste time correlating events across systems, and auditors can't get a complete picture of what happened.
 
-This accelerator closes all three gaps. It makes governance declarative—you define the policy in a spec file. It makes governance repeatable—the same spec deploys the same controls every time. And it makes governance verifiable—you get evidence exports that prove controls are in place.
+This accelerator provides centralized evidence export. Copilot prompts are retained in Exchange for eDiscovery. Purview scan results populate the Data Map. DLP violations log to the unified audit log. Defender alerts route to Log Analytics. And the accelerator includes scripts to export compliance inventory (labels, policies, retention rules) and audit logs locally as JSON files, ready to hand to auditors.
 
-No more manual clicking. No more drift. No more "I think we configured that."
+**Two Deployment Paths.** The accelerator supports two paths based on your AI strategy:
+
+**M365 Copilot & 3rd-party AI path:** Run the `m365` tag to configure DSPM for AI policies that capture prompts and responses to mailboxes. This enables retention, eDiscovery, and DLP for Copilot interactions. Combine with the `dspm` tag to configure Purview scans for Fabric workspaces, ensuring data sources are classified before AI agents access them.
+
+**Microsoft Foundry & custom agents path:** Run the `defender` and `foundry` tags to enable Defender for AI threat detection, configure diagnostics to Log Analytics, register Purview data sources (Fabric, OneLake), and apply Content Safety blocklists. This path gives you full observability and threat protection for custom AI agents.
+
+You can run both paths together if you're deploying Copilot and custom Foundry agents. The tag-based orchestrator runs modules in the correct order, ensuring dependencies are met.
 
 ---
 
 ## Slide 3: Technical Proof Points
 
 ### Key Points
-- Single spec file (`spec.local.json`) defines everything—tenants, Purview, Foundry, policies, diagnostics
-- Tag-based orchestration runs modules in the right order: foundation → m365 → dspm → defender → foundry
-- Outputs are measurable: DSPM scans, diagnostics to Log Analytics, compliance inventory exports
-- Architecture diagram shows how it all connects: data sources → governance controls → observability
+- Single configuration file (spec.local.json) defines tenants, Purview accounts, Foundry projects, policies, and export settings
+- Tag-based orchestrator runs modules in correct order (foundation, m365, dspm, defender, foundry)
+- Controls enabled: DSPM scans, Secure Interactions, DLP with labels/retention, Defender for AI with diagnostics, Content Safety, Azure Policy
+- Exportable evidence: compliance inventory, audit logs, diagnostics to Log Analytics
 
 ### Short (≈30 sec, Executive Summary)
-One JSON file drives everything. Tag-based execution ensures modules run in the right order—foundation, m365, dspm, defender, foundry. The outputs aren't just configuration—they're evidence. DSPM scans, diagnostics in Log Analytics, compliance inventory exports. The architecture shows how data flows from sources through governance controls to unified observability.
+The accelerator uses a single JSON spec file to drive ordered PowerShell modules that configure governance across Purview, Defender, and M365 Compliance. Tag-based execution lets you run just the modules you need: `foundation` for core setup, `m365` for Copilot governance, `dspm` for Purview scans, `defender` for threat detection, and `foundry` for agent registration and safety. Every control is configured via API calls—DSPM scans, DLP policies, Defender plans, diagnostics—and evidence is automatically exported for audits.
 
 ### Long (≈3 min, Technical Deep Dive)
-Now let's get technical. This is where I show you how it actually works.
+Let me show you how this works technically, using the architecture diagram as a reference.
 
-The heart of this accelerator is a single configuration file: `spec.local.json`. This isn't a massive script you have to debug. It's a structured JSON file that defines everything you need: your tenant ID, your subscriptions, your Purview account, your Foundry projects, your Fabric workspaces, the sensitivity labels you want applied, the DLP policies you need enforced, the retention policies for eDiscovery.
+**Configuration File: spec.local.json.** Everything starts with a single JSON specification file. You copy `spec.dspm.template.json` to `spec.local.json` and fill in your environment details: tenant ID, subscription IDs, resource group names, Purview account name, Foundry project resource IDs, Fabric workspace names, and OneLake paths. Then you define your governance policies in the same file: which sensitivity labels to create, which DLP rules to enforce, which retention policies to apply, and where to export audit logs. The spec is self-contained—one file defines your entire governance posture.
 
-That's the policy. That's the desired state. Now here's how we make it real.
+**Orchestrator: Tag-Based Execution.** The PowerShell orchestrator (`run.ps1`) supports tag-based execution, allowing you to run just the modules you need:
 
-The orchestrator reads that spec and runs tagged modules in a specific, deterministic order. **Foundation** sets up resource groups and Log Analytics workspaces. **m365** configures Copilot-related governance—DSPM for AI secure interactions that capture prompts to Exchange Online. **dspm** registers Purview data sources (Fabric workspaces and OneLake roots) and triggers scans to discover sensitive data. **Defender** enables Defender for AI plans and configures diagnostic settings. **Foundry** configures Content Safety blocklists and wires up threat detection.
+- **foundation tag:** Core setup—ensures Azure context, creates resource groups, validates Purview accounts.
+- **m365 tag:** M365 Copilot governance—creates sensitivity labels, publishes them to Exchange/SharePoint/OneDrive/Fabric, creates DLP policies targeting labels and sensitive info types, configures retention policies for Copilot prompts.
+- **dspm tag:** Purview Data Map configuration—registers Fabric workspaces and OneLake as data sources, creates and triggers scans, exports scan results and compliance inventory.
+- **defender tag:** Defender for AI enablement—enables the Defender for AI plan at subscription level, configures diagnostic settings on Foundry Cognitive Services accounts to route alerts to Log Analytics.
+- **foundry tag:** Foundry agent registration and safety—registers Foundry projects with Purview, applies Content Safety blocklists, assigns Azure Policies.
 
-**Key architectural insight for GBBs/Solutions Architects:** While Foundry agents can query many data sources (Azure AI Search, SQL, SharePoint, APIs), unifying data in Fabric workspaces and OneLake enables seamless Purview scanning, DLP policy application, and Defender correlation. Fabric provides the single governance surface where classification labels flow automatically and access policies apply consistently.
+You can run multiple tags in one command: `.\run.ps1 -Tags foundation,m365,dspm,defender,foundry` deploys the full stack. Or run selectively: `.\run.ps1 -Tags m365,dspm` for just Copilot governance and Purview scans.
 
-Each module is idempotent—you can run it multiple times, and it won't create duplicates or break existing configurations. Each module produces outputs—logs, scan results, policy states—that flow to Log Analytics for security monitoring and to local directories for compliance evidence.
+**Controls Enabled.** The accelerator configures multiple governance controls via native Microsoft APIs:
 
-Look at the architecture diagram on this slide. On the left, you've got AI workloads: Copilot, Foundry, Fabric. In the middle, you've got governance controls: Purview DSPM scans discovering sensitive data, DLP policies blocking leaks, Defender for AI detecting threats, Content Safety filtering harmful prompts. On the right, you've got observability: diagnostic logs flowing to Log Analytics, audit logs exported to Blob Storage, compliance inventory snapshots ready for auditors.
+- **DSPM scans and Secure Interactions:** Purview Data Map scans Fabric workspaces and OneLake to discover and classify sensitive data. DSPM for AI Secure Interactions policies capture Copilot prompts and responses to Exchange Online mailboxes for retention and eDiscovery.
+- **DLP policies with sensitivity labels and retention:** DLP compliance policies are created in M365 Compliance Center, targeting sensitive info types (SSN, credit cards) and sensitivity labels (Confidential, Highly Confidential). Rules block or audit violations in Exchange, SharePoint, OneDrive, and Teams. Retention policies ensure Copilot prompts are retained for the configured period.
+- **Defender for AI with diagnostics:** Defender for AI plan is enabled at the subscription level. Diagnostic settings are configured on each Foundry Cognitive Services account (parent of Foundry projects) to route logs and metrics to your Log Analytics workspace. This ensures threat alerts, usage metrics, and audit logs flow to a central location for security operations.
+- **Content Safety blocklists:** Custom blocklists are applied to Foundry projects via Content Safety APIs, blocking known harmful patterns or organization-specific terms.
+- **Azure Policy assignments:** Azure Policies are assigned to enforce standards like requiring diagnostic settings, enforcing network restrictions, or mandating tags.
 
-This isn't a collection of disconnected scripts. It's an integrated governance architecture—deployed and configured from one spec file, producing measurable evidence that controls are working.
+**Evidence Export.** The accelerator includes evidence export capabilities for audits and compliance reviews:
 
-That's the technical proof. One file. One command. Repeatable results.
+- **Compliance inventory:** Export current labels, DLP policies, retention policies, and Purview Data Map scan results as JSON files. These snapshots prove what governance controls were in place at a specific point in time.
+- **Audit log exports:** Export M365 unified audit logs to Azure Storage or local files, providing evidence of user actions, DLP violations, and Copilot interactions.
+- **Diagnostics to Log Analytics:** All Foundry diagnostic logs, Defender alerts, and Purview audit events flow to Log Analytics for centralized security operations and KQL-based investigations.
+
+This architecture provides end-to-end observability and proof of governance enforcement—critical for passing compliance audits.
 
 ---
 
 ## Slide 4: How It Works
 
 ### Key Points
-- **Define**: Copy template to `spec.local.json`, fill in your environment parameters
-- **Deploy**: Run `azd up` or `run.ps1` with tags—automation handles the rest
-- **Verify**: Check Purview Audit for Foundry activity, Exchange for Copilot prompts, Content Safety blocklists
-- **Evidence**: Export audit logs and policy snapshots—ready for compliance reviews
+- Four steps: Define spec file, Deploy with azd/run.ps1, Verify controls work, Export evidence
+- Idempotent deployment—re-run safely, only updates what changed
+- Tag-based execution allows selective deployment (m365, dspm, defender, foundry)
 
 ### Short (≈30 sec, Executive Summary)
-Four steps. Define your spec file. Deploy with one command and the tags you need. Verify that controls are working—Purview Audit capturing Foundry activity, DSPM storing Copilot prompts, Content Safety blocking harmful content. Export the evidence—audit logs, policy snapshots—and you're done. Repeatable. Auditable. Fast.
+Four steps to governed AI: Define your governance in spec.local.json—tenants, subscriptions, Purview accounts, Foundry projects, policies, and export settings. Deploy with `azd up` or `run.ps1` using your chosen tags—policies, data sources, scans, and Defender plans are applied automatically. Verify that Purview Audit captures Foundry activity, DSPM for AI stores Copilot prompts in Exchange for retention, and Content Safety blocklists protect agents. Export audit logs and policy snapshots locally—ready for security reviews and compliance audits.
 
 ### Long (≈3 min, Technical Deep Dive)
-Let me walk you through how this works in practice—from zero to governed AI environment in four steps.
+Let me walk you through the four-step deployment process.
 
-**Step 1: Define.** You start by copying the template: `spec.dspm.template.json` → `spec.local.json`. Then you fill in your environment parameters. Your tenant ID. Your subscription. Your Purview account name. The Foundry projects you want to govern. The Fabric workspaces you want scanned. The sensitivity labels you need—like "Confidential" or "Highly Confidential." The DLP policy rules—what should be blocked, what should be audited. The retention policies for eDiscovery.
+**Step 1: Define.** Start by copying `spec.dspm.template.json` to `spec.local.json`. This template includes placeholders for all required configuration. Fill in your environment details:
 
-This is where you declare your governance intent. What data sources should be discovered? What policies should be enforced? Where should diagnostics go?
+- **Tenant and subscriptions:** Your Azure AD tenant ID and subscription IDs where resources are deployed.
+- **Purview account:** The Purview account name and resource group. If you don't have one yet, the scripts can create it, but you need to provide the name and location.
+- **Foundry projects:** List all your Foundry project resource IDs. The scripts will enable Defender for AI and configure diagnostics on the parent Cognitive Services accounts.
+- **Fabric workspaces and OneLake:** List Fabric workspace names and OneLake folder paths that should be registered as Purview data sources and scanned for sensitive data.
+- **Labels and DLP policies:** Define sensitivity labels (Public, Internal, Confidential, Highly Confidential) with descriptions and encryption settings. Define DLP policy rules targeting sensitive info types (SSN, credit card numbers) and sensitivity labels.
+- **Retention policies:** Specify retention duration for Copilot prompts and other compliance artifacts.
+- **Audit export:** Configure where to export audit logs—Azure Storage account, local path, or both.
 
-**Step 2: Deploy.** You run one command: `azd up` or `run.ps1`. You can run all tags or pick specific ones. Want just M365 Copilot governance? Run the `m365` tag. Want Foundry agent protection? Run `defender,foundry`. Want everything? Run them all.
+The spec file is JSON, making it easy to version-control in Git and review in pull requests before deployment.
 
-The automation handles the rest. It connects to Purview APIs and registers data sources. It calls M365 Compliance APIs and creates labels and DLP policies. It enables Defender for AI plans via Azure Resource Manager. It configures diagnostic settings to route logs to Log Analytics. It applies Content Safety blocklists to Foundry deployments.
+**Step 2: Deploy.** Run `azd up` for integrated Azure Developer CLI deployment, or run `.\run.ps1` directly with PowerShell. Use the `-Tags` parameter to run specific modules:
 
-You're not clicking through portals. You're not trying to remember which settings go where. The code orchestrates everything.
+- `.\run.ps1 -Tags foundation,m365` → Core setup + Copilot governance (labels, DLP, retention)
+- `.\run.ps1 -Tags dspm` → Register Fabric/OneLake data sources, trigger Purview scans
+- `.\run.ps1 -Tags defender,foundry` → Enable Defender for AI, configure diagnostics, apply Content Safety
 
-**Step 3: Verify.** Now you validate that it worked. Open the Purview portal and check Purview Audit—you should see Foundry AI activity captured, including policy enforcement events. Open Exchange Online—Copilot interaction metadata is available for eDiscovery searches (DLP blocks sensitive content before it's sent). Check your Foundry deployments—Content Safety blocklists are applied, filtering harmful prompts before they reach the model.
+Or run all tags together for full deployment: `.\run.ps1 -Tags foundation,m365,dspm,defender,foundry`.
 
-This is where governance becomes observable. You're not trusting that it worked—you're seeing the evidence.
+The scripts are idempotent—you can re-run them safely. If a label already exists, it's not recreated. If a Purview data source is already registered, it's skipped. If diagnostic settings are already configured with the right workspace, they're not changed. This allows you to update your spec file, add new resources, and re-run deployment without breaking existing configuration.
 
-**Step 4: Evidence.** Finally, you export the proof. The accelerator has scripts that query the M365 Compliance APIs and download your current policy states—labels, DLP rules, retention policies—and save them as JSON in the `compliance_inventory/` directory. It exports unified audit logs to Azure Blob Storage with immutable policies, so they can't be tampered with. It ships diagnostics to Log Analytics for long-term retention.
+Deployment typically takes 10-30 minutes depending on how many resources you're configuring. The scripts log progress to the console and create detailed logs in `./logs/` for troubleshooting.
 
-When an auditor asks "prove that you had DLP configured on this date," you hand them the JSON snapshot. When security asks "show me the logs for this Foundry interaction," you query Log Analytics.
+**Step 3: Verify.** After deployment, verify that controls are working:
 
-That's the flow. Define once. Deploy anywhere. Verify everything. Export the proof.
+- **Purview Audit:** Navigate to Purview Compliance portal → Audit. Search for Foundry AI activity events. You should see events showing agent queries, data access, and policy evaluations.
+- **DSPM for AI Copilot prompts:** Check a test user's Exchange Online mailbox. Copilot prompts should appear as records with appropriate retention policies applied. Verify that eDiscovery searches can find them.
+- **Defender for AI alerts:** Simulate a prompt injection attack in a Foundry agent. Verify that Defender detects it and routes the alert to Log Analytics. Run a KQL query: `AzureDiagnostics | where ResourceType == "COGNITIVESERVICES"` to see diagnostic logs.
+- **Content Safety blocklists:** Test that blocked terms or patterns are rejected by Foundry agents.
+- **Data Map scans:** Navigate to Purview Data Map and verify that Fabric workspaces and OneLake sources appear as registered data sources. Check scan results to see if sensitive data was classified (SSNs, credit cards, etc.).
+
+**Step 4: Evidence.** Export evidence for compliance reviews and audits:
+
+- **Compliance inventory:** Run `.\scripts\governance\dspmPurview\17-Export-ComplianceInventory.ps1` to export current labels, DLP policies, retention policies, and scan results as JSON files to `./compliance_inventory/`. These snapshots prove what governance was in place.
+- **Audit logs:** Run `.\scripts\governance\dspmPurview\21-Export-Audit.ps1` to export M365 unified audit logs for a specific date range. Logs are saved locally and optionally uploaded to Azure Storage for long-term retention.
+- **Log Analytics queries:** Use KQL queries in Log Analytics to generate reports on Defender alerts, diagnostic events, and compliance violations. Export query results as CSV for audit evidence.
+
+This evidence is critical for compliance audits (SOC 2, ISO 27001, HIPAA, etc.), where auditors need proof that controls were implemented and operational during the audit period.
 
 ---
 
 ## Slide 5: Value, Evidence, and Next Steps
 
 ### Key Points
-- **Business outcomes**: Unified controls, automated deployment, audit-ready evidence, secure innovation
-- **Operational efficiency**: No manual drift, consistent governance across dev/test/prod
-- **Audit readiness**: Retained prompts, diagnostics, compliance inventory, all exportable
-- **Next steps**: DeploymentGuide.md, choose your tags (m365, defender, foundry), finish manual toggles, monitor costs
+- Four business outcomes: Unified controls, Operational efficiency, Audit-ready evidence, Secure innovation
+- Concrete next steps: review DeploymentGuide.md, choose deployment path (m365/defender/foundry tags), finish manual toggles, use CostGuidance.md
+- Evidence export built-in for compliance reviews
 
 ### Short (≈30 sec, Executive Summary)
-Here's the value: unified controls across Purview, Defender, Content Safety. Fifty-plus manual steps replaced by one repeatable command. Audit-ready evidence—retained prompts, diagnostics, compliance inventory. Secure innovation—controls in place before agents go live. Next steps: follow the Deployment Guide, pick your tags, finish the manual toggles, and monitor your costs. You're ready to govern AI at scale.
+Four business outcomes: Unified controls from one spec file—Purview DSPM, Defender for AI, Content Safety together. Operational efficiency—50+ manual portal steps replaced with repeatable commands. Audit-ready evidence—retained prompts, diagnostics, compliance inventory, audit exports. Secure innovation—security controls in place before agents go live, reducing prompt injection and data leakage risk. Next steps: Open DeploymentGuide.md, choose your path (m365 tag for Copilot, defender/foundry for agents, or both), finish manual toggles in Purview and Defender portals, use CostGuidance.md to manage retention costs.
 
 ### Long (≈3 min, Technical Deep Dive)
-Let's bring this home. What's the actual business value you get from deploying this accelerator?
+Let me summarize the business value and give you clear next steps to get started.
 
-**Business Outcome 1: Unified Controls.** You're governing Purview DSPM, Defender for AI, and Content Safety from a single spec file. That means when you update a DLP policy or add a new Foundry project, you edit the spec, redeploy, and the change is applied consistently across all environments. No more navigating between multiple admin portals. No more trying to remember which settings you changed in dev and whether you replicated them in prod. One spec. One command. Unified governance.
+**Business Outcome 1: Unified Controls.** Traditionally, governance for AI workloads is fragmented. Purview DSPM configuration happens in the Purview portal. Defender for AI enablement happens in Azure Portal. DLP policies are created in M365 Compliance Center. Content Safety blocklists are configured via Azure AI Studio. Each system operates independently, with its own authentication, configuration model, and logging.
 
-**Business Outcome 2: Operational Efficiency.** Manual governance requires navigating multiple admin portals—configuring Purview data sources, creating sensitivity labels, publishing DLP policies, enabling Defender plans, setting up diagnostics, exporting audit logs. Coordinating configuration across separate teams with no version control, no rollback, no proof that it's the same in every environment. This accelerator reduces that complexity to one command: `azd up`. The automation orchestrates API calls across Purview REST, Microsoft Graph, ARM, and Defender APIs. Because it's infrastructure-as-code, you can version it in Git, review changes through pull requests, and deploy to multiple environments with confidence.
+This accelerator unifies all of that into a single spec file. You define labels, DLP rules, Purview scans, Defender plans, and Content Safety settings in one JSON file. Deploy once, and all controls are configured consistently. Update the spec, redeploy, and changes propagate across all systems. Unified controls mean less operational overhead and fewer gaps.
 
-**Business Outcome 3: Audit-Ready Evidence.** Compliance teams and auditors don't care about your good intentions—they care about evidence. Can you prove that DLP was enforced on this date? Can you show the logs for this AI interaction? Can you produce the retention policy that applies to these prompts? With this accelerator, the answer is yes—every time. Copilot prompts are retained in Exchange Online. Foundry diagnostics are in Log Analytics. Compliance inventory snapshots are exported as JSON. Audit logs are in immutable Blob Storage. When the auditor asks for proof, you hand them the files.
+**Business Outcome 2: Operational Efficiency.** Manual configuration of governance controls is slow and error-prone. Creating one sensitivity label in M365 Compliance Center takes 5 minutes (navigate portal, fill form, publish to locations, wait for replication). Creating a Purview data source registration takes 10 minutes (navigate Purview portal, select source type, enter credentials, configure scan schedule). Enabling Defender for AI on one Foundry project takes 5 minutes (navigate Azure Portal, find Cognitive Services account, enable plan, configure diagnostics). Multiply by the number of labels, data sources, and Foundry projects, and you're at 50+ manual portal steps just to deploy baseline governance.
 
-**Business Outcome 4: Secure Innovation.** The biggest risk with AI adoption is deploying agents without governance. Someone builds a great Foundry agent, it goes live, and then—oops—we realize there's no DLP, no Defender, no diagnostics. The agent's been leaking data or getting manipulated, and we have no evidence of what happened. This accelerator flips that script. Governance goes live before the agent does. Controls are in place from day one. That means you can innovate with confidence—because security and compliance are built in, not bolted on.
+This accelerator replaces all of that with repeatable commands. `azd up` or `run.ps1` with your chosen tags deploys everything in 10-30 minutes, depending on resource count. Re-run to add new resources or update policies. The time savings compound as your AI estate grows.
 
-**Next Steps.** Ready to deploy? Here's your path. First, open `docs/DeploymentGuide.md`—it walks you through prerequisites, spec configuration, and deployment commands. Make sure you're running `azd` version 1.9.0 or higher. Second, decide your path: run the `m365` tag if you're governing Copilot, run `defender,foundry` if you're protecting Foundry agents, or run both. Third, finish the manual toggles—there are a few settings that still require portal clicks, like enabling Purview Audit and DSPM Secure Interactions. The guide lists them all. Finally, use `docs/CostGuidance.md` to set retention policies and monitor Log Analytics ingestion—so you're not surprised by your Azure bill.
+**Business Outcome 3: Audit-Ready Evidence.** Compliance audits (SOC 2, ISO 27001, HIPAA, FedRAMP) require proof that governance controls were implemented and operational. Auditors ask questions like: "Show me what DLP policies were active in Q4." "Prove that Copilot prompts containing PII were retained for eDiscovery." "Demonstrate that Defender for AI was enabled on all Foundry projects." "Export audit logs showing who accessed sensitive data via AI agents."
 
-That's it. You're ready to govern AI at enterprise scale—with controls that are automated, consistent, and auditable.
+This accelerator provides evidence automatically:
 
-Welcome to governance-first AI adoption. Let's make it happen.
+- **Retained prompts (M365):** Copilot prompts stored in Exchange Online mailboxes with retention policies applied—search able via eDiscovery.
+- **Diagnostics (Foundry):** All Foundry AI activity logged to Log Analytics—KQL queries export evidence of agent interactions, Defender alerts, and policy violations.
+- **Compliance inventory:** JSON snapshots of labels, DLP policies, retention policies, and Purview scan results—timestamped proof of what governance was in place.
+- **Audit exports:** M365 unified audit logs exported to Azure Storage or local files—complete record of user actions, DLP violations, and admin changes.
 
-**For GBBs and MCAPS:** This accelerator serves as a repeatable customer engagement tool—demonstrating governance-first architecture, role-based deployment patterns (no Global Admin required), API orchestration across Microsoft Cloud services, and measurable compliance evidence. Use it to accelerate customer conversations on AI security, reduce POC-to-production timelines, and establish governance baselines that scale.
+Hand these exports to auditors, and they have the evidence they need. This reduces audit preparation time from weeks to days.
 
-**Key points**
-- One spec-driven deployment across Purview DSPM, Defender for AI, Foundry, Copilot, Fabric
-- Fewer portals, repeatable governance
-- Audience: security, compliance, platform teams
+**Business Outcome 4: Secure Innovation.** AI innovation moves fast, but security teams slow it down when governance is an afterthought. Developers build POC agents, get approval to move to production, then face a 6-week governance delay while security manually configures controls. By the time governance is ready, the POC momentum is lost, and the project gets deprioritized.
 
-**Short (≈30s)**
-“Here’s the elevator pitch: this accelerator turns multi-portal governance into one spec-driven deployment. It lights up Purview DSPM, Defender for AI, Foundry, Copilot, and Fabric in a repeatable way. The audience is security, compliance, and platform teams who need consistent controls without manual drift.”
+This accelerator flips the model: security controls are in place **before** agents go live. Deploy governance alongside your POC using the same spec file. Security validates that Defender for AI is detecting threats, DLP is blocking policy violations, and Purview is classifying data. When it's time to move to production, you redeploy the same spec with production parameters—no delay, no manual reconfiguration. Governance no longer blocks innovation; it enables it.
 
-**Long (≈3 min)**
-“Let’s start with the outcome: a single configuration file and a single run that wires up governance across Purview DSPM for AI, Defender for AI, Microsoft Foundry, M365 Copilot, and Fabric. Instead of bouncing between portals to configure labels, DLP, scans, and diagnostics, we declare the intent once in `spec.local.json` and apply it consistently. This is designed for teams who own risk and platform readiness—security, compliance, and data/AI platform owners. The value is speed and repeatability: you can establish a governance baseline quickly, validate it, and apply the same baseline across environments. I’ll show how the solution removes manual steps and produces evidence that auditors and security teams can rely on.”
+This reduces two critical risks:
 
----
+- **Prompt injection:** Defender for AI detects jailbreak attempts, prompt manipulation, and model extraction attacks in real time—stopping attacks before they succeed.
+- **Data leakage:** DLP policies block sensitive data from leaking through prompts or responses—preventing accidental exposure of PII, IP, or confidential information.
 
-## Slide 2 — The Governance Gap
-**Key points**
-- AI prompts can bypass traditional DLP without DSPM for AI
-- Foundry projects drift without standardized diagnostics and plans
-- Auditors need retained evidence and scan results
+**Next Steps:** Here's your path to deployment:
 
-**Short (≈30s)**
-“This slide highlights the gap: AI interactions slip past legacy controls unless DSPM captures them, Foundry settings drift without automation, and audit teams lack evidence. The accelerator closes those gaps by standardizing policies, diagnostics, and evidence capture.”
+1. **Open docs/DeploymentGuide.md** for step-by-step setup instructions. Ensure you have azd 1.9.0+ installed and appropriate admin roles: Compliance Admin in M365, Purview Data Source Admin, Contributor + Security Admin in Azure.
 
-**Long (≈3 min)**
-"The governance gap shows up in three places. First, AI prompts containing sensitive data can bypass traditional DLP unless DSPM for AI detects and blocks them before they reach the model. Second, Foundry projects become inconsistent when diagnostics and Defender plans are configured manually—what's enabled in one environment is missing in another. Third, audit and compliance teams need evidence, but they don't have a single place to get policy enforcement logs, scan results, or policy states. The accelerator solves this by making policy and telemetry configuration declarative. It registers data sources, runs DSPM scans, standardizes Defender settings, and exports evidence so governance is not just 'configured,' it's verifiable."
+2. **Decide your deployment path:**
+   - Run **m365 tag** for Copilot governance: captures prompts/responses to mailboxes for retention, eDiscovery, and DLP.
+   - Run **defender, foundry tags** for Foundry agent security: enables Defender for AI threat detection and diagnostics to Log Analytics.
+   - Run **both paths** if deploying Copilot and custom agents together.
 
----
+3. **Finish manual toggles:** Some features require manual portal configuration because APIs aren't available yet:
+   - Enable **Purview Audit** in the Purview Compliance portal to capture AI activity events.
+   - Enable **Secure Interactions** in DSPM for AI settings to capture Copilot prompts.
+   - Enable **Defender user prompt evidence** in Defender for AI settings to log full prompts in alerts.
+   - Enable **Purview integration** in Defender for AI to correlate threats with data classification.
 
-## Slide 3 — Technical proof points
-**Key points**
-- Single spec file orchestrates all modules
-- Tag-based execution ensures ordered, repeatable runs
-- Evidence export + diagnostics to Log Analytics
+4. **Use docs/CostGuidance.md** to manage costs. Retention policies generate storage costs (Exchange mailboxes, Log Analytics ingestion). Set appropriate retention periods based on compliance requirements. Monitor Log Analytics workspace ingestion and adjust diagnostic settings if costs grow unexpectedly.
 
-**Short (≈30s)**
-“One JSON spec drives all modules in the right order. Tags control which paths run, and outputs include diagnostics and evidence export—so governance is repeatable and auditable.”
-
-**Long (≈3 min)**
-“This slide is the technical heart. A single JSON file defines tenants, Purview accounts, Foundry projects, policy settings, and export locations. The orchestrator reads that spec and runs tagged modules in a deterministic order—foundation, m365, dspm, defender, foundry—so the same configuration is applied every time. The result is not just setup, but measurable outputs: DSPM scans, diagnostics into Log Analytics, and exportable compliance inventory and audit logs. That gives platform teams repeatability and gives security teams evidence.”
-
----
-
-## Slide 4 — How it works
-**Key points**
-- Define: create `spec.local.json`
-- Deploy: `azd up` or `run.ps1`
-- Verify: check audit, capture, Content Safety
-- Evidence: export logs and snapshots
-
-**Short (≈30s)**
-“Four steps: define the spec, deploy with one command, verify the controls, and export evidence. It’s straightforward and repeatable.”
-
-**Long (≈3 min)**
-“The flow is simple but complete. First, define the configuration by copying the template into `spec.local.json` and filling tenant, subscriptions, Purview, Foundry, and policy settings. Second, deploy with `azd up` or `run.ps1` and the tags you need. That applies labels, DLP, scans, and Defender plans in order. Third, verify: Purview Audit captures Foundry activity, DSPM for AI stores Copilot prompts in Exchange Online, and Content Safety blocklists protect agents. Finally, export evidence—audit logs and policy snapshots—so compliance and security teams can review and validate without manual collection.”
-
----
-
-## Slide 5 — Value, evidence, and next steps
-**Key points**
-- Unified controls and repeatable automation
-- Audit-ready evidence and reduced manual effort
-- Clear next steps: DeploymentGuide, tags, manual toggles
-
-**Short (≈30s)**
-“Value: unified controls, less manual work, and audit-ready evidence. Next steps: follow the Deployment Guide, pick the tags you need, and finish any portal toggles.”
-
-**Long (≈3 min)**
-"This slide brings it together. Business outcomes: unified controls across Purview DSPM, Defender for AI, and Content Safety; operational efficiency by replacing manual portal navigation with repeatable automation; and audit-ready evidence that includes retained prompts, diagnostics, inventory exports, and audit logs. The next steps are practical: open the Deployment Guide, ensure `azd` is current, choose whether you're running `m365` for Copilot capture or `defender,foundry` for Foundry agents—or both. Finally, complete the manual toggles like Purview Audit and Secure Interactions, then tune retention using the Cost Guidance. That's the path from demo to production readiness."
+That's it. You're now ready to deploy governed AI with confidence.

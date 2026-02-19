@@ -3,10 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Agent Governance & Security Accelerator</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Data & Agent Governance and Security Accelerator</title>
   <style>
     :root {
       --ink: #0d0f1c;
@@ -21,12 +18,9 @@
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #eef2ff;
-      background: radial-gradient(circle at 20% 20%, rgba(91,214,255,0.15), transparent 30%),
-                  radial-gradient(circle at 80% 30%, rgba(156,123,255,0.18), transparent 32%),
-                  radial-gradient(circle at 50% 80%, rgba(74,222,128,0.14), transparent 30%),
-                  linear-gradient(135deg, #0b1224, #0d1020 50%, #0b1224);
+      background: #091F2C;
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -36,19 +30,17 @@
     .frame {
       width: min(1200px, 100%);
       height: min(720px, 85vh);
-      background: rgba(12, 18, 34, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 28px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      background: #091F2C;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
       overflow: hidden;
       position: relative;
-      backdrop-filter: blur(6px);
     }
     .overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(closest-side at 15% 25%, rgba(91,214,255,0.12), transparent 55%),
-                  radial-gradient(closest-side at 85% 75%, rgba(156,123,255,0.12), transparent 55%);
+      background: transparent;
       pointer-events: none;
     }
     .slides {
@@ -233,8 +225,8 @@
     <div class="overlay"></div>
     <div class="slides" aria-live="polite">
       <section class="slide active" aria-label="Slide 1: Title">
-        <h1>Data & Agent Governance Accelerator</h1>
-        <p>Configuration-driven automation that enables Purview DSPM for AI, Defender for AI, Microsoft Foundry, and Fabric governance controls in a single deployment—without clicking through multiple portals.</p>
+        <h1>Data & Agent Governance and Security Accelerator</h1>
+        <p>Configuration-driven automation that enables Purview DSPM for AI, Defender for AI, M365 Copilot, Microsoft Foundry, and Fabric governance controls in a single deployment—without clicking through multiple portals.</p>
         <div class="badges">
           <div class="pill"><img src="./icons/defender.svg" alt="Defender icon">Microsoft Defender for AI</div>
           <div class="pill"><img src="./icons/purview.svg" alt="Purview icon">Microsoft Purview DSPM for AI</div>
@@ -251,7 +243,7 @@
             <p>One configuration file and one command: registers data sources, applies data security policies, enables threat detection, configures diagnostics, and exports audit logs.</p>
           </div>
           <div class="card">
-            <h2>Why Now</h2>
+            <h2>Why</h2>
             <p>Users are prompting AI today; security and governance controls need to catch up to protect production agent workloads.</p>
           </div>
         </div>
@@ -285,7 +277,7 @@
         <p>A single configuration file drives ordered modules that enable Purview DSPM for AI, Defender for AI, Content Safety, Azure Policy assignments, and exportable evidence.</p>
         <div class="grid">
           <div class="image-card" aria-label="Architecture diagram">
-            <img src="doc-images/architectureDAGSA.png" alt="Data Agent governance architecture diagram">
+            <img src="doc-images/architectureDAGSA.png" alt="Data & Agent Governance and Security Accelerator architecture diagram">
           </div>
           <div class="card">
             <div class="list">

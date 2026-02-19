@@ -9,6 +9,7 @@ param dagaTags array = [
 	'dspm'
 	'defender'
 	'foundry'
+	'm365'
 ]
 
 @description('Set to true when Microsoft 365 portions of the run plan should execute during the hook.')

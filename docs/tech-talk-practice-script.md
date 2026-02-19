@@ -35,38 +35,34 @@ Users are prompting AI today; security and governance controls need to catch up 
 ## **SLIDE 2: Act One - Setting the Stage**
 
 **OPEN WITH:**
-"Let me frame the technical and operational challenges IT teams face when governing AI agents."
+"Three critical problems block enterprise AI adoption: manual governance overhead, deployment verification failures, and POC momentum loss."
 
-**KEY POINTS TO HIT:**
-- ✓ **Governance Gap 1:** Without Purview data source registration, you don't know what data AI agents can access
-  - Cue: Fabric workspaces and OneLake data sources aren't auto-discovered in Purview - must register manually via REST API
-- ✓ **Governance Gap 2:** Without DLP policies configured for AI workloads, sensitive data leaks through prompts/responses
-  - Cue: Traditional DLP inspects file transfers, not AI interactions - need explicit policy configuration
-- ✓ **Governance Gap 3:** Without Defender for AI enabled, prompt injection and jailbreak attempts go undetected
-  - Cue: Defender for Cloud doesn't auto-enable AI plan - must configure per subscription
-- ✓ **Governance Gap 4:** Without diagnostic settings, no telemetry for investigations
-  - Cue: Foundry resources don't inherit diagnostics - must configure per resource
-  
-**NEXT TOPIC CUE:** "Now the operational problem..."
+**THREE PROBLEMS - RAPID FIRE:**
 
-**OPERATIONAL PROBLEM BULLETS:**
-- ✓ **What the accelerator automates:**
-  1. Purview data source registration (Fabric workspaces + OneLake) - no auto-discovery
-  2. DLP policy creation via Microsoft Graph Compliance APIs
-  3. Defender for AI plan enablement per subscription
-  4. Diagnostic settings configuration per Foundry resource
-  5. Sensitivity label creation and publishing
-  6. Audit log export to storage
-- ✓ **Without automation:** Coordinating configuration across multiple admin portals
-- ✓ **No native orchestration:** Purview REST, Microsoft Graph, ARM, Defender APIs are separate surfaces requiring manual coordination
-- ✓ **No configuration management:** No version control, no drift detection, manual evidence collection
+**PROBLEM 1: Manual Governance Takes Time**
+- Portal navigation: Purview → M365 Compliance → Azure Portal → Security PowerShell
+- Each with different auth, different config models, different terminology
+- No version control, no automation, no repeatability
+- Cue: "What Purview calls a 'data source' isn't what Defender calls a 'resource'"
 
-**VALUE TO IT TEAMS - RAPID FIRE:**
-- Reduced overhead: Manual portal navigation becomes one command
-- Drift prevention: Git version control for governance configuration
-- Audit automation: JSON exports, immutable storage for compliance evidence
-- Multi-env consistency: Same spec deploys identical controls to dev/test/prod
-- Faster incident response: Diagnostics pre-configured, telemetry flows to Log Analytics
+**PROBLEM 2: Delays in Production Deployment**
+- Dev environment: Governance manually configured, everything works
+- Prod deployment: How do you verify same controls are configured?
+- No manifest, no spec, no infrastructure-as-code trail
+- Security blocks until they can verify consistency: "Can you prove DLP policies match dev?"
+- Manual verification = error-prone + time-consuming
+- Cue: "Without automation, the answer is 'I think so, but I can't prove it deterministically'"
+
+**PROBLEM 3: POCs Stall Under Complexity**
+- Developers excited about AI innovation
+- Compliance shows up: "We need labels, DLP, scans, Defender, audit logs, retention"
+- Two-week POC becomes two-month compliance project
+- Role silos: Developers don't know DLP, compliance doesn't know Purview, security doesn't know diagnostics
+- Momentum dies, executives lose confidence
+- Cue: "The blocker isn't the technology—it's the operational friction of deploying governance manually"
+
+**ACCELERATOR VALUE - ONE SENTENCE:**
+"This accelerator solves all three: one spec file, one command, governance deploys in minutes with provable consistency across environments."
 
 **TRANSITION TO NEXT SLIDE:**
 "So those are the problems. Now let's look at the four pillars of the solution..."
@@ -189,32 +185,7 @@ Users are prompting AI today; security and governance controls need to catch up 
 
 ---
 
-## **SLIDE 7: Deployment Step - Configure Parameters**
-
-**OPEN WITH:**
-"The heart of the accelerator: spec.local.json"
-
-**WALK THROUGH SECTIONS:**
-- **Top:** tenantId, subscriptionId, resourceGroup
-- **Purview:** purviewAccount name
-- **Foundry:** project name + resourceId
-- **Fabric:** workspaces array with names + scanNames
-- **DLP:** policy name + mode (Audit/Enforce)
-- **Labels:** array with name, displayName, encryption settings
-
-**KEY POINT:**
-"This is configuration-driven governance. Edit spec → commit to Git → deploy → repeatable across environments"
-
-**DEMO CUE:**
-[Show spec.local.json in VS Code → walk through each section]
-[Run `git log -- spec.local.json` to show version control]
-
-**TRANSITION TO NEXT SLIDE:**
-"Next four steps ensure observability and compliance..."
-
----
-
-## **SLIDE 8: Observability & Compliance (Steps 5-8)**
+## **SLIDE 7: Observability & Compliance (Steps 5-8)**
 
 **OPEN WITH:**
 "Four observability steps complete the governance layer."
@@ -247,7 +218,7 @@ Users are prompting AI today; security and governance controls need to catch up 
 
 ---
 
-## **SLIDE 9: Role-Aligned & Policy-Driven Workflows**
+## **SLIDE 8: Role-Aligned & Policy-Driven Workflows**
 
 **OPEN WITH:**
 "Core design principle: role alignment and policy-driven governance."
@@ -280,7 +251,7 @@ Users are prompting AI today; security and governance controls need to catch up 
 
 ---
 
-## **SLIDE 10: MCEM Readiness Stages**
+## **SLIDE 9: MCEM Readiness Stages**
 
 **OPEN WITH:**
 "How this accelerator aligns with MCEM—the structured path for AI adoption."
@@ -310,7 +281,7 @@ Users are prompting AI today; security and governance controls need to catch up 
 
 ---
 
-## **SLIDE 11: Act Three - Key Takeaways**
+## **SLIDE 10: Act Three - Key Takeaways**
 
 **OPEN WITH:**
 "Three things to remember when you walk out of here."
@@ -335,35 +306,39 @@ Users are prompting AI today; security and governance controls need to catch up 
 
 ---
 
-## **SLIDE 12: Why Governance-First Matters**
+## **SLIDE 11: Why Governance-First Matters**
 
 **OPEN WITH:**
-"Picture this: You've built an amazing Foundry agent. It works in POC. Then security shows up..."
+"Why does governance-first matter? Because traditional approaches delay production."
 
-**STORY: Traditional Approach**
-1. Build POC
-2. Security audit finds gaps
-3. Weeks of manual remediation
-4. Re-review
-5. Finally production (but momentum lost)
+**STORY: Traditional Approach (Problem)**
+1. Build POC first
+2. Then scramble to add governance
+3. Manual controls create verification gaps
+4. Error-prone configuration = inconsistencies
+5. Weeks of delay
 
-**STORY: Governance-First Approach**
-1. Build POC with governance automated
-2. Security validates controls work
-3. Production same day
+**STORY: Governance-First Approach (Solution)**
+1. Build POC with governance built in
+2. Security validates during POC
+3. Production ready immediately
+4. No reconfiguration needed
 
-**FOUR REASONS - BULLET RAPID-FIRE:**
-1. **Accelerate POC→Production:** Compliance automated from day one
-2. **Reduce Risk:** Deterministic policy enforcement (spec → code → deployed)
-3. **Full Observability:** Diagnostics to Log Analytics, audit to storage, Purview in Data Map
-4. **One Command:** `.\run.ps1` orchestrates everything
+**FOUR REASONS - BULLET FOCUS:**
+1. **Traditional Delays Production:** POC works, then governance scramble → weeks lost
+2. **Manual Controls Create Verification Gaps:** Controls after development → errors, inconsistencies, unverifiable
+3. **Governance-First Proves Early:** Controls validated during POC, not at production gate
+4. **Removes Bottlenecks:** Governance deploys with agents → no reconfiguration between environments
+
+**KEY TRANSITION PHRASE:**
+"Governance-first removes the biggest blocker in enterprise AI adoption: the reconfiguration delay."
 
 **TRANSITION TO NEXT SLIDE:**
 "Four concrete enterprise benefits you get..."
 
 ---
 
-## **SLIDE 13: Enterprise Benefits**
+## **SLIDE 12: Enterprise Benefits**
 
 **OPEN WITH:**
 "Four measurable benefits for the enterprise."
@@ -397,7 +372,7 @@ Users are prompting AI today; security and governance controls need to catch up 
 
 ---
 
-## **SLIDE 14: Microsoft Solution Play**
+## **SLIDE 13: Microsoft Solution Play**
 
 **OPEN WITH:**
 "Built on Microsoft's Secure & Govern AI solution play."
@@ -430,6 +405,31 @@ Users are prompting AI today; security and governance controls need to catch up 
 
 **TRANSITION TO NEXT SLIDE:**
 "Three next steps to get started..."
+
+---
+
+## **SLIDE 14: Related Sessions**
+
+**OPEN WITH:**
+"Three related sessions to deepen your expertise."
+
+**SESSION 1: Purview DSPM**
+- Deep dive on Data Security Posture Management
+- Data discovery and classification
+- Security posture insights
+
+**SESSION 2: Defender for AI**
+- AI threat protection and detection
+- Prompt injection defense
+- Model manipulation alerts
+
+**SESSION 3: Foundry Observability**
+- Monitoring AI agents in production
+- Diagnostic settings and Log Analytics
+- Performance and security dashboards
+
+**TRANSITION TO NEXT SLIDE:**
+"Ready to get started? Here are your next steps..."
 
 ---
 
@@ -474,23 +474,24 @@ Users are prompting AI today; security and governance controls need to catch up 
 
 ### Timing Guide (8 Minutes Total):
 - **Slide 1:** 30 seconds (quick intro - what this is)
-- **Slide 2:** 90 seconds (the problem - attack surfaces + operational burden)
+- **Slide 2:** 90 seconds (three critical problems: manual governance weeks, deployment delays, POC stalls)
 - **Slide 3:** 60 seconds (four pillars - rapid overview)
 - **Slide 4:** 30 seconds (architecture - point to diagram, don't explain every box)
 - **Slide 5:** 15 seconds (transition to demo)
-- **Slides 6-7:** 2 minutes (core demo - show spec, run command, quick verify)
-- **Slide 8:** 45 seconds (observability outputs)
-- **Slides 9-10:** 45 seconds (role-aligned + MCEM - key points only)
-- **Slide 11:** 15 seconds (transition to takeaways)
-- **Slides 12-13:** 90 seconds (rapid-fire benefits)
-- **Slides 14-15:** 45 seconds (alignment + next steps)
+- **Slide 6:** 90 seconds (deployment workflow steps 1-4)
+- **Slide 7:** 45 seconds (observability & compliance steps 5-8)
+- **Slides 8-9:** 45 seconds (role-aligned workflows + MCEM - key points only)
+- **Slide 10:** 15 seconds (transition to takeaways)
+- **Slide 11:** 60 seconds (why governance-first matters)
+- **Slide 12:** 60 seconds (enterprise benefits - rapid-fire)
+- **Slides 13-15:** 60 seconds (solution play, related sessions, next steps)
 - **Total:** ~8 minutes
 
 ### 8-Minute Strategy:
 **Use SHORT versions only** - skip all long deep dives
-- Slides 1-5: Set up the problem (3 min)
-- Slides 6-8: Show the solution working (3 min)
-- Slides 9-15: Value and next steps (2 min)
+- **Slides 1-5:** Set up the problem (3 min)
+- **Slides 6-7:** Show the solution working - demo deployment workflow (2 min)
+- **Slides 8-15:** Implementation details, value, and next steps (3 min)
 
 ### Transition Phrases (Keep Moving):
 - "Quickly..." (signal speed)
@@ -520,12 +521,12 @@ Users are prompting AI today; security and governance controls need to catch up 
 - **Assume knowledge:** Don't explain what Purview/Defender are - assume audience knows
 
 ### If Running Over Time:
-- Skip Slides 9-10 entirely (role alignment + MCEM)
-- Skip Slide 14 (solution play alignment)
-- Jump from Slide 8 → Slide 12 (demo straight to benefits)
-- Condense Slides 12-13 to bullet points only
+- Skip Slides 8-9 entirely (role alignment + MCEM staging)
+- Skip Slide 13 (solution play alignment)
+- Jump from Slide 7 → Slide 11 (demo straight to governance-first)
+- Condense Slides 11-12 to bullet points only
 
 ### If Ahead of Schedule:
-- Add one demo detail in Slide 6 (show actual policy created)
-- Briefly explain one API orchestration point in Slide 2
-- Show compliance_inventory/ export in Slide 8
+- Add one demo detail in Slide 6 (show actual policy created in portal)
+- Briefly explain one API orchestration point in Slide 2  
+- Show compliance_inventory/ export files in Slide 7 (observability step)
