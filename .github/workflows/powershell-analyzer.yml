@@ -2,11 +2,11 @@ name: PowerShell Analysis
 
 on:
   push:
-    branches: [main]
+    branches: [ "main", "dev" ]
     paths:
       - '**/*.ps1'
   pull_request:
-    branches: [main]
+    branches: [ "main", "dev"]
     paths:
       - '**/*.ps1'
   workflow_dispatch:
