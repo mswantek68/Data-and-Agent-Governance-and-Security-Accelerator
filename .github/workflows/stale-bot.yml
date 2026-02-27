@@ -29,7 +29,7 @@ jobs:
           fetch-depth: 0  # Fetch full history for accurate branch checks
       - name: Fetch All Branches
         run: git fetch --all --prune
-      - name: List Merged Branches With No Activity in Last 3 Months
+      - name: List Old Branches With No Activity in Last 3 Months
         run: |
           
           echo "Branch Name,Last Commit Date,Committer,Committed In Branch,Action" > merged_branches_report.csv
