@@ -10,6 +10,8 @@ This guide documents every field that appears in the working `spec.local.json` *
 
 **[spec-example.json](./spec-example.json)** — A complete example with realistic (fictional) values and inline comments explaining each section.
 
+The example mirrors the current production `spec.local.json` schema and includes Fabric lakehouse sensitivity-label examples (`Public`, `Personal`, and parent/child format like `Confidential\\All Employees`).
+
 **To create your spec file:**
 ```powershell
 # Option 1: Copy from the example (recommended for learning)
@@ -59,20 +61,23 @@ Then edit `spec.local.json` with your actual Azure resource IDs and configuratio
 
 > **Why both `aiFoundry` and `foundry.resources`?** Purview automatically discovers Foundry accounts, but the automation only touches resources explicitly listed here. `aiFoundry` gives scripts one deterministic “primary” project to reference, while `foundry.resources[]` lets you manage any number of projects (tagging, diagnostics, Content Safety) in parallel.
 
-## Fabric / OneLake preview inputs
+## Fabric workspace inputs
 
 | Path | Type | Description | Consumed by |
 | ---- | ---- | ----------- | ----------- |
-| `fabric.oneLakeRoots[]` | array | List of OneLake roots that should be registered with Purview DSPM for AI. Keep entries even while scripts 26–29 stay commented so values are ready when you enable the scans. | `26-Register-OneLake.ps1`, `28-Trigger-OneLakeScan.ps1` |
-| `fabric.oneLakeRoots[].name` | string | Friendly name that becomes the Purview data-source ID. | `26-Register-OneLake.ps1` |
-| `fabric.oneLakeRoots[].resourceId` | string | Fabric ARM resource ID for the root (for example `/providers/Microsoft.Fabric/oneLakeWorkspaces/...`). | `26-Register-OneLake.ps1` |
-| `fabric.oneLakeRoots[].scanName` | string | Name of the Purview scan definition to create/execute against that root. | `28-Trigger-OneLakeScan.ps1` |
-| `fabric.workspaces[]` | array | Fabric workspaces whose assets (lakehouses, warehouses, etc.) should be crawled. | `27-Register-FabricWorkspace.ps1`, `29-Trigger-FabricWorkspaceScan.ps1` |
-| `fabric.workspaces[].name` | string | Name/identifier used when registering the Fabric workspace in Purview. | `27-Register-FabricWorkspace.ps1` |
-| `fabric.workspaces[].resourceId` | string | `/providers/Microsoft.Fabric/workspaces/...` resource ID for the workspace. | `27-Register-FabricWorkspace.ps1` |
+| `fabric.workspaces[]` | array | Fabric workspaces whose assets (lakehouses, warehouses, etc.) should be crawled. This flow is workspace-scoped and does not register OneLake roots. | `26-Ensure-FabricWorkspaceSensitivity.ps1`, `26-Apply-FabricLakehouseSensitivity.ps1`, `27-Register-FabricWorkspace.ps1`, `29-Trigger-FabricWorkspaceScan.ps1` |
+| `fabric.workspaces[].name` | string | Fabric workspace name. This is sufficient in most cases; the script attempts to resolve workspace GUID by name automatically. | `27-Register-FabricWorkspace.ps1` |
+| `fabric.workspaces[].resourceId` | string | Workspace identifier accepted by Purview registration. ARM-style Fabric resource IDs are supported, and this field can also be a Fabric workspace URL (`https://app.powerbi.com/groups/<workspaceGuid>`). | `27-Register-FabricWorkspace.ps1` |
+| `fabric.workspaces[].workspaceUrl` | string | Optional explicit Fabric workspace URL (`https://app.powerbi.com/groups/<workspaceGuid>`). Use this if name-based resolution is ambiguous or blocked by API permissions. | `27-Register-FabricWorkspace.ps1` |
+| `fabric.workspaces[].workspaceId` | string | Optional workspace GUID fallback. Use this if multiple workspaces share the same name or when API lookup is unavailable. | `27-Register-FabricWorkspace.ps1`, `29-Trigger-FabricWorkspaceScan.ps1` |
 | `fabric.workspaces[].scanName` | string | Purview scan definition name to associate with that workspace. | `29-Trigger-FabricWorkspaceScan.ps1` |
+| `fabric.workspaces[].lakehouses[]` | array | Lakehouse-level sensitivity targets for validation and application. | `26-Ensure-FabricWorkspaceSensitivity.ps1`, `26-Apply-FabricLakehouseSensitivity.ps1` |
+| `fabric.workspaces[].lakehouses[].name` | string | Lakehouse item name in the Fabric workspace. | `26-Ensure-FabricWorkspaceSensitivity.ps1`, `26-Apply-FabricLakehouseSensitivity.ps1` |
+| `fabric.workspaces[].lakehouses[].sensitivityLabel` | string | Desired sensitivity label on that lakehouse item. Use display names (for example `Public`) or parent/child display paths (for example `Confidential\All Employees`). The pre-step resolves these values to internal label identities, validates existence, and emits a target map for the apply step. | `26-Ensure-FabricWorkspaceSensitivity.ps1`, `26-Apply-FabricLakehouseSensitivity.ps1` |
 
-> **Status:** The Fabric scripts are commented out in `run.ps1` until they gracefully handle empty arrays. Populate these fields now so you can unlock Fabric scans simply by uncommenting the steps when ready.
+> **Execution order:** Label validation runs first, then label apply, then workspace registration, then workspace scan trigger. This preserves a workspace-only Purview map and avoids tenant-wide OneLake scanning.
+
+> **Label format tip:** In JSON, represent parent/child labels with escaped backslashes (for example `"Confidential\\All Employees"`).
 
 ## Global Content Safety configuration
 

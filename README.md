@@ -2,6 +2,8 @@
 
 Enable Microsoft Purview Data Security Posture Management (DSPM) for AI to safeguard Microsoft 365 Copilot, Azure AI Foundry, Microsoft Fabric, and custom agentic solutions. Deploy end-to-end governance controls, automate registration and scanning, integrate telemetry with Defender for AI, and export auditable evidence for regulators.
 
+Includes Fabric lakehouse Sensitivity Labels configuration and application through the `spec.local.json` workflow.
+
 <div align="center">
 
 [**FEATURES**](#features) | [**GETTING STARTED**](#getting-started) | [**GUIDANCE**](#guidance) | [**RESOURCES**](#resources)
@@ -41,6 +43,7 @@ Without automation, this requires significant manual configuration across multip
 This accelerator orchestrates Azure and Microsoft 365 governance artifacts through PowerShell and Azure Developer CLI hooks:
 
 - Automates Purview DSPM for AI onboarding (resource groups, Purview account checks, data-source registration, scans, DLP/label/retention policies, audit exports)
+- Applies Fabric lakehouse sensitivity labels from `spec.local.json` and validates label resolution before apply.
 - Governs Azure AI Foundry projects with Azure Policy, Defender for Cloud, Content Safety blocklists, diagnostics, and tagging
 - Ships telemetry to Log Analytics and exports compliance evidence for downstream analytics or regulators
 - Provides repeatable CI/Desktop experiences through spec-controlled tags and azd post-provision hooks
@@ -75,6 +78,7 @@ This accelerator orchestrates Azure and Microsoft 365 governance artifacts throu
 - [Architecture Overview](./docs/ArchitectureOverview.md) - Technical architecture and class diagram
 - [Deployment Guide](./docs/DeploymentGuide.md) - Comprehensive step-by-step instructions
 - [Alternative Deployment Paths](./docs/AlternativeDeploymentPaths.md) - CI/CD, run.ps1 tags, M365 desktop deployment
+- [Spec File Reference](./docs/spec-local-reference.md) - Field-by-field `spec.local.json` documentation, including Fabric workspace/lakehouse sensitivity label configuration
 - [Troubleshooting Guide](./docs/TroubleshootingGuide.md)
 
 ---
@@ -115,7 +119,7 @@ Copy-Item ./spec.dspm.template.json ./spec.local.json
 # Bash command
 cp ./spec.dspm.template.json ./spec.local.json
 ```
-Edit `spec.local.json` with your tenant ID, subscription ID, Purview account details, and AI Foundry project information. For optional sections, copy blocks from [docs/spec-example.json](docs/spec-example.json).
+Edit `spec.local.json` with your tenant ID, subscription ID, Purview account details, AI Foundry project information, and Fabric workspace/lakehouse sensitivity label settings. For optional sections, copy blocks from [docs/spec-example.json](docs/spec-example.json).
 
 **3. Deploy:**
 ```powershell

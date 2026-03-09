@@ -1,171 +1,146 @@
 {
-  "_comment": "EXAMPLE SPEC FILE - Copy to spec.local.json and replace all values with your own",
-  "_warning": "This file contains fictional example values. Do NOT use as-is.",
-
-  "//": "=== CORE ENVIRONMENT (Required for all deployments) ===",
-  
-  "tenantId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-  "subscriptionId": "12345678-90ab-cdef-1234-567890abcdef",
+  "tenantId": "11111111-2222-3333-4444-555555555555",
+  "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+  "resourceGroup": "rg-governance-example",
   "location": "eastus2",
-  "resourceGroupName": "rg-dagsa-governance",
-  "logAnalyticsWorkspaceId": "/subscriptions/12345678-90ab-cdef-1234-567890abcdef/resourceGroups/rg-dagsa-governance/providers/Microsoft.OperationalInsights/workspaces/law-dagsa-logs",
-
-  "//": "=== TAGS (Control which script modules run) ===",
-  "_tagOptions": "foundation | dspm | defender | foundry | m365 | all",
-  "tags": ["foundation", "dspm", "defender", "foundry"],
-
-  "//": "=== MICROSOFT PURVIEW CONFIGURATION ===",
-  
-  "purview": {
-    "accountName": "purv-contoso-governance",
-    "resourceGroupName": "rg-purview-prod",
-    "managedResourceGroupName": "rg-purview-prod-managed",
-    
-    "_comment": "Data sources to register and scan",
-    "dataSources": [
+  "purviewAccount": "contosoPurview",
+  "purviewResourceGroup": "rg-governance-example",
+  "purviewSubscriptionId": "ffffffff-1111-2222-3333-444444444444",
+  "aiResourceGroup": "rg-ai-example",
+  "aiSubscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+  "aiFoundry": {
+    "name": "project-example",
+    "resourceId": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg-ai-example/providers/Microsoft.CognitiveServices/accounts/ai-example/projects/project-example"
+  },
+  "foundry": {
+    "resources": [
       {
-        "name": "contoso-ai-foundry-project",
-        "kind": "AzureAIService",
-        "resourceId": "/subscriptions/12345678-90ab-cdef-1234-567890abcdef/resourceGroups/rg-ai-foundry/providers/Microsoft.CognitiveServices/accounts/ai-contoso-project"
+        "name": "project-example",
+        "resourceId": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg-ai-example/providers/Microsoft.CognitiveServices/accounts/ai-example",
+        "diagnostics": true,
+        "tags": {
+          "Environment": "Dev",
+          "Owner": "DataGov",
+          "CostCenter": "example001"
+        }
       },
       {
-        "name": "contoso-storage-data",
-        "kind": "AzureStorage",
-        "resourceId": "/subscriptions/12345678-90ab-cdef-1234-567890abcdef/resourceGroups/rg-data/providers/Microsoft.Storage/storageAccounts/stcontosodatalake"
+        "name": "project-example-2",
+        "resourceId": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/rg-ai-example-2/providers/Microsoft.CognitiveServices/accounts/ai-example-2/projects/project-example-2",
+        "diagnostics": true,
+        "tags": {
+          "Environment": "Dev",
+          "Owner": "DataGov",
+          "CostCenter": "example002"
+        }
       }
     ],
-    
-    "scans": [
-      {
-        "dataSourceName": "contoso-ai-foundry-project",
-        "scanName": "weekly-ai-scan",
-        "scanLevel": "Incremental"
-      }
-    ]
-  },
-
-  "//": "=== AI FOUNDRY / COGNITIVE SERVICES ===",
-  
-  "aiFoundry": {
-    "projectName": "ai-contoso-project",
-    "resourceGroupName": "rg-ai-foundry",
-    "resourceId": "/subscriptions/12345678-90ab-cdef-1234-567890abcdef/resourceGroups/rg-ai-foundry/providers/Microsoft.CognitiveServices/accounts/ai-contoso-project",
-    
-    "_comment": "Content Safety configuration",
     "contentSafety": {
-      "enabled": true,
-      "blocklistNames": ["contoso-blocked-terms", "pii-patterns"],
-      "severityThresholds": {
-        "hate": 2,
-        "selfHarm": 2,
-        "sexual": 2,
-        "violence": 2
-      }
+      "endpoint": "",
+      "apiKeySecretRef": {
+        "keyVaultResourceId": "",
+        "secretName": ""
+      },
+      "textBlocklists": [],
+      "harmSeverityThreshold": null
     }
   },
-
-  "//": "=== FABRIC / ONELAKE (Optional - for data lake governance) ===",
-  
   "fabric": {
-    "enabled": false,
-    "_comment": "Set enabled to true and populate these if scanning Fabric/OneLake",
-    "workspaceId": "",
-    "lakehouseName": "",
-    "oneLakeEndpoint": ""
-  },
-
-  "//": "=== DEFENDER FOR AI ===",
-  
-  "defenderForAI": {
-    "enableDefenderForCloudPlans": [
-      "CognitiveServices",
-      "StorageAccounts",
-      "KeyVaults"
-    ],
-    "logAnalyticsWorkspaceId": "/subscriptions/12345678-90ab-cdef-1234-567890abcdef/resourceGroups/rg-dagsa-governance/providers/Microsoft.OperationalInsights/workspaces/law-dagsa-logs",
-    "diagnosticCategories": [
-      "AuditEvent",
-      "RequestResponse",
-      "Trace"
-    ]
-  },
-
-  "//": "=== M365 COMPLIANCE (Requires m365 tag and E5 license) ===",
-  
-  "m365": {
-    "enabled": false,
-    "_comment": "Set enabled to true if you have M365 E5 and want DLP/retention policies",
-    
-    "sensitivityLabels": [
+    "workspaces": [
       {
-        "name": "Contoso-Confidential-AI",
-        "displayName": "Confidential - AI Data",
-        "tooltip": "Contains AI training data or model outputs",
-        "enabled": true
-      }
-    ],
-    
-    "dlpPolicies": [
-      {
-        "name": "DLP-AI-PII-Protection",
-        "comment": "Prevent PII in AI prompts and responses",
-        "enabled": true,
-        "locations": ["Exchange", "SharePoint", "OneDrive", "Teams"],
-        "rules": [
+        "name": "workspace-example-1",
+        "workspaceId": "11111111-aaaa-bbbb-cccc-222222222222",
+        "workspaceUrl": "https://app.powerbi.com/groups/11111111-aaaa-bbbb-cccc-222222222222",
+        "scanName": "scan-example-1",
+        "lakehouses": [
           {
-            "name": "Block-SSN-in-AI-Content",
-            "sensitiveInfoTypes": ["U.S. Social Security Number (SSN)"],
-            "action": "BlockAccess"
+            "name": "bronze",
+            "sensitivityLabel": "Personal"
+          },
+          {
+            "name": "silver",
+            "sensitivityLabel": "Confidential\\All Employees"
+          }
+        ]
+      },
+      {
+        "name": "workspace-example-2",
+        "workspaceId": "33333333-dddd-eeee-ffff-444444444444",
+        "workspaceUrl": "https://app.powerbi.com/groups/33333333-dddd-eeee-ffff-444444444444",
+        "scanName": "scan-example-2",
+        "lakehouses": [
+          {
+            "name": "bronze",
+            "sensitivityLabel": "Public"
+          },
+          {
+            "name": "silver",
+            "sensitivityLabel": "Public"
+          },
+          {
+            "name": "gold",
+            "sensitivityLabel": "Public"
           }
         ]
       }
-    ],
-    
-    "retentionPolicies": [
+    ]
+  },
+  "logAnalyticsWorkspaceId": "55555555-6666-7777-8888-999999999999",
+  "dataSources": [],
+  "scans": [],
+  "dlpPolicy": {
+    "name": "AI Egress Control",
+    "mode": "Enforce",
+    "locations": {
+      "Exchange": "All",
+      "SharePoint": "All",
+      "OneDrive": "All"
+    },
+    "rules": [
       {
-        "name": "Retain-AI-Audit-7Years",
-        "comment": "Regulatory retention for AI interaction logs",
-        "enabled": true,
-        "duration": "P7Y",
-        "locations": ["Exchange", "SharePoint"]
+        "name": "Block Sensitive Data to AI Destinations",
+        "sensitiveInfoTypes": [
+          {
+            "name": "Credit Card Number",
+            "count": 1,
+            "confidence": 85
+          },
+          {
+            "name": "U.S. Social Security Number (SSN)",
+            "count": 1,
+            "confidence": 85
+          }
+        ],
+        "blockAccess": true,
+        "notifyUser": true
       }
     ]
   },
-
-  "//": "=== AZURE POLICY ASSIGNMENTS ===",
-  
-  "azurePolicies": [
+  "labels": [
     {
-      "name": "Require-Diagnostic-Settings-AI",
-      "displayName": "Require diagnostic settings on Cognitive Services",
-      "definitionName": "Deploy-Diagnostics-CognitiveServices",
-      "scope": "/subscriptions/12345678-90ab-cdef-1234-567890abcdef/resourceGroups/rg-ai-foundry",
-      "enabled": true,
-      "parameters": {
-        "logAnalyticsWorkspaceId": "/subscriptions/12345678-90ab-cdef-1234-567890abcdef/resourceGroups/rg-dagsa-governance/providers/Microsoft.OperationalInsights/workspaces/law-dagsa-logs"
+      "name": "ExampleConfidential",
+      "publishPolicyName": "Publish: Confidential",
+      "encryptionEnabled": false,
+      "publishScopes": {
+        "Exchange": "All",
+        "SharePoint": "All",
+        "OneDrive": "All"
       }
     }
   ],
-
-  "//": "=== AUDIT EXPORT (For compliance evidence) ===",
-  
-  "activityExport": {
-    "outputPath": "./exports/audit-logs",
-    "contentTypes": [
-      "Audit.AzureActiveDirectory",
-      "Audit.Exchange",
-      "Audit.SharePoint",
-      "Audit.General"
+  "retentionPolicies": [],
+  "activityExport": null,
+  "defenderForAI": {
+    "enableDefenderForCloudPlans": [
+      "CognitiveServices",
+      "Storage",
+      "Containers"
+    ],
+    "logAnalyticsWorkspaceId": "55555555-6666-7777-8888-999999999999",
+    "diagnosticCategories": [
+      "Audit",
+      "RequestResponse",
+      "AllMetrics"
     ]
-  },
-
-  "//": "=== RESOURCE TAGS (Applied to created Azure resources) ===",
-  
-  "resourceTags": {
-    "Environment": "Production",
-    "Project": "AI-Governance",
-    "CostCenter": "IT-Security-001",
-    "Owner": "security-team@contoso.com",
-    "Compliance": "SOC2-HIPAA"
   }
 }

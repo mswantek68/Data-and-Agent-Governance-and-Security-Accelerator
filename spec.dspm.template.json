@@ -35,6 +35,22 @@
       "harmSeverityThreshold": null
     }
   },
+  "fabric": {
+    "workspaces": [
+      {
+        "name": "workspace-demo-001",
+        "workspaceId": "",
+        "workspaceUrl": "",
+        "scanName": "scan-workspace-demo-001",
+        "lakehouses": [
+          {
+            "name": "bronze",
+            "sensitivityLabel": "Public"
+          }
+        ]
+      }
+    ]
+  },
   "logAnalyticsWorkspaceId": "12345678-90ab-cdef-1234-567890abcdef",
   "dataSources": [],
   "scans": [],

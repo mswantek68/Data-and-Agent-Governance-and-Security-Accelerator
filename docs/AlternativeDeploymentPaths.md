@@ -276,8 +276,8 @@ pwsh ./scripts/governance/dspmPurview/02-Ensure-PurviewAccount.ps1 -SpecPath ./s
 
 **Defender for AI posture:**
 ```powershell
-pwsh ./scripts/defender/defenderForAI/06-Enable-DefenderPlans.ps1 -SpecPath ./spec.local.json
-pwsh ./scripts/defender/defenderForAI/07-Enable-Diagnostics.ps1 -SpecPath ./spec.local.json
+pwsh ./scripts/defender/06-Enable-DefenderPlans.ps1 -SpecPath ./spec.local.json
+pwsh ./scripts/defender/07-Enable-Diagnostics.ps1 -SpecPath ./spec.local.json
 ```
 
 **Foundry registration + Content Safety:**
@@ -479,7 +479,7 @@ These scripts are idempotent and safe to re-run:
 | Folder | Purpose | Key scripts |
 | ------ | ------- | ----------- |
 | `scripts/governance` | Spec management, Purview bootstrap, policy creation, audit exports, Foundry integration | `00-New-DspmSpec.ps1`, `02-Ensure-PurviewAccount.ps1`, `12-Create-DlpPolicy.ps1`, `30-Foundry-RegisterResources.ps1` |
-| `scripts/defender/defenderForAI` | Defender for Cloud AI plans, diagnostics | `06-Enable-DefenderPlans.ps1`, `07-Enable-Diagnostics.ps1` |
+| `scripts/defender` | Defender for Cloud AI plans, diagnostics | `06-Enable-DefenderPlans.ps1`, `07-Enable-Diagnostics.ps1` |
 | `scripts/exchangeOnline` | Security and Compliance PowerShell (behind `m365` tag) | `10-Connect-Compliance.ps1`, `11-Enable-UnifiedAudit.ps1` |
 
 Each script is idempotent and checks for prerequisites before applying changes.
