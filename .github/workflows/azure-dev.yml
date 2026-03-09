@@ -1,7 +1,10 @@
-name: AZD Template Validation
+name: Azure Template Validation
 
 on:
   workflow_dispatch:
+  schedule:
+    # Run weekly on Sundays at midnight UTC
+    - cron: '0 0 * * 0'
 
 permissions:
   contents: read
@@ -9,18 +12,18 @@ permissions:
   pull-requests: write
 
 jobs:
-  template_validation:
+  template_validation_job:
     runs-on: ubuntu-latest
-    name: azd template validation
+    name: Validate Template Standards
     environment: azd-template-gallery
     steps:
       - uses: actions/checkout@v4
 
       - uses: microsoft/template-validation-action@Latest
+        id: validation
         with:
           validateAzd: ${{ vars.AZD_VALIDATE || 'false' }}
           useDevContainer: ${{ vars.AZD_USE_DEV_CONTAINER || 'false' }}
-        id: validation
         env:
           AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
           AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
