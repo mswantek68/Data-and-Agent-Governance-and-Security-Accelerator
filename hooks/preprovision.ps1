@@ -49,10 +49,12 @@ $spec = Get-Content $templatePath -Raw | ConvertFrom-Json
 if ($tenantId) { $spec.tenantId = $tenantId }
 if ($subscriptionId) {
   $spec.subscriptionId = $subscriptionId
-  if ($spec.aiSubscriptionId -ne $null) { $spec.aiSubscriptionId = $subscriptionId }
+  if ($null -ne ($spec.aiSubscriptionId)) { $spec.aiSubscriptionId = $subscriptionId }
+  if ($null -ne ($spec.purviewSubscriptionId) -and [string]::IsNullOrWhiteSpace([string]$spec.purviewSubscriptionId)) { $spec.purviewSubscriptionId = $subscriptionId }
 }
 if ($resourceGroup) { $spec.resourceGroup = $resourceGroup }
 if ($location) { $spec.location = $location }
+if ($spec.resourceGroup -and $null -ne ($spec.purviewResourceGroup) -and [string]::IsNullOrWhiteSpace([string]$spec.purviewResourceGroup)) { $spec.purviewResourceGroup = $spec.resourceGroup }
 
 $specDir = Split-Path -Parent $specPath
 if (-not (Test-Path -Path $specDir)) {

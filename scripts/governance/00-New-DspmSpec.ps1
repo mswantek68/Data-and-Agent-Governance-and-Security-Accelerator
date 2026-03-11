@@ -34,10 +34,18 @@ if ($env:AZURE_TENANT_ID) { $template.tenantId = $env:AZURE_TENANT_ID }
 if ($env:AZURE_SUBSCRIPTION_ID) {
   $template.subscriptionId = $env:AZURE_SUBSCRIPTION_ID
   if ($template.aiSubscriptionId -ne $null) { $template.aiSubscriptionId = $env:AZURE_SUBSCRIPTION_ID }
+  if ($template.purviewSubscriptionId -ne $null -and [string]::IsNullOrWhiteSpace([string]$template.purviewSubscriptionId)) { $template.purviewSubscriptionId = $env:AZURE_SUBSCRIPTION_ID }
 }
 if ($env:AZURE_RESOURCE_GROUP) { $template.resourceGroup = $env:AZURE_RESOURCE_GROUP }
 elseif ($env:AZURE_RESOURCE_GROUP_NAME) { $template.resourceGroup = $env:AZURE_RESOURCE_GROUP_NAME }
 if ($env:AZURE_LOCATION) { $template.location = $env:AZURE_LOCATION }
+
+if ($template.subscriptionId -and $template.purviewSubscriptionId -ne $null -and [string]::IsNullOrWhiteSpace([string]$template.purviewSubscriptionId)) {
+  $template.purviewSubscriptionId = $template.subscriptionId
+}
+if ($template.resourceGroup -and $template.purviewResourceGroup -ne $null -and [string]::IsNullOrWhiteSpace([string]$template.purviewResourceGroup)) {
+  $template.purviewResourceGroup = $template.resourceGroup
+}
 
 $destinationDir = Split-Path -Parent $OutFile
 if ($destinationDir -and -not (Test-Path -Path $destinationDir)) {

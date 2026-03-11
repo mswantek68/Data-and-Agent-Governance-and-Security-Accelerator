@@ -26,7 +26,7 @@ Both scripts support `-SpecPath` and optional `-Tags` parameters so they can run
 
 ## Typical execution flow
 
-1. Run the DSPM prerequisites (Purview account, unified audit) as described in `scripts/governance/README.md`.
+1. Run the DSPM prerequisites (Purview account, unified audit) as described in [Alternative Deployment Paths](../../docs/AlternativeDeploymentPaths.md) and the [Spec File Reference](../../docs/spec-local-reference.md).
 2. Enable Defender plans:
    ```powershell
    pwsh ./scripts/defender/06-Enable-DefenderPlans.ps1 -SpecPath ./spec.local.json
@@ -62,4 +62,4 @@ Both scripts support `-SpecPath` and optional `-Tags` parameters so they can run
 - Pair these scripts with the DSPM modules that export audit data so security alerts can be correlated with user prompts and sensitive information types.
 - Update the spec if you add new Azure AI resources; rerun the scripts to ensure they inherit the same protection baseline.
 
-These Defender modules provide the security telemetry half of the story captured in the root README and complement the governance steps in `scripts/governance/README.md`.
+These Defender modules provide the security telemetry half of the story captured in the root README and complement the governance steps documented in [Alternative Deployment Paths](../../docs/AlternativeDeploymentPaths.md).

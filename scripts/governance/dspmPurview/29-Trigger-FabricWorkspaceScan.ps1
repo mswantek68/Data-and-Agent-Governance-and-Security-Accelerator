@@ -3,6 +3,10 @@ param([Parameter(Mandatory=$true)][string]$SpecPath)
 
 $ErrorActionPreference = 'Stop'
 $spec = Get-Content $SpecPath -Raw | ConvertFrom-Json
+$ensureContextPath = Join-Path $PSScriptRoot "..\..\common\Ensure-AzContext.ps1"
+. $ensureContextPath
+Import-Module Az.Accounts -ErrorAction Stop
+Ensure-AzContext -TenantId $spec.tenantId -SubscriptionId $spec.subscriptionId
 
 function Get-OptionalStringProperty($obj, [string]$name){
   if(-not $obj){ return $null }
@@ -168,6 +172,35 @@ function Resolve-FallbackDatasourceName([string]$endpoint, $headers, [string]$wo
   return $null
 }
 
+function Get-DatasourceWorkspaceIdByName([string]$endpoint, $headers, [string]$datasourceName){
+  if([string]::IsNullOrWhiteSpace($datasourceName)){ return $null }
+  $all = Get-ExistingPowerBiDatasources -endpoint $endpoint -headers $headers
+  if($all.Count -eq 0){ return $null }
+
+  $match = @($all | Where-Object {
+    (Get-OptionalStringProperty -obj $_ -name 'name') -eq $datasourceName
+  } | Select-Object -First 1)
+  if($match.Count -eq 0){ return $null }
+
+  return Get-DatasourceWorkspaceId -datasource $match[0]
+}
+
+function Get-ExistingScanByName([string]$endpoint, $headers, [string]$datasourceName, [string]$scanName){
+  if([string]::IsNullOrWhiteSpace($datasourceName) -or [string]::IsNullOrWhiteSpace($scanName)){ return $null }
+  $uri = "$endpoint/scan/datasources/${datasourceName}/scans?api-version=2022-07-01-preview"
+  try {
+    $result = Invoke-RestMethod -Method Get -Uri $uri -Headers $headers
+    if($result -and $result.value){
+      $match = @($result.value | Where-Object {
+        (Get-OptionalStringProperty -obj $_ -name 'name') -eq $scanName
+      } | Select-Object -First 1)
+      if($match.Count -gt 0){ return $match[0] }
+    }
+  } catch {
+  }
+  return $null
+}
+
 function Test-DatasourceExists([string]$endpoint, $headers, [string]$datasourceName){
   if([string]::IsNullOrWhiteSpace($datasourceName)){ return $false }
   $uri = "$endpoint/scan/datasources/${datasourceName}?api-version=2022-07-01-preview"
@@ -177,6 +210,46 @@ function Test-DatasourceExists([string]$endpoint, $headers, [string]$datasourceN
   } catch {
     return $false
   }
+}
+
+function Get-HttpErrorDetails($exception){
+  $statusCode = $null
+  $body = $null
+
+  if($null -eq $exception){
+    return [pscustomobject]@{ StatusCode = $null; Body = $null }
+  }
+
+  $response = $exception.Response
+  if($null -eq $response){
+    return [pscustomobject]@{ StatusCode = $null; Body = $null }
+  }
+
+  try {
+    if($response.PSObject.Properties['StatusCode']){
+      $rawCode = $response.StatusCode
+      if($rawCode -is [int]){ $statusCode = $rawCode }
+      else { $statusCode = [int]$rawCode }
+    }
+  } catch {
+  }
+
+  try {
+    if($response -is [System.Net.Http.HttpResponseMessage]){
+      if($response.Content){
+        $body = $response.Content.ReadAsStringAsync().GetAwaiter().GetResult()
+      }
+    } elseif($response.PSObject.Methods.Name -contains 'GetResponseStream'){
+      $stream = $response.GetResponseStream()
+      if($stream){
+        $reader = New-Object System.IO.StreamReader($stream)
+        $body = $reader.ReadToEnd()
+      }
+    }
+  } catch {
+  }
+
+  return [pscustomobject]@{ StatusCode = $statusCode; Body = $body }
 }
 
 if(-not $spec.purviewAccount){
@@ -191,6 +264,28 @@ if($spec.fabric -and $spec.fabric.workspaces){
 if($workspaces.Count -eq 0){
   Write-Host 'No fabric.workspaces entries found. Skipping Fabric workspace scans.' -ForegroundColor DarkGray
   exit 0
+}
+
+$scanAutomationMode = 'full'
+if($spec.fabric){
+  $configuredMode = Get-OptionalStringProperty -obj $spec.fabric -name 'scanAutomationMode'
+  if(-not [string]::IsNullOrWhiteSpace($configuredMode)){
+    $scanAutomationMode = $configuredMode.Trim().ToLowerInvariant()
+  }
+}
+if($scanAutomationMode -notin @('full','runonly','disabled')){
+  Write-Host "Unknown fabric.scanAutomationMode '$scanAutomationMode'. Falling back to 'full'." -ForegroundColor Yellow
+  $scanAutomationMode = 'full'
+}
+if($scanAutomationMode -eq 'disabled'){
+  Write-Host "Fabric scan automation mode is 'disabled'. Skipping Fabric scan trigger step." -ForegroundColor DarkGray
+  exit 0
+}
+
+$hasAzCli = $null -ne (Get-Command az -ErrorAction SilentlyContinue)
+$hasAzAccounts = $null -ne (Get-Command Get-AzAccessToken -ErrorAction SilentlyContinue)
+if(-not $hasAzCli -and -not $hasAzAccounts){
+  throw "Fabric workspace scans require Azure authentication tooling. Install Azure CLI or Az.Accounts and authenticate before running this script."
 }
 
 $purviewToken = Get-PurviewToken
@@ -226,6 +321,9 @@ foreach($workspace in $workspaces){
   }
 
   $scanName = Get-OptionalStringProperty -obj $workspace -name 'scanName'
+  if(-not [string]::IsNullOrWhiteSpace($scanName) -and -not [string]::IsNullOrWhiteSpace($workspaceName)){
+    $scanName = $scanName.Replace('[name]', $workspaceName)
+  }
   if([string]::IsNullOrWhiteSpace($scanName)){ $scanName = "scan-workspace-$workspaceGuid" }
 
   $datasourceName = Get-OptionalStringProperty -obj $workspace -name 'dataSourceName'
@@ -264,6 +362,46 @@ foreach($workspace in $workspaces){
     continue
   }
 
+  $datasourceWorkspaceId = Get-DatasourceWorkspaceIdByName -endpoint $endpoint -headers $headers -datasourceName $datasourceName
+  if(-not [string]::IsNullOrWhiteSpace($datasourceWorkspaceId) -and $datasourceWorkspaceId -ne $workspaceGuid){
+    Write-Host "Datasource '$datasourceName' is bound to workspace '$datasourceWorkspaceId' but expected '$workspaceGuid'. Skipping scan trigger for '$workspaceName'." -ForegroundColor Yellow
+    continue
+  }
+
+  $collectionId = Resolve-CollectionIdFromMap -workspaceName $workspaceName
+  $existingScan = Get-ExistingScanByName -endpoint $endpoint -headers $headers -datasourceName $datasourceName -scanName $scanName
+  $skipCreateUpdate = $false
+
+  if($scanAutomationMode -eq 'runonly'){
+    if($existingScan){
+      $skipCreateUpdate = $true
+      Write-Host "fabric.scanAutomationMode=runOnly; preserving existing scan definition '$scanName' and triggering run only." -ForegroundColor DarkGray
+    } else {
+      Write-Host "fabric.scanAutomationMode=runOnly but scan '$scanName' does not exist. Create it once in Purview portal, then rerun automation." -ForegroundColor Yellow
+      continue
+    }
+  }
+
+  if([string]::IsNullOrWhiteSpace($datasourceWorkspaceId)){
+    if($existingScan){
+      $existingCollectionId = $null
+      if($existingScan.properties -and $existingScan.properties.collection){
+        $existingCollectionId = Get-OptionalStringProperty -obj $existingScan.properties.collection -name 'referenceName'
+      }
+      if(-not [string]::IsNullOrWhiteSpace($collectionId) -and $existingCollectionId -ne $collectionId){
+        Write-Host "Existing scan '$scanName' on shared datasource '$datasourceName' is mapped to collection '$existingCollectionId' but expected '$collectionId'. Skipping run for '$workspaceName'." -ForegroundColor Yellow
+        continue
+      }
+      if(-not $skipCreateUpdate){
+        $skipCreateUpdate = $true
+        Write-Host "Datasource '$datasourceName' is shared (no workspace binding). Preserving existing scan definition '$scanName' to avoid losing scoped settings; triggering run only." -ForegroundColor Yellow
+      }
+    } else {
+      Write-Host "Datasource '$datasourceName' is shared and scan '$scanName' does not exist. Skipping automatic creation to avoid unscoped tenant-wide scans; create scoped scan once in portal." -ForegroundColor Yellow
+      continue
+    }
+  }
+
   $payload = [ordered]@{
     properties = [ordered]@{
       includePersonalWorkspaces = $false
@@ -277,46 +415,45 @@ foreach($workspace in $workspaces){
     kind = 'PowerBIMsi'
   }
 
-  $collectionId = Resolve-CollectionIdFromMap -workspaceName $workspaceName
   if(-not [string]::IsNullOrWhiteSpace($collectionId)){
     Write-Host "Collection map resolved '$collectionId' for workspace '$workspaceName'; scan will use datasource-bound collection." -ForegroundColor DarkGray
   }
 
   $datasourceCollectionId = Get-DatasourceCollectionId -endpoint $endpoint -headers $headers -datasourceName $datasourceName
-  if(-not [string]::IsNullOrWhiteSpace($datasourceCollectionId)){
+  if(-not [string]::IsNullOrWhiteSpace($collectionId)){
+    $payload.properties.collection = [ordered]@{ referenceName = $collectionId; type = 'CollectionReference' }
+    Write-Host "Using mapped workspace collection '$collectionId' for workspace '$workspaceName'." -ForegroundColor DarkGray
+  } elseif(-not [string]::IsNullOrWhiteSpace($datasourceCollectionId)){
     $payload.properties.collection = [ordered]@{ referenceName = $datasourceCollectionId; type = 'CollectionReference' }
     Write-Host "Using datasource-bound collection '$datasourceCollectionId' for workspace '$workspaceName'." -ForegroundColor DarkGray
-  } elseif(-not [string]::IsNullOrWhiteSpace($collectionId)){
-    $payload.properties.collection = [ordered]@{ referenceName = $collectionId; type = 'CollectionReference' }
-    Write-Host "Datasource collection not resolvable; falling back to mapped collection '$collectionId' for workspace '$workspaceName'." -ForegroundColor Yellow
   }
 
   $createUrl = "$endpoint/scan/datasources/${datasourceName}/scans/${scanName}?api-version=2022-07-01-preview"
   $runUrl = "$endpoint/scan/datasources/${datasourceName}/scans/${scanName}/run?api-version=2022-07-01-preview"
   $bodyJson = $payload | ConvertTo-Json -Depth 12
 
-  $createCode = $null
-  $createBody = $null
-  try {
-    $resp = Invoke-WebRequest -Uri $createUrl -Method Put -Headers $headers -Body $bodyJson -UseBasicParsing
-    $createCode = [int]$resp.StatusCode
-    $createBody = $resp.Content
-  } catch {
-    $resp = $_.Exception.Response
-    if($resp){
+  if(-not $skipCreateUpdate){
+    $createCode = $null
+    $createBody = $null
+    try {
+      $resp = Invoke-WebRequest -Uri $createUrl -Method Put -Headers $headers -Body $bodyJson -UseBasicParsing
       $createCode = [int]$resp.StatusCode
-      $reader = New-Object System.IO.StreamReader($resp.GetResponseStream())
-      $createBody = $reader.ReadToEnd()
-    } else {
-      Write-Host "Failed to create/update Fabric scan '$scanName' for '$workspaceName': $($_.Exception.Message)" -ForegroundColor Yellow
+      $createBody = $resp.Content
+    } catch {
+      $details = Get-HttpErrorDetails -exception $_.Exception
+      $createCode = $details.StatusCode
+      $createBody = $details.Body
+      if($null -eq $createCode){
+        Write-Host "Failed to create/update Fabric scan '$scanName' for '$workspaceName': $($_.Exception.Message)" -ForegroundColor Yellow
+        continue
+      }
+    }
+
+    if($createCode -lt 200 -or $createCode -ge 300){
+      Write-Host "Failed to create/update Fabric scan '$scanName' for '$workspaceName' (HTTP $createCode)." -ForegroundColor Yellow
+      if($createBody){ Write-Host $createBody -ForegroundColor Yellow }
       continue
     }
-  }
-
-  if($createCode -lt 200 -or $createCode -ge 300){
-    Write-Host "Failed to create/update Fabric scan '$scanName' for '$workspaceName' (HTTP $createCode)." -ForegroundColor Yellow
-    if($createBody){ Write-Host $createBody -ForegroundColor Yellow }
-    continue
   }
 
   $runCode = $null
@@ -326,12 +463,10 @@ foreach($workspace in $workspaces){
     $runCode = [int]$runResp.StatusCode
     $runBody = $runResp.Content
   } catch {
-    $resp = $_.Exception.Response
-    if($resp){
-      $runCode = [int]$resp.StatusCode
-      $reader = New-Object System.IO.StreamReader($resp.GetResponseStream())
-      $runBody = $reader.ReadToEnd()
-    } else {
+    $details = Get-HttpErrorDetails -exception $_.Exception
+    $runCode = $details.StatusCode
+    $runBody = $details.Body
+    if($null -eq $runCode){
       Write-Host "Failed to run Fabric scan '$scanName' for '$workspaceName': $($_.Exception.Message)" -ForegroundColor Yellow
       continue
     }

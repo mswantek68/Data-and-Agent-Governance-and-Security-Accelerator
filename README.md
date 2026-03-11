@@ -1,6 +1,6 @@
 # Data Agent Governance and Security Accelerator
 
-Enable Microsoft Purview Data Security Posture Management (DSPM) for AI to safeguard Microsoft 365 Copilot, Azure AI Foundry, Microsoft Fabric, and custom agentic solutions. Deploy end-to-end governance controls, automate registration and scanning, integrate telemetry with Defender for AI, and export auditable evidence for regulators.
+Enable Microsoft Purview Data Security Posture Management (DSPM) for AI to safeguard Microsoft 365 Copilot, Microsoft Foundry, Microsoft Fabric, and custom agentic solutions. Deploy end-to-end governance controls, automate registration and scanning, integrate telemetry with Defender for AI, and export auditable evidence for regulators.
 
 Includes Fabric lakehouse Sensitivity Labels configuration and application through the `spec.local.json` workflow.
 
@@ -22,7 +22,7 @@ For a more comprehensive list of best practices and security recommendations for
 
 ## <img src="./docs/images/readme/user-story.png" width="48" alt="User Story" /> User story
 
-Organizations deploying AI across Microsoft 365 Copilot, Azure AI Foundry, and custom agents face a common challenge: **how do you govern AI interactions at scale while maintaining compliance?**
+Organizations deploying AI across Microsoft 365 Copilot, Microsoft Foundry, and custom agents face a common challenge: **how do you govern AI interactions at scale while maintaining compliance?**
 
 A data protection team is tasked with securing AI workloads across the enterprise. They need to:
 
@@ -44,7 +44,7 @@ This accelerator orchestrates Azure and Microsoft 365 governance artifacts throu
 
 - Automates Purview DSPM for AI onboarding (resource groups, Purview account checks, data-source registration, scans, DLP/label/retention policies, audit exports)
 - Applies Fabric lakehouse sensitivity labels from `spec.local.json` and validates label resolution before apply.
-- Governs Azure AI Foundry projects with Azure Policy, Defender for Cloud, Content Safety blocklists, diagnostics, and tagging
+- Governs Microsoft Foundry projects with Azure Policy, Defender for Cloud, Content Safety blocklists, diagnostics, and tagging
 - Ships telemetry to Log Analytics and exports compliance evidence for downstream analytics or regulators
 - Provides repeatable CI/Desktop experiences through spec-controlled tags and azd post-provision hooks
 
@@ -119,7 +119,7 @@ Copy-Item ./spec.dspm.template.json ./spec.local.json
 # Bash command
 cp ./spec.dspm.template.json ./spec.local.json
 ```
-Edit `spec.local.json` with your tenant ID, subscription ID, Purview account details, AI Foundry project information, and Fabric workspace/lakehouse sensitivity label settings. For optional sections, copy blocks from [docs/spec-example.json](docs/spec-example.json).
+Edit `spec.local.json` with your tenant ID, subscription ID, Purview account details, Microsoft Foundry project information, and Fabric workspace/lakehouse sensitivity label settings. For optional sections, copy blocks from [docs/spec-example.json](docs/spec-example.json).
 
 **3. Deploy:**
 ```powershell
@@ -171,7 +171,7 @@ To deploy this solution accelerator, ensure you have access to an [Azure subscri
 | Service | Purpose | Pricing |
 | ------- | ------- | ------- |
 | [Microsoft Purview](https://azure.microsoft.com/pricing/details/purview/) | DSPM for AI scans, Secure Interactions, Know Your Data | [Usage based](https://azure.microsoft.com/pricing/details/purview/) |
-| [Azure AI Foundry / Cognitive Services](https://azure.microsoft.com/pricing/details/ai-studio/) | AI project hosting, diagnostics, Content Safety | [Usage based](https://azure.microsoft.com/pricing/details/ai-studio/) |
+| [Microsoft Foundry / Cognitive Services](https://azure.microsoft.com/pricing/details/ai-studio/) | AI project hosting, diagnostics, Content Safety | [Usage based](https://azure.microsoft.com/pricing/details/ai-studio/) |
 | [Microsoft Defender for Cloud](https://azure.microsoft.com/pricing/details/defender-for-cloud/) | Defender for AI plans, alerts, diagnostics | [Per resource type](https://azure.microsoft.com/pricing/details/defender-for-cloud/) |
 | [Log Analytics](https://azure.microsoft.com/pricing/details/monitor/) | Central log collection for diagnostics | [Pay-as-you-go](https://azure.microsoft.com/pricing/details/monitor/) |
 
@@ -187,7 +187,7 @@ Use the [Azure pricing calculator](https://azure.microsoft.com/pricing/calculato
 
 ![DSPM for all services](./docs/doc-images/DSPM-for-all-services-steps.png)
 
-A data protection program is tasked with lighting up Microsoft Purview Data Security Posture Management for AI and Microsoft Defender for AI across Microsoft 365 Copilot, Azure AI Foundry, Fabric, and bespoke agentic solutions.
+A data protection program is tasked with lighting up Microsoft Purview Data Security Posture Management for AI and Microsoft Defender for AI across Microsoft 365 Copilot, Microsoft Foundry, Fabric, and bespoke agentic solutions.
 
 They must:
 - Discover and classify the source data that feeds every agent
@@ -214,7 +214,7 @@ With this accelerator, the team captures those requirements in a spec file, exec
 
 | Environment Component | Secured Asset | Product | Key Features |
 | --------------------- | ------------- | ------- | ------------ |
-| **Azure AI Foundry** | AI interactions (prompts & responses), workspaces, connections | Microsoft Purview **DSPM for AI** | Discovery of AI interactions; sensitivity classification & labeling; DLP on prompts/responses; audit & eDiscovery |
+| **Microsoft Foundry** | AI interactions (prompts & responses), workspaces, connections | Microsoft Purview **DSPM for AI** | Discovery of AI interactions; sensitivity classification & labeling; DLP on prompts/responses; audit & eDiscovery |
 | **Azure OpenAI / Azure ML** | Model endpoints, prompt flow apps, deployments | **Defender for AI** | AI-specific threat detection and posture hardening; misconfiguration findings; attack-path analysis |
 | **Microsoft Fabric OneLake** | Tables/files (Delta/Parquet), Lakehouse/Warehouse data | Microsoft Purview + **DSPM for AI** | Sensitivity labels; DLP for structured data; label coverage reports; activity monitoring |
 | **Cross-estate AI** | Prompt/response interaction data across Copilot, agents, AI apps | Microsoft Purview **DSPM for AI** | Unified view of AI interactions; policy enforcement; natural-language risk exploration |
@@ -234,7 +234,7 @@ With this accelerator, the team captures those requirements in a spec file, exec
 | [Why DSPM for AI?](./docs/WhyDSPM.md) | Value proposition and stakeholder communication |
 | [Cost Guidance](./docs/CostGuidance.md) | Billing models and optimization tips |
 | [Spec File Reference](./docs/spec-local-reference.md) | Field-by-field documentation for spec.local.json |
-| [Script Reference](./scripts/governance/README.md) | Repository structure and script descriptions |
+| [Script Reference](./scripts/governance/README.md) | Repository script structure and governance module descriptions |
 
 ### Security guidelines
 
@@ -255,7 +255,7 @@ Have questions, find a bug, or want to request a feature? [Submit a new issue](h
 
 ## Responsible AI Transparency FAQ
 
-Please refer to [TRANSPARENCY_FAQ.md](./TRANSPARENCY_FAQ.md) for responsible AI transparency details of this solution accelerator.
+Please refer to [TRANSPARENCY.md](./TRANSPARENCY.md) for responsible AI transparency details of this solution accelerator.
 
 ---
 

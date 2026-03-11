@@ -58,15 +58,15 @@ Get-AzContext  # Verify tenant/subscription match your spec
 | `m365` | Exchange Online / Compliance Center steps requiring interactive auth: Unified Audit, Know Your Data policy, DLP/label/retention settings | `./run.ps1 -Tags m365 -SpecPath ./spec.local.json` |
 | `dspm` | Broader Purview governance: scan registration, audit subscriptions/exports, Azure policy assignments, tagging, posture validation | `./run.ps1 -Tags foundation,dspm -SpecPath ./spec.local.json` |
 | `defender` | Defender for AI enablement: plans, diagnostics, content-safety wiring | `./run.ps1 -Tags defender -SpecPath ./spec.local.json` |
-| `foundry` | Azure AI Foundry integration: resource registration, tagging, diagnostics, content safety | `./run.ps1 -Tags foundry -SpecPath ./spec.local.json` |
+| `foundry` | Microsoft Foundry integration: resource registration, tagging, diagnostics, content safety | `./run.ps1 -Tags foundry -SpecPath ./spec.local.json` |
 | `audit` | Replay audit export scripts only | `./run.ps1 -Tags audit -SpecPath ./spec.local.json` |
 | `all` | Runs everything end-to-end | `./run.ps1 -Tags all -SpecPath ./spec.local.json` |
 
 ### Common Deployment Scenarios
 
-| I want to... | Run these tags | Prerequisites | Key spec sections |
+| Goal | Run these tags | Prerequisites | Key spec sections |
 |-------------|----------------|---------------|-------------------|
-| **Secure Azure AI Foundry only** | `defender,foundry` | Azure Contributor on subscription with Foundry projects | `aiFoundry.*`, `foundry.resources[]`, `defenderForAI.enableDefenderForCloudPlans` |
+| **Secure Microsoft Foundry only** | `defender,foundry` | Azure Contributor on subscription with Foundry projects | `aiFoundry.*`, `foundry.resources[]`, `defenderForAI.enableDefenderForCloudPlans` |
 | **Full Purview DSPM for AI (no M365)** | `foundation,dspm,defender,foundry` | Azure Contributor + Purview Data Source Admin | All Azure sections (skip `dlpPolicy`, `labels`, `retentionPolicies`) |
 | **Enable M365 Copilot governance** | `m365` (run separately from desktop) | Desktop + MFA + Exchange Online admin + E5 license | `dlpPolicy`, `labels`, `retentionPolicies` |
 | **Everything** | `all` | All of the above (may require multiple operators) | All spec sections |
@@ -109,7 +109,7 @@ If your team splits responsibilities:
 
 ## Foundry-Only Configuration
 
-For organizations that only need to govern Azure AI Foundry projects without full Purview DSPM or M365 setup:
+For organizations that only need to govern Microsoft Foundry projects without full Purview DSPM or M365 setup:
 
 ### Prerequisites
 - Azure Contributor RBAC on the subscription containing your Foundry projects

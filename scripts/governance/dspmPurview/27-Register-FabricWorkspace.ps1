@@ -29,6 +29,18 @@ function Get-OptionalStringProperty($obj, [string]$name){
   return [string]$prop.Value
 }
 
+$scanAutomationMode = 'full'
+if($spec.fabric){
+  $configuredMode = Get-OptionalStringProperty -obj $spec.fabric -name 'scanAutomationMode'
+  if(-not [string]::IsNullOrWhiteSpace($configuredMode)){
+    $scanAutomationMode = $configuredMode.Trim().ToLowerInvariant()
+  }
+}
+if($scanAutomationMode -notin @('full','runonly','disabled')){
+  Write-Host "Unknown fabric.scanAutomationMode '$scanAutomationMode'. Falling back to 'full'." -ForegroundColor Yellow
+  $scanAutomationMode = 'full'
+}
+
 function Get-AccessTokenForResource([string]$resourceUrl){
   try {
     $token = az account get-access-token --resource $resourceUrl --query accessToken -o tsv 2>$null
@@ -158,6 +170,42 @@ function Get-ExistingPowerBiDatasource($existingDataSources, [string]$workspaceS
   return $null
 }
 
+function Get-AllDatasources {
+  $all = @()
+  $continuationToken = $null
+  $iteration = 0
+
+  do {
+    $path = '/scan/datasources?api-version=2022-07-01-preview'
+    if(-not [string]::IsNullOrWhiteSpace($continuationToken)){
+      $encodedToken = [System.Uri]::EscapeDataString($continuationToken)
+      $path = "$path&continuationToken=$encodedToken"
+    }
+
+    try {
+      $page = PvInvoke 'GET' $path $null
+    } catch {
+      break
+    }
+
+    if($page -and $page.value){
+      $all += @($page.value)
+    }
+
+    $continuationToken = Get-OptionalStringProperty -obj $page -name 'continuationToken'
+    if([string]::IsNullOrWhiteSpace($continuationToken)){
+      $nextLink = Get-OptionalStringProperty -obj $page -name 'nextLink'
+      if(-not [string]::IsNullOrWhiteSpace($nextLink) -and $nextLink -match 'continuationToken=([^&]+)'){
+        $continuationToken = [System.Uri]::UnescapeDataString($Matches[1])
+      }
+    }
+
+    $iteration++
+  } while(-not [string]::IsNullOrWhiteSpace($continuationToken) -and $iteration -lt 50)
+
+  return @{ value = $all }
+}
+
 function Get-ExistingPowerBiDatasourceForWorkspace($existingDataSources, [string]$workspaceGuid){
   if(-not $existingDataSources -or -not $existingDataSources.value){ return $null }
   if([string]::IsNullOrWhiteSpace($workspaceGuid)){ return $null }
@@ -209,6 +257,60 @@ function Register-WorkspaceDatasourceResult([string]$workspaceName, [string]$wor
   $registeredDataSourceMapRef.Value += [pscustomobject]@{ workspaceName = $workspaceName; workspaceId = $workspaceGuid; datasourceName = $datasourceName }
 }
 
+function Resolve-ExistingDatasourceNameForWorkspace([string]$workspaceGuid, [string]$preferredName){
+  $all = Get-AllDatasources
+
+  $workspaceMatch = Get-ExistingPowerBiDatasourceForWorkspace -existingDataSources $all -workspaceGuid $workspaceGuid
+  if($workspaceMatch){
+    $workspaceName = Get-OptionalStringProperty -obj $workspaceMatch -name 'name'
+    if(-not [string]::IsNullOrWhiteSpace($workspaceName)){
+      return $workspaceName
+    }
+  }
+
+  if(-not [string]::IsNullOrWhiteSpace($preferredName)){
+    $nameMatch = Get-ExistingPowerBiDatasource -existingDataSources $all -workspaceSpecificName $preferredName
+    if($nameMatch){
+      $name = Get-OptionalStringProperty -obj $nameMatch -name 'name'
+      if(-not [string]::IsNullOrWhiteSpace($name)){
+        return $name
+      }
+    }
+  }
+
+  return $null
+}
+
+function Resolve-ExistingDatasourceNameForWorkspaceWithRetry([string]$workspaceGuid, [string]$preferredName, [int]$attempts, [int]$sleepSeconds){
+  if($attempts -lt 1){ $attempts = 1 }
+  if($sleepSeconds -lt 0){ $sleepSeconds = 0 }
+
+  for($i = 1; $i -le $attempts; $i++){
+    $resolved = Resolve-ExistingDatasourceNameForWorkspace -workspaceGuid $workspaceGuid -preferredName $preferredName
+    if(-not [string]::IsNullOrWhiteSpace($resolved)){
+      return $resolved
+    }
+
+    if($i -lt $attempts -and $sleepSeconds -gt 0){
+      Start-Sleep -Seconds $sleepSeconds
+    }
+  }
+
+  return $null
+}
+
+function Resolve-SharedPowerBiDatasourceName {
+  $all = Get-AllDatasources
+  if(-not $all -or -not $all.value){ return $null }
+
+  $pbi = @($all.value | Where-Object { (Get-OptionalStringProperty -obj $_ -name 'kind') -eq 'PowerBI' })
+  if($pbi.Count -eq 1){
+    return Get-OptionalStringProperty -obj $pbi[0] -name 'name'
+  }
+
+  return $null
+}
+
 $purviewPrincipalId = Get-PurviewPrincipalId
 if(-not $purviewPrincipalId){
   Write-Host "Could not resolve Purview managed identity principalId. Scan may fail if workspace access is missing." -ForegroundColor Yellow
@@ -229,6 +331,15 @@ foreach($workspace in $workspaces){
   if([string]::IsNullOrWhiteSpace($workspaceName) -or [string]::IsNullOrWhiteSpace($workspaceGuid)){
     Write-Host "Skipping Fabric workspace entry; provide workspace name and resolvable workspaceId/workspaceUrl." -ForegroundColor Yellow
     continue
+  }
+
+  if($scanAutomationMode -eq 'runonly'){
+    $sharedName = Resolve-SharedPowerBiDatasourceName
+    if(-not [string]::IsNullOrWhiteSpace($sharedName)){
+      Write-Host "fabric.scanAutomationMode=runOnly; reusing shared datasource '$sharedName' for workspace '$workspaceName'." -ForegroundColor DarkGray
+      Register-WorkspaceDatasourceResult -workspaceName $workspaceName -workspaceGuid $workspaceGuid -datasourceName $sharedName -registeredDataSourcesRef ([ref]$registeredDataSources) -registeredDataSourceMapRef ([ref]$registeredDataSourceMap)
+      continue
+    }
   }
 
   if($purviewPrincipalId){
@@ -256,18 +367,17 @@ foreach($workspace in $workspaces){
     $datasourceName = "Fabric-Workspace-$workspaceGuid"
   }
 
-  $collectionId = Resolve-CollectionId -workspaceName $workspaceName -collectionMap $collectionMap
-  if([string]::IsNullOrWhiteSpace($collectionId)){
-    $collectionId = $spec.purviewAccount
+  $collectionId = $spec.purviewAccount
+  if([string]::IsNullOrWhiteSpace([string]$collectionId)){
+    $collectionId = Resolve-CollectionId -workspaceName $workspaceName -collectionMap $collectionMap
+  }
+  if([string]::IsNullOrWhiteSpace([string]$collectionId)){
+    throw "Unable to resolve a Purview collection for Fabric datasource registration. Ensure purviewAccount is configured."
   }
 
   $path = "/scan/datasources/${datasourceName}?api-version=2022-07-01-preview"
 
-  try {
-    $existingDs = PvInvoke 'GET' '/scan/datasources?api-version=2022-07-01-preview' $null
-  } catch {
-    $existingDs = @{ value = @() }
-  }
+  $existingDs = Get-AllDatasources
 
   $existingWorkspaceMatch = Get-ExistingPowerBiDatasourceForWorkspace -existingDataSources $existingDs -workspaceGuid $workspaceGuid
   if($existingWorkspaceMatch){
@@ -285,9 +395,8 @@ foreach($workspace in $workspaces){
     if(-not [string]::IsNullOrWhiteSpace($existingName)){
       $existingWorkspaceId = Get-DatasourceWorkspaceId -datasource $existingMatch
       if([string]::IsNullOrWhiteSpace($existingWorkspaceId)){
-        Write-Host "Existing datasource '$existingName' has no workspace id metadata. Reusing without forced recreate." -ForegroundColor DarkGray
-        Register-WorkspaceDatasourceResult -workspaceName $workspaceName -workspaceGuid $workspaceGuid -datasourceName $existingName -registeredDataSourcesRef ([ref]$registeredDataSources) -registeredDataSourceMapRef ([ref]$registeredDataSourceMap)
-        continue
+        Write-Host "Existing datasource '$existingName' has no workspace id metadata. It is not safe for scoped workspace scans; recreating as workspace-specific datasource." -ForegroundColor Yellow
+        Remove-DatasourceIfExists -datasourceName $existingName
       }
 
       if(-not [string]::IsNullOrWhiteSpace($existingWorkspaceId) -and $existingWorkspaceId -eq $workspaceGuid){
@@ -327,6 +436,13 @@ foreach($workspace in $workspaces){
         continue
       }
 
+      $resolvedName = Resolve-ExistingDatasourceNameForWorkspaceWithRetry -workspaceGuid $workspaceGuid -preferredName $datasourceName -attempts 4 -sleepSeconds 3
+      if(-not [string]::IsNullOrWhiteSpace($resolvedName)){
+        Write-Host "Datasource conflict for '$workspaceName' resolved by reusing existing datasource '$resolvedName'." -ForegroundColor DarkGray
+        Register-WorkspaceDatasourceResult -workspaceName $workspaceName -workspaceGuid $workspaceGuid -datasourceName $resolvedName -registeredDataSourcesRef ([ref]$registeredDataSources) -registeredDataSourceMapRef ([ref]$registeredDataSourceMap)
+        continue
+      }
+
       Write-Host "Datasource '$datasourceName' returned 409 for workspace '$workspaceName' but was not found on lookup. Attempting clean recreate." -ForegroundColor Yellow
       Remove-DatasourceIfExists -datasourceName $datasourceName
       try {
@@ -347,6 +463,15 @@ foreach($workspace in $workspaces){
           continue
         } catch {
           $firstError = $_.Exception.Message
+          if($firstError -match '409|Conflict|already'){
+            $resolvedName = Resolve-ExistingDatasourceNameForWorkspaceWithRetry -workspaceGuid $workspaceGuid -preferredName $alternateDatasourceName -attempts 4 -sleepSeconds 3
+            if(-not [string]::IsNullOrWhiteSpace($resolvedName)){
+              Write-Host "Alternate datasource conflict for '$workspaceName' resolved by reusing existing datasource '$resolvedName'." -ForegroundColor DarkGray
+              Register-WorkspaceDatasourceResult -workspaceName $workspaceName -workspaceGuid $workspaceGuid -datasourceName $resolvedName -registeredDataSourcesRef ([ref]$registeredDataSources) -registeredDataSourceMapRef ([ref]$registeredDataSourceMap)
+              continue
+            }
+
+          }
         }
       }
     }
@@ -374,10 +499,23 @@ foreach($workspace in $workspaces){
           continue
         }
 
+        $resolvedName = Resolve-ExistingDatasourceNameForWorkspaceWithRetry -workspaceGuid $workspaceGuid -preferredName $datasourceName -attempts 4 -sleepSeconds 3
+        if(-not [string]::IsNullOrWhiteSpace($resolvedName)){
+          Write-Host "Fallback conflict for '$workspaceName' resolved by reusing existing datasource '$resolvedName'." -ForegroundColor DarkGray
+          Register-WorkspaceDatasourceResult -workspaceName $workspaceName -workspaceGuid $workspaceGuid -datasourceName $resolvedName -registeredDataSourcesRef ([ref]$registeredDataSources) -registeredDataSourceMapRef ([ref]$registeredDataSourceMap)
+          continue
+        }
+
         Write-Host "Datasource '$datasourceName' still not found after fallback 409 for workspace '$workspaceName'." -ForegroundColor Yellow
       }
 
       Write-Host "Failed to register workspace-specific Fabric datasource '$datasourceName' for workspace '${workspaceName}' after fallback: $fallbackError" -ForegroundColor Yellow
+
+      $sharedName = Resolve-SharedPowerBiDatasourceName
+      if(-not [string]::IsNullOrWhiteSpace($sharedName)){
+        Write-Host "Falling back to shared PowerBI datasource '$sharedName' for workspace '$workspaceName'. Workspace scoping must be preserved at scan-definition level." -ForegroundColor Yellow
+        Register-WorkspaceDatasourceResult -workspaceName $workspaceName -workspaceGuid $workspaceGuid -datasourceName $sharedName -registeredDataSourcesRef ([ref]$registeredDataSources) -registeredDataSourceMapRef ([ref]$registeredDataSourceMap)
+      }
     }
   }
 }
