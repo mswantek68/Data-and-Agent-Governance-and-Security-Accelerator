@@ -111,6 +111,8 @@ Set-AzContext -Subscription <subscriptionId>
 **2. Prepare the spec file:**
 `azd up` now runs a preprovision hook that creates `spec.local.json` if it doesn't exist, with the minimum required fields populated from your azd/az CLI context (tenant, subscription, resource group, location) and empty placeholders for optional sections.
 
+For a complete reference example, see [docs/spec-example.json](docs/spec-example.json). It contains synthetic values and shows where each setting goes.
+
 If you prefer to scaffold manually:
 ```powershell
 Copy-Item ./spec.dspm.template.json ./spec.local.json
