@@ -11,6 +11,8 @@ This folder contains the orchestration entry scripts for Purview DSPM governance
 
 ## Purview DSPM modules (`dspmPurview`)
 
+Note: Script numbers `08` and `09` are intentionally unused to reserve space for future steps.
+
 | Script | Purpose |
 | --- | --- |
 | `02-Ensure-PurviewAccount.ps1` | Validates/ensures Purview account availability. |
