@@ -1,6 +1,6 @@
 # Deployment Guide
 
-Follow this guide to deploy the Data Agent Governance and Security Accelerator (DAGA) into your Azure subscription using the Azure Developer CLI (azd).
+Follow this guide to deploy the Data and Agent Governance and Security Accelerator (DAGSA) into your Azure subscription using the Azure Developer CLI (azd).
 
 ---
 
