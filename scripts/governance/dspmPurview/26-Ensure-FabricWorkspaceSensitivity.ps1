@@ -144,6 +144,7 @@ try {
 
 $labelLookup = @{}
 $resolvedIdentityLookup = @{}
+$missingLabels = @()
 foreach($labelName in $requestedLabels){
 	$resolution = Resolve-LabelFromSpecValue -labelSpecValue $labelName -allLabels $allLabels
 	if($resolution.IsResolved){
@@ -156,8 +157,22 @@ foreach($labelName in $requestedLabels){
 		Write-Host "Fabric sensitivity label resolved: '$labelName' -> '$resolvedIdentity'" -ForegroundColor Green
 	} else {
 		$labelLookup[$labelName] = $false
+		$missingLabels += $labelName
 		Write-Host "Fabric sensitivity label '$labelName' not found. $($resolution.Message)" -ForegroundColor Yellow
 	}
+}
+
+if($missingLabels.Count -gt 0){
+	Write-Host "" 
+	Write-Host "========================================" -ForegroundColor Yellow
+	Write-Host "WARNING: Missing Fabric sensitivity labels" -ForegroundColor Yellow
+	Write-Host "The following label names were not found:" -ForegroundColor Yellow
+	foreach($missing in ($missingLabels | Sort-Object -Unique)){
+		Write-Host "  - $missing" -ForegroundColor Yellow
+	}
+	Write-Host "Update spec.local.json to use exact label display names, then rerun." -ForegroundColor Yellow
+	Write-Host "========================================" -ForegroundColor Yellow
+	Write-Host "" 
 }
 
 foreach($target in $lakehouseTargets){
